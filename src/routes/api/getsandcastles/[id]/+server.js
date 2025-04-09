@@ -9,12 +9,12 @@ import { connectDB } from '$lib/db';
 export async function GET({ params }) {
     try {
         await connectDB();
-        const id = params.id; 
-        const sandcastle = await Jaedeesai.findOne({ id: id }); // Fetch data from the database
+        const id = params.id;
+        const sandcastle = await Jaedeesai.findOne({ id: id }).select("-_id -decorations._id"); // Fetch data from the database
 
         if (!sandcastle) {
             return new Response(JSON.stringify({ error: 'Sandcastle not found' }), {
-                status: 404,
+                status: 04,
                 headers: { 'Content-Type': 'application/json' }
             });
         }
