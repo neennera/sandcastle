@@ -23,7 +23,7 @@ const connectDB = async() => {
   }
 
   await mongoose.connect(MONGO_URL || '', {
-    dbName : 'jaedeesai',});
+    dbName : 'sandcastle',});
     mongoConnection.isConnecting = 1;
     console.log('New connection to mongodb');
 }
