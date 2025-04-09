@@ -2,13 +2,15 @@
 	import '../app.css';
 </script>
 
-<div class="relative bg-blue-100 min-h-screen flex flex-col items-center sm:max-w-120 w-full mx-auto rela">
-  <a href="/" class="absolute top-4 left-4 px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600">
-    Home
-  </a>
+<div
+	class="rela relative mx-auto flex min-h-screen w-full flex-col items-center bg-blue-100 sm:max-w-120"
+>
+	<a
+		href="/"
+		class="absolute top-4 left-4 rounded-lg bg-blue-500 px-4 py-2 text-white shadow-md hover:bg-blue-600"
+	>
+		Home
+	</a>
 
-  <slot />
+	<slot />
 </div>
-
-
-
