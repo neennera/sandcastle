@@ -14,7 +14,7 @@ export async function GET({ params }) {
 
         if (!sandcastle) {
             return new Response(JSON.stringify({ error: 'Sandcastle not found' }), {
-                status: 04,
+                status: 404,
                 headers: { 'Content-Type': 'application/json' }
             });
         }
