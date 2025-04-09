@@ -1,4 +1,5 @@
 import mongoose, {Model, mongo} from "mongoose";
+import isEmail from "validator/lib/isEmail";
 
 /**
  * 
@@ -20,7 +21,7 @@ const decorationSchema = new mongoose.Schema({
     },
     wishing_text: {
         type: String,
-        maxlength: 200 //Will find a perfect length later
+        maxlength: 70 
     },
     sender_name:{
         type: String,
@@ -33,22 +34,27 @@ const jaedeesaiSchema = new mongoose.Schema({
     id: {
         type: Number,
         required: true,
-        validate: [checkJeadeeID, "ID must be 6 digits"] //Check if it's 6 digits
+        validate: [checkJeadeeID, "ID must be 6 digits"] 
     },
     name: {
         type: String,
         required: [true, 'Please add your Jaedee name!'],
-        maxlength: 50 //Should we fix name length???
+        maxlength: 20,
     },
     type:{
         type: String, 
         enum: ['lotus', 'octagonal', 'flora', 'layer'],
         required: true
     },
-    ownerId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',  
-        required: true,
+    ownername: {
+        type: String,
+        required: [true, 'Please add your Jaedee name!'],
+        maxlength: 20,
+    },
+    email: {
+        type: String,
+        require: true,
+        validator : [isEmail],
     },
     decorations: {
         type: [decorationSchema]
