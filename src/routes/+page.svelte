@@ -4,32 +4,38 @@
 	let imageUrl = '/sample/jaedee1.webp';
 </script>
 
-<div class="flex min-h-screen w-full flex-col items-center justify-center self-center">
-	<h1 class="mb-6 text-4xl font-bold text-yellow-700">เจดีย์ทราย</h1>
+<div class="flex w-full h-full flex-col items-center justify-center self-center bg-[url('/sample/templebg.webp')] bg-cover">
+	<div class="relative flex w-[90%] h-[90%] flex-col items-center justify-center rounded-[20px] bg-[url('/sample/bg.webp')] bg-cover">
+		<div class="flex w-full h-[20%] items-center justify-center">
+			<h1 class="font-bold text-[#BD7878] text-5xl sm:text-7xl">เจดีย์ทราย</h1>
+		</div>
+		
+		<div class="flex w-full h-[40%] items-center justify-center">
+			<img src={imageUrl} alt="เจดีย์ทราย" class="h-full rounded-lg" />
+		</div>
 
-	<img src={imageUrl} alt="เจดีย์ทราย" class="mb-6 h-64 w-64 rounded-lg shadow-lg" />
+		<div class="flex flex-col space-y-4 w-full items-center justify-start h-[40%]">
+			<a
+				href="/sandgarden"
+				class="btn-primary"
+				>สำรวจเจดีย์ในลานวัด</a
+			>
+			<a
+				href="/sandcastle"
+				class="btn-primary"
+				>ตกแต่งเจดีย์เพื่อน</a
+			>
+			<a
+				href="/buildcastle"
+				class="btn-primary"
+				>ก่อเจดีย์ทรายของคุณ</a
+			>
+		</div>
 
-	<div class="flex flex-col space-y-4">
-		<a
-			href="/sandgarden"
-			class="rounded-lg bg-yellow-500 px-6 py-3 text-center text-white shadow-md hover:bg-yellow-600"
-			>สำรวจเจดีย์ในลานวัด</a
+		<button
+			class="absolute right-3 bottom-3 mt-6 flex h-10 w-10 sm:h-15 sm:w-15 items-center justify-center rounded-full bg-[#fff8ee] border-[3px] border-[#6a799a] opacity-80 hover:opacity-100 font-bold text-[#6a799a] text-[24px] sm:text-[36px]"
 		>
-		<a
-			href="/sandcastle"
-			class="rounded-lg bg-sky-500 px-6 py-3 text-center text-white shadow-md hover:bg-sky-600"
-			>ตกแต่งเจดีย์เพื่อน</a
-		>
-		<a
-			href="/buildcastle"
-			class="rounded-lg bg-sky-500 px-6 py-3 text-center text-white shadow-md hover:bg-sky-600"
-			>ก่อเจดีย์ทรายของคุณ</a
-		>
+			?
+		</button>
 	</div>
-
-	<button
-		class="absolute right-5 bottom-30 mt-6 flex h-10 w-10 items-center justify-center rounded-full bg-gray-300 shadow-md hover:bg-gray-400"
-	>
-		❓
-	</button>
 </div>
