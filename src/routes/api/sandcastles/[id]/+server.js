@@ -34,10 +34,10 @@ export async function GET({ params }) {
 export async function POST({ params, request }) {
     try {
         const id = params.id;
-        const { name, type, wishing_text, sender_name } = await request.json();
+        const { type, wishing_text, sender_name } = await request.json();
 
         // Validate input : If one of them is empty
-        if (!name || !type || !wishing_text || !sender_name) {
+        if (!type || !wishing_text || !sender_name) {
             return new Response(JSON.stringify({ error: 'Missing required fields' }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
@@ -47,6 +47,14 @@ export async function POST({ params, request }) {
         // Validate input : wishing_text length
         if (wishing_text.length > 70) {
             return new Response(JSON.stringify({ error: 'Wishing text exceeds 70 characters' }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+
+        // Validate input : type validation
+        if (!['ratchapruek', 'mali', 'banmairooroi', 'flag', 'stone', 'leaf'].includes(type)) {
+            return new Response(JSON.stringify({ error: 'Type Invalid' }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -65,7 +73,6 @@ export async function POST({ params, request }) {
 
         // Add the new decoration
         sandcastle.decorations.push({
-            name,
             type,
             wishing_text,
             sender_name

@@ -28,13 +28,7 @@ export async function GET() {
 
 export async function POST({ request }) {
     try {
-        
-
-        
-        const { name, type, ownername, email } =await request.json();
-        
-        console.log(name,type, ownername, email);
-        
+        const { name, type, ownername, email } = await request.json();
         
         // Validate input : If one of them is empty
         if (!name || !type || !ownername || !email) {
