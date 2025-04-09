@@ -3,7 +3,7 @@
 </script>
 
 <div
-	class="rela relative mx-auto flex min-h-screen w-full flex-col items-center bg-blue-100 sm:max-w-120"
+	class=" font-thai relative mx-auto flex min-h-screen w-full flex-col items-center bg-blue-100 sm:max-w-120"
 >
 	<a
 		href="/"
