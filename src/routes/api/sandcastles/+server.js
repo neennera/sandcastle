@@ -28,8 +28,14 @@ export async function GET() {
 
 export async function POST({ request }) {
     try {
-        const { name, type, ownername, email } = await request.json();
+        
 
+        
+        const { name, type, ownername, email } =await request.json();
+        
+        console.log(name,type, ownername, email);
+        
+        
         // Validate input : If one of them is empty
         if (!name || !type || !ownername || !email) {
             return new Response(JSON.stringify({ error: 'Missing required fields' }), {
@@ -39,14 +45,23 @@ export async function POST({ request }) {
         }
 
         // Validate input : type validation
-        if (!(type in ['ratchapruek', 'mali', 'banmairooroi', 'flag', 'stone', 'leaf'])) {
-            return new Response(JSON.stringify({ error: 'Missing required fields' }), {
+        if (!['lotus', 'octagonal', 'flora', 'layer'].includes(type)) {
+            return new Response(JSON.stringify({ error: 'Type Invalid' }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
         }
 
         await connectDB();
+
+        // Validate input: Check if email is valid
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return new Response(JSON.stringify({ error: 'Invalid email format' }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
 
         // Validate input : Check if email already exists
         const existingSandcastle = await Jaedeesai.findOne({ email });
