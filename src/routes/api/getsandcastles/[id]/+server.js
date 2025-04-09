@@ -1,5 +1,5 @@
 import Jaedeesai from '$lib/models/jaedeesai.js';
-
+import { connectDB } from '$lib/db';
 /**
  * 
  * @param {*} param0 
@@ -8,8 +8,9 @@ import Jaedeesai from '$lib/models/jaedeesai.js';
 
 export async function GET({ params }) {
     try {
-        const id = params.id; // Extract the 'id' from the route parameters
-        const sandcastle = await Jaedeesai.find(); // Fetch data from the database
+        await connectDB();
+        const id = params.id; 
+        const sandcastle = await Jaedeesai.findOne({ id: id }); // Fetch data from the database
 
         if (!sandcastle) {
             return new Response(JSON.stringify({ error: 'Sandcastle not found' }), {
