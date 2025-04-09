@@ -16,6 +16,11 @@ Everything you need to build a Svelte project, powered by [`sv`](https://github.
 pnpm run dev
 ```
 
+## prettier
+```bash
+npx prettier --write src/**/*.svelte
+```
+
 ## Building
 
 To create a production version of your app:
