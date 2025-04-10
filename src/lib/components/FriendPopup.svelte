@@ -23,7 +23,7 @@
 <div class="absolute z-0 top-[25%] mt-6 flex flex-col h-0 opacity-0 w-[80%] items-center justify-center rounded-[20px] bg-[#f3f5e7] border-[#e3d1a0] border-[2px] font-bold text-[#8D7878] text-[24px] sm:text-[36px]"
 id="friend-popup">
   <div class="flex w-full h-[33%] items-center justify-center">
-      <h3 class="text-3xl sm:text-5xl">รหัสเจดีย์</h3>
+      <h3 class="text-3xl sm:text-4xl">รหัสเจดีย์</h3>
   </div>
 
   <div class="flex w-full h-[33%] items-center justify-center gap-2">
@@ -42,14 +42,14 @@ id="friend-popup">
 
   <div class="flex w-full h-[33%] items-center justify-center">
       <button
-          class="rounded-3xl w-[50%] h-[40%] text-xl sm:text-3xl bg-[#f9f6e8] border-[2px] border-[#e3d1a0]"
+          class="rounded-3xl w-[50%] h-[40%] text-xl sm:text-2xl bg-[#f9f6e8] border-[2px] border-[#e3d1a0]"
           on:click={()=>navigateToPage('/sandcastle')}
       >
         ไปที่เจดีย์
       </button>
   </div>
   <button
-      class="absolute right-3 top-4 flex h-8 w-8 sm:h-15 sm:w-15 items-center justify-center rounded-full bg-[#d9d9d9] opacity-80 hover:opacity-100 font-bold text-[#8d7878] text-[24px] sm:text-[36px]"
+      class="absolute right-3 top-4 flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-[#d9d9d9] opacity-80 hover:opacity-100 font-bold text-[#8d7878] text-[24px] sm:text-[32px]"
       on:click={close}
   > x </button>
 </div>
