@@ -3,14 +3,14 @@ import { connectDB } from '$lib/db';
 import JWTVerify from '../../jwtVerify';
 /**
  * 
- * @param {*} param0 
+ * @param {any} params
  * @returns 
  */
 
 export async function GET({ params, request }) {
     try {
         const authHeader = request.headers.get('Authorization');
-        if(!authHeader){
+        if (!authHeader) {
             return new Response(JSON.stringify({ error: 'Unauthorized: Missing token' }), {
                 status: 401,
                 headers: { 'Content-Type': 'application/json' }
@@ -46,10 +46,15 @@ export async function GET({ params, request }) {
     }
 }
 
+/**
+ * 
+ * @param {any} params
+ * @returns 
+ */
 export async function POST({ params, request }) {
     try {
         const authHeader = request.headers.get('Authorization');
-        if(!authHeader){
+        if (!authHeader) {
             return new Response(JSON.stringify({ error: 'Unauthorized: Missing token' }), {
                 status: 401,
                 headers: { 'Content-Type': 'application/json' }
