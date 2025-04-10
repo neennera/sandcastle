@@ -1,19 +1,24 @@
 import JWTVerify from '../../routes/api/jwtVerify';
-const BASE_URL = process.env.API_BASE_URL || 'http://localhost:xxxx';
-
-export function showingErrorDummy() { }
+import { BASE_URL } from '$env/static/private';
 
 /**
- * @param {any} userId
+ * Logs error messages for debugging purposes.
+ * @param {string} message
  */
+export function showingErrorDummy(message) {
+    console.error(message);
+}
 
-//How do we get userId btw ;w;
+/**
+ * Sets a JWT token for the user.
+ * @param {string} userId - The ID of the user.
+ */
 export async function setToken(userId) {
     const existingToken = localStorage.getItem('jwtToken');
     if (existingToken) {
-        const isTokenValid = await JWTVerify(existingToken);
+        const isTokenValid = await JWTVerify(`Bearer ${existingToken}`);
         if (isTokenValid) {
-            return;
+            return; // Token is valid, no need to fetch a new one
         }
     }
 
@@ -25,18 +30,23 @@ export async function setToken(userId) {
         });
 
         if (response.status === 404) {
-            showingErrorDummy();
+            showingErrorDummy('User not found (404).');
             return;
         }
 
         if (!response.ok) {
-            showingErrorDummy();
+            showingErrorDummy(`Failed to set token: ${response.statusText}`);
             return;
         }
 
         const { token } = await response.json();
-        localStorage.setItem('jwtItem', token);
+        localStorage.setItem('jwtToken', token);
     } catch (err) {
-        throw new Error('Cannot get the token');
+        if (err instanceof Error) {
+            showingErrorDummy(err.message);
+        } else {
+            showingErrorDummy('An unknown error occurred while setting the token.');
+        }
+        throw new Error('Cannot set the token');
     }
 }
