@@ -1,9 +1,25 @@
 import Jaedeesai from "$lib/models/jaedeesai";
 import { connectDB } from "$lib/db";
 import crypto from 'crypto';
+import JWTVerify from "../jwtVerify.js";
 
-export async function GET() {
+export async function GET({request}) {
     try {
+        const authHeader = request.headers.get('Authorization');
+        if(!authHeader){
+            return new Response(JSON.stringify({ error: 'Unauthorized: Missing token' }), {
+                status: 401,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+        const isTokenValid = JWTVerify(authHeader);
+        if (!isTokenValid) {
+            return new Response(JSON.stringify({ error: 'Unauthorized: Invalid token' }), {
+                status: 401,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+
         await connectDB();
         const allSandcastles = await Jaedeesai.find().select('-_id id name ownername');
         if (!allSandcastles) {
@@ -28,6 +44,20 @@ export async function GET() {
 
 export async function POST({ request }) {
     try {
+        const authHeader = request.headers.get('Authorization');
+        if(!authHeader){
+            return new Response(JSON.stringify({ error: 'Unauthorized: Missing token' }), {
+                status: 401,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+        const isTokenValid = JWTVerify(authHeader);
+        if (!isTokenValid) {
+            return new Response(JSON.stringify({ error: 'Unauthorized: Invalid token' }), {
+                status: 401,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
         const { name, type, ownername, email } = await request.json();
         
         // Validate input : If one of them is empty

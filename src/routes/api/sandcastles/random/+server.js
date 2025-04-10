@@ -1,7 +1,22 @@
 import Jaedeesai from '$lib/models/jaedeesai.js';
 import { connectDB } from '$lib/db';
+import JWTVerify from '../../jwtVerify';
 
-export async function GET() {
+export async function GET({request}) {
+    const authHeader = request.headers.get('Authorization');
+            if(!authHeader){
+                return new Response(JSON.stringify({ error: 'Unauthorized: Missing token' }), {
+                    status: 401,
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            }
+            const isTokenValid = JWTVerify(authHeader);
+            if (!isTokenValid) {
+                return new Response(JSON.stringify({ error: 'Unauthorized: Invalid token' }), {
+                    status: 401,
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            }
     await connectDB();
     try {
         const randomSandcastles = await Jaedeesai.aggregate([
