@@ -18,14 +18,6 @@
           }
       }
   }
-
-  // function navigateToPage(page: string) {
-  //     const homebtn = document.getElementById('home-button');
-  //     if (homebtn) {
-  //         homebtn.style.display = 'block'; 
-  //     }
-  //     goto(page); 
-  // }
 </script>
 
 <div class="absolute z-0 top-[25%] mt-6 flex flex-col h-0 opacity-0 w-[80%] items-center justify-center rounded-[20px] bg-[#f3f5e7] border-[#e3d1a0] border-[2px] font-bold text-[#8D7878] text-[24px] sm:text-[36px]"
@@ -40,6 +32,7 @@ id="friend-popup">
               id={`otp-${index}`}
               type="text"
               maxlength="1"
+              autocomplete="off"
               class="w-[15%] h-[60%] rounded-lg border-2 border-[#8d7878] bg-[#f9f5e6] text-[#6a799a] text-[24px] sm:text-[36px] font-bold text-center focus:border-[#e3d1a0] focus:outline-none"
               bind:value={otp[index]}
               on:keydown={(event) => handleInput(event, index)}
