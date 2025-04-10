@@ -8,7 +8,7 @@
 
 @layer base {
     .btn-primary {
-        @apply flex w-[80%] h-[20%] rounded-[20px] justify-center items-center text-[#658890] text-[24px] md:text-4xl font-semibold opacity-80 hover:opacity-100 border-[#7ababe] border-[1px] bg-cover;
+        @apply flex w-[80%] h-[20%] rounded-[20px] justify-center items-center text-[#658890] text-[24px] md:text-3xl font-semibold opacity-80 hover:opacity-100 border-[#7ababe] border-[1px] bg-cover;
         background-image: url('sample/btnbg.webp')
     }
 }
