@@ -20,7 +20,7 @@ export default function JWTVerify(authHeader) {
     }
 
     const token = authHeader.split(' ')[1];
-    console.log(SECRET_KEY, token);
+    // console.log(SECRET_KEY, token);
     
     // Verify the token
     try {
