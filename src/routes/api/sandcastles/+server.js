@@ -12,6 +12,8 @@ export async function GET({request}) {
                 headers: { 'Content-Type': 'application/json' }
             });
         }
+        // console.log(authHeader);
+        
         const isTokenValid = JWTVerify(authHeader);
         if (!isTokenValid) {
             return new Response(JSON.stringify({ error: 'Unauthorized: Invalid token' }), {
@@ -51,6 +53,8 @@ export async function POST({ request }) {
                 headers: { 'Content-Type': 'application/json' }
             });
         }
+        // console.log(authHeader);
+        
         const isTokenValid = JWTVerify(authHeader);
         if (!isTokenValid) {
             return new Response(JSON.stringify({ error: 'Unauthorized: Invalid token' }), {

@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import 'dotenv/config';
 const SECRET_KEY = process.env.SECRET_KEY;
 
 /**
@@ -7,6 +8,9 @@ const SECRET_KEY = process.env.SECRET_KEY;
  * @returns {boolean} - Returns true if the token is valid, false otherwise.
  */
 export default function JWTVerify(authHeader) {
+
+    // console.log(SECRET_KEY);
+    
     if (!SECRET_KEY) {
         return false; // No secret key available
     }
@@ -16,7 +20,8 @@ export default function JWTVerify(authHeader) {
     }
 
     const token = authHeader.split(' ')[1];
-
+    console.log(SECRET_KEY, token);
+    
     // Verify the token
     try {
         jwt.verify(token, SECRET_KEY);
