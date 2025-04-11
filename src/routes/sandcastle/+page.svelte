@@ -18,7 +18,7 @@
 		try {
 			// TODO : replace token
 			const token =
-				'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ0ZW1wIiwiaWF0IjoxNzQ0MzU3NzA5LCJleHAiOjE3NDQzNjEzMDl9.sVRrm6thlkrgVib8hrmgrGvAzi0eEHz-7y3aWPKXmiI';
+				'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ0ZW1wIiwiaWF0IjoxNzQ0MzYyOTM1LCJleHAiOjE3NDQzNjY1MzV9.7rCnJwIUsOKLjdCYVtZARmEhJqNi-l5nRobIw_vMuSI';
 			console.log(token);
 
 			const response = await fetch(`/api/sandcastles/${id}`, {
