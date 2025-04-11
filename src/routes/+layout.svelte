@@ -3,8 +3,9 @@
 </script>
 
 <div
-	class=" font-thai relative mx-auto flex min-h-screen w-full md:h-screen md:w-auto flex-col items-center bg-blue-100 aspect-[9/16] md:max-w-[800px]"
->
+	class=" font-thai relative mx-auto flex min-h-screen w-full md:h-screen md:w-auto flex-col items-center aspect-[9/16] md:max-w-[800px]"
+>	
+	<div class="absolute w-full h-full bg-[url('/sample/songkranframe.webp')] z-2 bg-cover" style="pointer-events: none;"></div>
 	<a
 	id="home-button"
 	href="/"
