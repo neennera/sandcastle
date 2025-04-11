@@ -1,5 +1,6 @@
 <script>
 	import DecoItems from './decoItems.svelte';
+	import jaedee1 from '$lib/images/sandcastle/jaedee1.webp';
 	export let sandcastle;
 
 	// State to track the selected decoration
@@ -11,6 +12,10 @@
 	// Pagination state
 	let currentPage = 1;
 	const itemsPerPage = 6;
+
+	// Configurable top and right values
+	const top_values = ['60px', '95px', '115px', '40px', '50px', '60px'];
+	const right_values = ['130px', '90px', '150px', '40px', '50px', '60px'];
 
 	// Function to handle decoration selection
 	/**
@@ -41,54 +46,76 @@
 	}
 </script>
 
-{#if sandcastle.decorations.length > 0}
-	<div>
-		<!-- Paginated decorations -->
-		<div class="decorations-grid">
-			{#each paginatedDecorations as decoration}
-				<button
-					type="button"
-					class={selectedDecoration === decoration
-						? 'flex h-[80px] w-[100px] items-center justify-center rounded-4xl outline-2 outline-white'
-						: 'flex h-[80px] w-[100px] items-center justify-center'}
-					on:click={() => {
-						if (
-							selectedDecoration &&
-							decoration.sender_name == selectedDecoration.sender_name &&
-							decoration.wishing_text == selectedDecoration.wishing_text
-						) {
-							selectDecoration(null);
-						} else {
-							selectDecoration(decoration);
-						}
-					}}
-					on:keydown={(e) => e.key === 'Enter' && selectDecoration(decoration)}
-				>
-					<DecoItems type={decoration.type} />
-				</button>
-			{/each}
-		</div>
-
-		<!-- Pagination controls -->
-		<div class="pagination-controls">
-			<button on:click={goToPreviousPage} disabled={currentPage === 1}> {'<'} </button>
-			<span>กองที่ {currentPage} จาก {totalPages}</span>
-			<button on:click={goToNextPage} disabled={currentPage === totalPages}> {'>'} </button>
-		</div>
-
-		<!-- Selected decoration details -->
-		{#if selectedDecoration}
-			<div class="selected-decoration">
-				<p>Wishing Text: {selectedDecoration.wishing_text}</p>
-				<p>Sender: {selectedDecoration.sender_name}</p>
-			</div>
-		{/if}
+<div class="relative h-[500px] w-[350px]">
+	<!-- Decoration -->
+	<div class="decorations-grid">
+		{#each paginatedDecorations as decoration, index}
+			<button
+				type="button"
+				class={`decoration-button ${selectedDecoration === decoration ? 'selected' : ''}`}
+				style="top: {top_values[index % 6]}; right: {right_values[index % 6]};"
+				on:click={() => {
+					if (
+						selectedDecoration &&
+						decoration.sender_name == selectedDecoration.sender_name &&
+						decoration.wishing_text == selectedDecoration.wishing_text
+					) {
+						selectDecoration(null);
+					} else {
+						selectDecoration(decoration);
+					}
+				}}
+				on:keydown={(e) => e.key === 'Enter' && selectDecoration(decoration)}
+			>
+				<DecoItems type={decoration.type} />
+			</button>
+		{/each}
 	</div>
-{:else}
-	<p>No decorations yet.</p>
-{/if}
+
+	<!-- Sandcastle -->
+	<img class=" h-[350px] w-[350px]" src={jaedee1} alt={'sandcastle'} />
+
+	<!-- Pagination controls -->
+	<div class="pagination-controls">
+		<button on:click={goToPreviousPage} disabled={currentPage === 1}> {'<'} </button>
+		<span>กองที่ {currentPage} จาก {totalPages}</span>
+		<button on:click={goToNextPage} disabled={currentPage === totalPages}> {'>'} </button>
+	</div>
+
+	<!-- Selected decoration details -->
+	{#if selectedDecoration}
+		<div class="selected-decoration mx-2">
+			<p>Wishing Text: {selectedDecoration.wishing_text}</p>
+			<p>Sender: {selectedDecoration.sender_name}</p>
+		</div>
+	{/if}
+</div>
 
 <style>
+	.decoration-button {
+		position: absolute;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100px;
+		height: 80px;
+		border-radius: 20px;
+		background-color: transparent;
+		border: none;
+		cursor: pointer;
+		transition:
+			transform 0.2s,
+			box-shadow 0.2s;
+	}
+
+	.decoration-button:hover {
+		transform: scale(1.05);
+	}
+
+	.decoration-button.selected {
+		outline: 2px solid white;
+		background-color: rgba(255, 255, 255, 0.1);
+	}
 	.decorations-grid {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
