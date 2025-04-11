@@ -10,6 +10,7 @@
 	const sandcastle_type = ['flora', 'layer', 'lotus', 'octagonal'].includes(sandcastle.type)
 		? sandcastle.type
 		: 'layer';
+	// const sandcastle_type = 'octagonal';
 
 	// State to track the selected decoration
 	/**
@@ -22,8 +23,8 @@
 	const itemsPerPage = 5;
 
 	// Configurable top and right values
-	const top_values = ['60px', '95px', '115px', '40px', '50px'];
-	const right_values = ['130px', '90px', '150px', '40px', '50px'];
+	const top_values = ['60px', '95px', '115px', '60px', '115px'];
+	const right_values = ['130px', '90px', '150px', '40px', '30px'];
 
 	// Function to handle decoration selection
 	/**
@@ -60,37 +61,39 @@
 	};
 </script>
 
-<div class="relative flex h-[300px] w-[300px] flex-col items-center justify-center">
+<div class="relative flex w-[300px] flex-col items-center justify-start">
 	<!-- Decoration -->
-	<div class="decorations-grid">
-		{#each paginatedDecorations as decoration, index}
-			<button
-				type="button"
-				class={`decoration-button ${selectedDecoration === decoration ? 'selected' : ''}`}
-				style="top: {top_values[index % 6]}; right: {right_values[index % 6]};"
-				on:click={() => {
-					if (
-						selectedDecoration &&
-						decoration.sender_name == selectedDecoration.sender_name &&
-						decoration.wishing_text == selectedDecoration.wishing_text
-					) {
-						selectDecoration(null);
-					} else {
-						selectDecoration(decoration);
-					}
-				}}
-				on:keydown={(e) => e.key === 'Enter' && selectDecoration(decoration)}
-			>
-				<DecoItems type={decoration.type} />
-			</button>
-		{/each}
+	<div class="relative flex h-[200px] w-[300px] items-center justify-center">
+		<div class="decorations-grid">
+			{#each paginatedDecorations as decoration, index}
+				<button
+					type="button"
+					class={`decoration-button ${selectedDecoration === decoration ? 'selected' : ''}`}
+					style="top: {top_values[index % 6]}; right: {right_values[index % 6]};"
+					on:click={() => {
+						if (
+							selectedDecoration &&
+							decoration.sender_name == selectedDecoration.sender_name &&
+							decoration.wishing_text == selectedDecoration.wishing_text
+						) {
+							selectDecoration(null);
+						} else {
+							selectDecoration(decoration);
+						}
+					}}
+					on:keydown={(e) => e.key === 'Enter' && selectDecoration(decoration)}
+				>
+					<DecoItems type={decoration.type} />
+				</button>
+			{/each}
+		</div>
+
+		<!-- Sandcastle -->
+		<img class="h-[300px] w-[250px]" src={imageMap[sandcastle_type] || lotus} alt={'sandcastle'} />
 	</div>
 
-	<!-- Sandcastle -->
-	<img class=" h-[250px] w-[250px]" src={imageMap[sandcastle_type] || lotus} alt={'sandcastle'} />
-
 	<!-- Pagination controls -->
-	<div class="pagination-controls">
+	<div class="pagination-controls mt-8">
 		<button on:click={goToPreviousPage} disabled={currentPage === 1}> {'<'} </button>
 		<span>กองที่ {currentPage} จาก {totalPages}</span>
 		<button on:click={goToNextPage} disabled={currentPage === totalPages}> {'>'} </button>
@@ -98,10 +101,12 @@
 
 	<!-- Selected decoration details -->
 	{#if selectedDecoration}
-		<div class="selected-decoration top-0">
-			<p>Wishing Text: {selectedDecoration.wishing_text}</p>
-			<p>Sender: {selectedDecoration.sender_name}</p>
+		<div class="selected-decoration h-[100px] w-full overflow-y-scroll">
+			<p>คำอวยพร : {selectedDecoration.wishing_text}</p>
+			<p>จาก: {selectedDecoration.sender_name}</p>
 		</div>
+	{:else}
+		<div class="h-[100px] w-full"></div>
 	{/if}
 </div>
 
@@ -159,7 +164,6 @@
 
 	.selected-decoration {
 		font-size: medium;
-		margin-top: 20px;
 		padding: 10px;
 		border: 1px solid #ccc;
 		border-radius: 15px;
