@@ -125,7 +125,7 @@
 
 		<!-- Show QR code and ID icon in share mode -->
 		{#if isSharing}
-			<div class="absolute bottom-5 flex flex-col items-center rounded-2xl bg-white">
+			<div class="absolute bottom-5 flex w-[80%] flex-col items-center rounded-2xl bg-white">
 				<p class="mt-2 text-lg font-bold text-black">ID: {id}</p>
 				<img src={qrCodeUrl} alt="QR Code" class="h-[200px] w-[200px]" />
 			</div>
