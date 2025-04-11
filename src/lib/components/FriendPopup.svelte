@@ -2,7 +2,7 @@
   import {navigateToPage} from '$lib/utils/functionUtils';
 
   export let close: () => void;
-  let otp = Array(5).fill(''); 
+  let otp = Array(6).fill(''); 
 
   function handleInput(event: KeyboardEvent, index: number) {
       const target = event.target as HTMLInputElement;
@@ -20,7 +20,7 @@
   }
 </script>
 
-<div class="absolute z-0 top-[25%] mt-6 flex flex-col h-0 opacity-0 w-[80%] items-center justify-center rounded-[20px] bg-[#f3f5e7] border-[#e3d1a0] border-[2px] font-bold text-[#8D7878] text-[24px] sm:text-[36px]"
+<div class="absolute z-0 top-[25%] mt-6 flex flex-col h-0 opacity-0 w-[85%] items-center justify-center rounded-[20px] bg-[#f3f5e7] border-[#e3d1a0] border-[2px] font-bold text-[#8D7878] text-[24px] sm:text-[36px]"
 id="friend-popup">
   <div class="flex w-full h-[33%] items-center justify-center">
       <h3 class="text-3xl sm:text-4xl">รหัสเจดีย์</h3>
@@ -30,10 +30,10 @@ id="friend-popup">
       {#each otp as _, index}
           <input
               id={`otp-${index}`}
-              type="text"
+              type="number"
               maxlength="1"
               autocomplete="off"
-              class="w-[15%] h-[60%] rounded-lg border-2 border-[#8d7878] bg-[#f9f5e6] text-[#6a799a] text-[24px] sm:text-[36px] font-bold text-center focus:border-[#e3d1a0] focus:outline-none"
+              class="w-[13%] h-[45%] rounded-lg border-2 border-[#8d7878] bg-[#f9f5e6] text-[#6a799a] text-[24px] sm:text-[36px] font-bold text-center focus:border-[#e3d1a0] focus:outline-none"
               bind:value={otp[index]}
               on:keydown={(event) => handleInput(event, index)}
           />
