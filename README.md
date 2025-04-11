@@ -1,10 +1,11 @@
 # Sand Castle (เจดีย์ทราย)
+
 Tech Stack
-- package manager = pnpm 
+
+- package manager = pnpm
 - Framework = SvelteKit with JavaScript
 - Stying : TailwindCss, Prettier
 - Deploy on Vercel
-
 
 # Svelt Doc
 
@@ -17,6 +18,7 @@ pnpm run dev
 ```
 
 ## prettier
+
 ```bash
 npx prettier --write src/**/*.svelte
 ```
