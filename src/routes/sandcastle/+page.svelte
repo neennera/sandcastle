@@ -25,9 +25,6 @@
 				const errorData = await response.json();
 				error = errorData.error || 'Failed to fetch sandcastle data';
 				return;
-			} else {
-				console.log('success fully get cookie with tojen');
-				console.log(document.cookie);
 			}
 			sandcastle = await response.json(); // Store the fetched data
 		} catch (err) {
