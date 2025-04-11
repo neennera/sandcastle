@@ -82,6 +82,6 @@
 		{:else}
 			<p>Loading sandcastle data...</p>
 		{/if}
-		<Decopanel {openD} {closeD} {handleClickOutside} />
+		<Decopanel {openD} {closeD} {handleClickOutside} sandcastleId={id.toString()} />
 	</div>
 </div>

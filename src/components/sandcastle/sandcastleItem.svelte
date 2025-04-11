@@ -7,10 +7,10 @@
 	export let sandcastle;
 
 	/** @type {keyof typeof imageMap} */
-	// const sandcastle_type = ['flora', 'layer', 'lotus', 'octagonal'].includes(sandcastle.type)
-	// 	? sandcastle.type
-	// 	: 'layer';
-	const sandcastle_type = 'flora';
+	const sandcastle_type = ['flora', 'layer', 'lotus', 'octagonal'].includes(sandcastle.type)
+		? sandcastle.type
+		: 'layer';
+	// const sandcastle_type = 'flora';
 
 	// State to track the selected decoration
 	/**
@@ -106,7 +106,7 @@
 			<p>Sender: {selectedDecoration.sender_name}</p>
 		</div>
 	{:else}
-		<div class="h-[100px] w-full overflow-y-scroll"></div>
+		<div class="h-[100px] w-full"></div>
 	{/if}
 </div>
 

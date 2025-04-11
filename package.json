@@ -33,6 +33,7 @@
 		]
 	},
 	"dependencies": {
+		"@zerodevx/svelte-toast": "^0.9.6",
 		"dotenv": "^16.4.7",
 		"jsonwebtoken": "^9.0.2",
 		"mongoose": "^8.13.2",

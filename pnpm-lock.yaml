@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@zerodevx/svelte-toast':
+        specifier: ^0.9.6
+        version: 0.9.6(svelte@5.25.9)
       dotenv:
         specifier: ^16.4.7
         version: 16.4.7
@@ -642,6 +645,11 @@ packages:
     resolution: {integrity: sha512-A/Si4mrTkQqJ6EXJKv5EYCDQ3NL6nJXxG8VGXePsaiQigsomHYQC9xSpX8qGk7AEZk4b1ssbYIqJ0ISQQ7bfcA==}
     engines: {node: '>=18'}
     hasBin: true
+
+  '@zerodevx/svelte-toast@0.9.6':
+    resolution: {integrity: sha512-nHlTrCjverlPK9yukK6fqbG3e/R+f10ldrc4nJHOe2qNDScuPTuYVSFEk2dDDtzWAwTN5pmdEXgA3M2RbT8jiw==}
+    peerDependencies:
+      svelte: ^3.57.0 || ^4.0.0 || ^5.0.0
 
   abbrev@3.0.0:
     resolution: {integrity: sha512-+/kfrslGQ7TNV2ecmQwMJj/B65g5KVq1/L3SGVZ3tCYGqlzFuFCGBZJtMP99wH3NpEUyAjn0zPdPUg0D+DwrOA==}
@@ -1759,6 +1767,10 @@ snapshots:
       - encoding
       - rollup
       - supports-color
+
+  '@zerodevx/svelte-toast@0.9.6(svelte@5.25.9)':
+    dependencies:
+      svelte: 5.25.9
 
   abbrev@3.0.0: {}
 
