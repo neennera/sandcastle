@@ -3,7 +3,14 @@
 	let name = '';
 	let email = '';
 	let castleType = '';
-	const castleOptionImgs = ['jaedee1.webp', 'jaedee1.webp', 'jaedee1.webp', 'jaedee1.webp'];
+
+	const details = {
+		lotus: 'เจดีย์แบบดอกบัว เป็นสัญลักษณ์ของความบริสุทธิ์',
+		layer: 'เจดีย์แบบชั้น หมายถึงความมั่นคงและการเติบโต',
+		octagonal: 'เจดีย์แปดเหลี่ยม เป็นรูปแบบที่นิยมในหลายภูมิภาค',
+		flora: 'เจดีย์แบบดอกไม้ ประดับด้วยลวดลายงดงาม'
+	};
+
 	const castleOptions = ['lotus', 'layer', 'octagonal', 'flora'];
 
 	function handleSubmit() {
@@ -52,18 +59,19 @@
 			<label for="sandcastletype" class="block text-[#8D7878]">เลือกแบบเจดีย์</label>
 			<div class="flex space-x-4 py-4">
 				<div class="flex space-x-4">
-					{#each castleOptions as option, i}
+					{#each castleOptions as option}
 						<div class="flex flex-col items-center space-y-2 text-[#8D7878]">
-							<a
+							<button
 								type="button"
-								on:click={() => (castleType = option)}
-								href="/buildcastle/{option}"
+								on:click={() => {
+									castleType = option;
+								}}
 								class="rounded-lg border px-4 py-2 {castleType == option &&
 									'bg-yellow-500 font-bold text-white'} hover:bg-yellow-400 hover:text-white"
 							>
-								<img src="/sample/{castleOptionImgs[i]}" alt="option" width="85px" />
+								<img src="/sample/{option}.webp" alt="option" width="85px" height="100px" />
 								{option}
-							</a>
+							</button>
 						</div>
 					{/each}
 				</div>
