@@ -1,24 +1,9 @@
 import Jaedeesai from '$lib/models/jaedeesai.js';
 import { connectDB } from '$lib/db';
-import JWTVerify from '../../jwtVerify';
 
-/**
- * 
- * @param {any} request
- */
-
-
-export async function GET({ request }) {
-    const authHeader = request.headers.get('Authorization');
-    if (!authHeader) {
-        return new Response(JSON.stringify({ error: 'Unauthorized: Missing token' }), {
-            status: 401,
-            headers: { 'Content-Type': 'application/json' }
-        });
-    }
-    const isTokenValid = JWTVerify(authHeader);
-    if (!isTokenValid) {
-        return new Response(JSON.stringify({ error: 'Unauthorized: Invalid token' }), {
+export async function GET({ locals }) {
+    if (locals.user === null) {
+        return new Response(JSON.stringify({ error: 'Unautherized request' }), {
             status: 401,
             headers: { 'Content-Type': 'application/json' }
         });
@@ -36,7 +21,6 @@ export async function GET({ request }) {
                 }
             }
         ]);
-        
         if (!randomSandcastles) {
             return new Response(JSON.stringify({ error: 'Sandcastle not found' }), {
                 status: 404,
@@ -51,7 +35,7 @@ export async function GET({ request }) {
     }
     catch (err) {
         return new Response(JSON.stringify({ error: 'Internal server error' }), {
-            status: 400,
+            status: 500,
             headers: { 'content-type': 'application/json' }
         });
     }
