@@ -16,24 +16,19 @@
 	// Fetch sandcastle data from the API
 	onMount(async () => {
 		try {
-			// TODO : replace token
-			const token =
-				'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ0ZW1wIiwiaWF0IjoxNzQ0MzYyOTM1LCJleHAiOjE3NDQzNjY1MzV9.7rCnJwIUsOKLjdCYVtZARmEhJqNi-l5nRobIw_vMuSI';
-			console.log(token);
-
 			const response = await fetch(`/api/sandcastles/${id}`, {
 				method: 'GET',
-				headers: {
-					Authorization: `Bearer ${token}` // Replace with a valid token
-				}
+				credentials: 'include'
 			});
 
 			if (!response.ok) {
 				const errorData = await response.json();
 				error = errorData.error || 'Failed to fetch sandcastle data';
 				return;
+			} else {
+				console.log('success fully get cookie with tojen');
+				console.log(document.cookie);
 			}
-
 			sandcastle = await response.json(); // Store the fetched data
 		} catch (err) {
 			error = 'An error occurred while fetching sandcastle data';
