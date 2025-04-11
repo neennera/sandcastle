@@ -4,6 +4,8 @@
 	let email = '';
 	let castleType = '';
 
+	let toastMessage = '';
+
 	const details = {
 		lotus: 'เจดีย์แบบดอกบัว เป็นสัญลักษณ์ของความบริสุทธิ์',
 		layer: 'เจดีย์แบบชั้น หมายถึงความมั่นคงและการเติบโต',
@@ -65,6 +67,15 @@
 								type="button"
 								on:click={() => {
 									castleType = option;
+									if (option == 'lotus') {
+										toastMessage = details.lotus;
+									} else if (option == 'layer') {
+										toastMessage = details.layer;
+									} else if (option == 'octagonal') {
+										toastMessage = details.octagonal;
+									} else if (option == 'flora') {
+										toastMessage = details.flora;
+									}
 								}}
 								class="rounded-lg border px-4 py-2 {castleType == option &&
 									'bg-yellow-500 font-bold text-white'} hover:bg-yellow-400 hover:text-white"
@@ -76,6 +87,14 @@
 					{/each}
 				</div>
 			</div>
+
+			{#if toastMessage}
+				<div class="fixed inset-0 z-50 flex items-center justify-center">
+					<div class="rounded-lg bg-yellow-500 p-4 text-white shadow-lg">
+						{toastMessage}
+					</div>
+				</div>
+			{/if}
 
 			<!-- Submit Button -->
 			<button
