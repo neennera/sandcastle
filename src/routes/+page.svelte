@@ -1,6 +1,30 @@
 <script>
+	import { PUBLIC_WEB_SECRET } from '$env/static/public';
 	import { onMount } from 'svelte';
 
+	onMount(async () => {
+		const data = {
+			web_secret: PUBLIC_WEB_SECRET
+		};
+		try {
+			const response = await fetch('/api/auth/login', {
+				method: 'POST',
+				credentials: 'include',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data)
+			});
+			console.log(document.cookie);
+			if (!response.ok) {
+				const errorData = await response.json();
+				console.error('Login failed:', errorData);
+				return;
+			}
+		} catch (err) {
+			console.error('Error getting token:', err);
+		}
+	});
 	let imageUrl = '/sample/jaedee1.webp';
 </script>
 

@@ -25,7 +25,7 @@
 				const errorData = await response.json();
 				error = errorData.error || 'Failed to fetch sandcastle data';
 				return;
-			}
+			} 
 			sandcastle = await response.json(); // Store the fetched data
 		} catch (err) {
 			error = 'An error occurred while fetching sandcastle data';
