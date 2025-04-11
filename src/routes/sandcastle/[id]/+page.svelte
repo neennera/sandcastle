@@ -1,12 +1,14 @@
 <script lang="ts">
-	import SandcastleItem from '../../components/sandcastle/sandcastleItem.svelte';
+	import { page } from '$app/stores'; // Import the page store
+	import { goto } from '$app/navigation'; // Import SvelteKit's navigation helper
+
+	import SandcastleItem from '../../../components/sandcastle/sandcastleItem.svelte';
 	import Decopanel from '$lib/components/Decopanel.svelte';
 	import { onMount, tick } from 'svelte';
 	import html2canvas from 'html2canvas';
 	import QRCode from 'qrcode';
 
-	export let id = 123456; // Accept the sandcastle ID as a prop
-
+	let id: string = $page.params.id; // ID from the URL
 	let sandcastle: { name: string; ownername: string; type: string; decorations: string[] } | null =
 		null; // To store the fetched sandcastle data
 	let error: string | null = null; // To store any error messages
@@ -24,6 +26,9 @@
 			if (!response.ok) {
 				const errorData = await response.json();
 				error = errorData.error || 'Failed to fetch sandcastle data';
+				if (error === 'Sandcastle not found') {
+					goto('/errorhandle'); // Use SvelteKit's `goto` for better navigation
+				}
 				return;
 			}
 			sandcastle = await response.json(); // Store the fetched data
