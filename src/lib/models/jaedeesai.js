@@ -27,7 +27,7 @@ const decorationSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-}, {versionKey:false});
+}, { versionKey: false });
 
 
 const jaedeesaiSchema = new mongoose.Schema({
@@ -63,6 +63,6 @@ const jaedeesaiSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-}, { collection: 'jaedeesai' , versionKey:false})
+}, { collection: 'jaedeesai', versionKey: false })
 
-export default mongoose.model("Jaedeesai", jaedeesaiSchema);
+export default mongoose.models.Jaedeesai || mongoose.model("Jaedeesai", jaedeesaiSchema);
