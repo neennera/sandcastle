@@ -1,7 +1,15 @@
 <script>
 	import DecoItems from './decoItems.svelte';
-	import jaedee1 from '$lib/images/sandcastle/jaedee1.webp';
+	import flora from '$lib/images/sandcastle/flora.webp';
+	import layer from '$lib/images/sandcastle/layer.webp';
+	import lotus from '$lib/images/sandcastle/lotus.webp';
+	import octagonal from '$lib/images/sandcastle/octagonal.webp';
 	export let sandcastle;
+
+	/** @type {keyof typeof imageMap} */
+	const sandcastle_type = ['flora', 'layer', 'lotus', 'octagonal'].includes(sandcastle.type)
+		? sandcastle.type
+		: 'layer';
 
 	// State to track the selected decoration
 	/**
@@ -11,11 +19,11 @@
 
 	// Pagination state
 	let currentPage = 1;
-	const itemsPerPage = 6;
+	const itemsPerPage = 5;
 
 	// Configurable top and right values
-	const top_values = ['60px', '95px', '115px', '40px', '50px', '60px'];
-	const right_values = ['130px', '90px', '150px', '40px', '50px', '60px'];
+	const top_values = ['60px', '95px', '115px', '40px', '50px'];
+	const right_values = ['130px', '90px', '150px', '40px', '50px'];
 
 	// Function to handle decoration selection
 	/**
@@ -44,9 +52,15 @@
 			currentPage++;
 		}
 	}
+	const imageMap = {
+		flora: flora,
+		layer: layer,
+		lotus: lotus,
+		octagonal: octagonal
+	};
 </script>
 
-<div class="relative mt-20 h-[500px] w-[300px]">
+<div class="relative flex h-[300px] w-[300px] flex-col items-center justify-center">
 	<!-- Decoration -->
 	<div class="decorations-grid">
 		{#each paginatedDecorations as decoration, index}
@@ -73,7 +87,7 @@
 	</div>
 
 	<!-- Sandcastle -->
-	<img class=" h-[250px] w-[250px]" src={jaedee1} alt={'sandcastle'} />
+	<img class=" h-[250px] w-[250px]" src={imageMap[sandcastle_type] || lotus} alt={'sandcastle'} />
 
 	<!-- Pagination controls -->
 	<div class="pagination-controls">
@@ -144,10 +158,11 @@
 	}
 
 	.selected-decoration {
+		font-size: medium;
 		margin-top: 20px;
 		padding: 10px;
 		border: 1px solid #ccc;
-		border-radius: 5px;
+		border-radius: 15px;
 		background-color: #f9f9f9;
 	}
 </style>
