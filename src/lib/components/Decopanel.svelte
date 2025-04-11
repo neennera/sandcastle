@@ -71,8 +71,9 @@
 </div>
 
 <div
-	class="absolute z-0 h-full w-full rounded-[20px] bg-[#f6f5ea] opacity-0"
+	class="absolute z-0 h-full w-full rounded-[20px] bg-[#f6f5ea]"
 	id="blur"
+	hidden={!isOpen}
 	on:click={(event) => {
 		handleClickOutside(event);
 		clickedIndex = null;

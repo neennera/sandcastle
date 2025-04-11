@@ -46,7 +46,7 @@
 	}
 </script>
 
-<div class="relative h-[500px] w-[350px]">
+<div class="relative mt-20 h-[500px] w-[300px]">
 	<!-- Decoration -->
 	<div class="decorations-grid">
 		{#each paginatedDecorations as decoration, index}
@@ -73,7 +73,7 @@
 	</div>
 
 	<!-- Sandcastle -->
-	<img class=" h-[350px] w-[350px]" src={jaedee1} alt={'sandcastle'} />
+	<img class=" h-[250px] w-[250px]" src={jaedee1} alt={'sandcastle'} />
 
 	<!-- Pagination controls -->
 	<div class="pagination-controls">
@@ -84,7 +84,7 @@
 
 	<!-- Selected decoration details -->
 	{#if selectedDecoration}
-		<div class="selected-decoration mx-2">
+		<div class="selected-decoration top-0">
 			<p>Wishing Text: {selectedDecoration.wishing_text}</p>
 			<p>Sender: {selectedDecoration.sender_name}</p>
 		</div>
