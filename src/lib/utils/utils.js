@@ -18,7 +18,7 @@ const decoprops = [
         imgsrc: banmairooroi,
         focusedimg: banmairooroiFocused,
         detail: '"รักมั่น ไม่โรยง่าย"',
-        description: 'รักมั่น ไม่โรยง่าย',
+        description: 'ดอกไม้แห่งความรุ่งเรือง ขอพรแล้วโชคดีตลอดปี',
     },
     {
         name: 'ธงสี',

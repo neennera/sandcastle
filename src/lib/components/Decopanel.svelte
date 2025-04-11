@@ -1,10 +1,10 @@
 <!-- src/components/sandcastle/Decoration.svelte -->
 
 <script lang="ts">
-    import decoprops from '$lib/utils/utils';
-    export let openD: (selector: string) => void;
-    export let closeD: (selector: string) => void;
-    export let handleClickOutside: (event: MouseEvent) => void;
+	import decoprops from '$lib/utils/utils';
+	export let openD: (selector: string) => void;
+	export let closeD: (selector: string) => void;
+	export let handleClickOutside: (event: MouseEvent) => void;
 
     let clickedIndex: number | null = null;
     let isOpen: boolean = false;
@@ -55,18 +55,21 @@
     {/if}
     </div>
 </div>
-    
-  
+
 <div
-    class="bg-[#f6f5ea] opacity-0 w-full h-full absolute rounded-[20px] z-0"
-    id="blur"
-    on:click={(event) => { handleClickOutside(event); clickedIndex = null; isOpen=false;}}
-    on:keydown={(event) => {
-      if (event.key === 'Enter') {
-        closeD('#deco');
-      }
-    }}
-    role="button"
-    tabindex="0"
+	class="absolute z-0 h-full w-full rounded-[20px] bg-[#f6f5ea]"
+	id="blur"
+	hidden={!isOpen}
+	on:click={(event) => {
+		handleClickOutside(event);
+		clickedIndex = null;
+		isOpen = false;
+	}}
+	on:keydown={(event) => {
+		if (event.key === 'Enter') {
+			closeD('#deco');
+		}
+	}}
+	role="button"
+	tabindex="0"
 ></div>
-  

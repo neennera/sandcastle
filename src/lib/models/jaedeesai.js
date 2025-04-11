@@ -29,6 +29,7 @@ const decorationSchema = new mongoose.Schema({
     },
 }, { versionKey: false });
 
+
 const jaedeesaiSchema = new mongoose.Schema({
     id: {
         type: Number,
@@ -62,9 +63,6 @@ const jaedeesaiSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-}, { collection: 'jaedeesai', versionKey: false });
+}, { collection: 'jaedeesai', versionKey: false })
 
-// Check if the model already exists
-const Jaedeesai = mongoose.models.Jaedeesai || mongoose.model('Jaedeesai', jaedeesaiSchema);
-
-export default Jaedeesai;
+export default mongoose.models.Jaedeesai || mongoose.model("Jaedeesai", jaedeesaiSchema);
