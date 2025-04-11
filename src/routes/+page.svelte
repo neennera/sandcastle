@@ -3,6 +3,30 @@
 	import FriendPopup from '$lib/components/FriendPopup.svelte';
 	import CreditPopup from '$lib/components/CreditPopup.svelte';
 	import { navigateToPage } from '$lib/utils/functionUtils';
+	import { PUBLIC_WEB_SECRET } from '$env/static/public';
+
+	onMount(async () => {
+		const data = {
+			web_secret: PUBLIC_WEB_SECRET
+		};
+		try {
+			const response = await fetch('/api/auth/login', {
+				method: 'POST',
+				credentials: 'include',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data)
+			});
+			if (!response.ok) {
+				const errorData = await response.json();
+				console.error('Login failed:', errorData);
+				return;
+			}
+		} catch (err) {
+			console.error('Error getting token:', err);
+		}
+	});
 
 	let imageUrl = '/sample/jaedee1.webp';
 	onMount(() => {
@@ -67,7 +91,7 @@
 		</div>
 
 		<button
-			class="absolute right-3 bottom-3 flex h-8 w-8 items-center justify-center rounded-full border-[3px] border-[#6a799a] bg-[#fff8ee] text-[24px] font-bold text-[#6a799a] opacity-80 hover:opacity-100 sm:h-10 sm:w-10 sm:text-[36px]"
+			class="absolute bottom-3 right-3 flex h-8 w-8 items-center justify-center rounded-full border-[3px] border-[#6a799a] bg-[#fff8ee] text-[24px] font-bold text-[#6a799a] opacity-80 hover:opacity-100 sm:h-10 sm:w-10 sm:text-[36px]"
 			on:click={() => {
 				createPopUp('#credit-popup');
 			}}
@@ -80,7 +104,7 @@
 	</div>
 
 	<button
-		class="absolute right-5 bottom-30 mt-6 flex h-10 w-10 items-center justify-center rounded-full bg-gray-300 shadow-md hover:bg-gray-400"
+		class="bottom-30 absolute right-5 mt-6 flex h-10 w-10 items-center justify-center rounded-full bg-gray-300 shadow-md hover:bg-gray-400"
 	>
 		❓
 	</button>
