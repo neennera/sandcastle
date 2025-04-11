@@ -16,31 +16,22 @@
   
 	// Fetch sandcastle data from the API
 	onMount(async () => {
-	  try {
-		// TODO : replace token
-		const token =
-		  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ0ZW1wIiwiaWF0IjoxNzQ0MzYyOTM1LCJleHAiOjE3NDQzNjY1MzV9.7rCnJwIUsOKLjdCYVtZARmEhJqNi-l5nRobIw_vMuSI';
-		console.log(token);
-  
-		const response = await fetch(`/api/sandcastles/${id}`, {
-		  method: 'GET',
-		  headers: {
-			Authorization: `Bearer ${token}` // Replace with a valid token
-		  }
-		});
-  
-		if (!response.ok) {
-		  const errorData = await response.json();
-		  error = errorData.error || 'Failed to fetch sandcastle data';
-		  return;
+		try {
+			const response = await fetch(`/api/sandcastles/${id}`, {
+				method: 'GET',
+				credentials: 'include'
+			});
+
+			if (!response.ok) {
+				const errorData = await response.json();
+				error = errorData.error || 'Failed to fetch sandcastle data';
+				return;
+			} 
+			sandcastle = await response.json(); // Store the fetched data
+		} catch (err) {
+			error = 'An error occurred while fetching sandcastle data';
+			console.error(err);
 		}
-  
-		sandcastle = await response.json(); // Store the fetched data
-	  } catch (err) {
-		error = 'An error occurred while fetching sandcastle data';
-		console.error(err);
-	  }
-	});
   
 	function openD(selector: string) {
 	  const deco: HTMLElement = document.querySelector(selector) as HTMLElement;
@@ -68,26 +59,27 @@
 		closeD('#deco');
 	  }
 	}
-  </script>
-  
-  <div class="flex w-full h-full flex-col items-center justify-center self-center bg-[url('/sample/templebg.webp')] bg-cover">
+</script>
+
+<div
+	class="flex h-full w-full flex-col items-center justify-center self-center bg-[url('/sample/templebg.webp')] bg-cover"
+>
 	<div
-	  class="relative flex w-[90%] h-[90%] flex-col items-center justify-start rounded-[20px] bg-[url('/sample/bg.webp')] bg-cover overflow-hidden"
+		class="relative flex h-[90%] w-[90%] flex-col items-center justify-start overflow-hidden rounded-[20px] bg-[url('/sample/bg.webp')] bg-cover"
 	>
-	  <div class="flex flex-col w-full h-[25%] items-center justify-center mt-4">
-		<h1 class="font-bold text-[#8D7878] text-5xl">เจดีย์สุดจ๊าบ</h1>
-		<h3 class="font-semibold text-[#8D7878] text-2xl mt-2"> ของ นีร </h3>
-	  </div>
-	  {#if error}
-		<p class="text-red-800">{error}</p>
-	  {:else if sandcastle}
-		<div class="flex w-full h-[40%] items-center justify-center">
-		  <SandcastleItem {sandcastle} />
+		<div class="mt-4 flex h-[25%] w-full flex-col items-center justify-center">
+			<h1 class="text-5xl font-bold text-[#8D7878]">เจดีย์สุดจ๊าบ</h1>
+			<h3 class="mt-2 text-2xl font-semibold text-[#8D7878]">ของ นีร</h3>
 		</div>
-	  {:else}
-		<p>Loading sandcastle data...</p>
-	  {/if}
-	  <Decopanel {openD} {closeD} {handleClickOutside} />
+		{#if error}
+			<p class="text-red-800">{error}</p>
+		{:else if sandcastle}
+			<div class="flex h-[40%] w-full items-center justify-center">
+				<SandcastleItem {sandcastle} />
+			</div>
+		{:else}
+			<p>Loading sandcastle data...</p>
+		{/if}
+		<Decopanel {openD} {closeD} {handleClickOutside} />
 	</div>
-  </div>
-  
+</div>
