@@ -2,18 +2,19 @@
 	import SandcastleItem from '../../components/sandcastle/sandcastleItem.svelte';
 	import Decopanel from '$lib/components/Decopanel.svelte';
 	import { onMount } from 'svelte';
-  
+
 	export let id = 123456; // Accept the sandcastle ID as a prop
-  
+
 	/**
 	 * @type {{ name: any; ownername: any; type: any; decorations: string | any[]; } | null}
 	 */
-	let sandcastle: { name: string; ownername: string; type: string; decorations: string[] } | null = null; // To store the fetched sandcastle data
+	let sandcastle: { name: string; ownername: string; type: string; decorations: string[] } | null =
+		null; // To store the fetched sandcastle data
 	/**
 	 * @type {string | null}
 	 */
 	let error: string | null = null; // To store any error messages
-  
+
 	// Fetch sandcastle data from the API
 	onMount(async () => {
 		try {
@@ -26,38 +27,39 @@
 				const errorData = await response.json();
 				error = errorData.error || 'Failed to fetch sandcastle data';
 				return;
-			} 
+			}
 			sandcastle = await response.json(); // Store the fetched data
 		} catch (err) {
 			error = 'An error occurred while fetching sandcastle data';
 			console.error(err);
 		}
-  
+	});
+
 	function openD(selector: string) {
-	  const deco: HTMLElement = document.querySelector(selector) as HTMLElement;
-	  const blur: HTMLElement = document.querySelector('#blur') as HTMLElement;
-	  if (deco && blur) {
-		deco.style.height = '40%';
-		blur.style.opacity = '0.5';
-		blur.style.zIndex = '10';
-	  }
+		const deco: HTMLElement = document.querySelector(selector) as HTMLElement;
+		const blur: HTMLElement = document.querySelector('#blur') as HTMLElement;
+		if (deco && blur) {
+			deco.style.height = '40%';
+			blur.style.opacity = '0.5';
+			blur.style.zIndex = '10';
+		}
 	}
-  
+
 	function closeD(selector: string) {
-	  const deco: HTMLElement = document.querySelector(selector) as HTMLElement;
-	  const blur: HTMLElement = document.querySelector('#blur') as HTMLElement;
-	  if (deco && blur) {
-		deco.style.height = '10%';
-		blur.style.opacity = '0';
-		blur.style.zIndex = '0';
-	  }
+		const deco: HTMLElement = document.querySelector(selector) as HTMLElement;
+		const blur: HTMLElement = document.querySelector('#blur') as HTMLElement;
+		if (deco && blur) {
+			deco.style.height = '10%';
+			blur.style.opacity = '0';
+			blur.style.zIndex = '0';
+		}
 	}
-  
+
 	function handleClickOutside(event: MouseEvent) {
-	  const deco = document.getElementById('deco');
-	  if (deco && !deco.contains(event.target as Node)) {
-		closeD('#deco');
-	  }
+		const deco = document.getElementById('deco');
+		if (deco && !deco.contains(event.target as Node)) {
+			closeD('#deco');
+		}
 	}
 </script>
 
