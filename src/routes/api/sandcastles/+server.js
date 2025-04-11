@@ -1,35 +1,27 @@
 import Jaedeesai from "$lib/models/jaedeesai";
 import { connectDB } from "$lib/db";
 import crypto from 'crypto';
-import JWTVerify from "../jwtVerify.js";
+import mongoose from "mongoose";
 
-export async function GET({request}) {
+export async function GET({ locals }) {
     try {
-        const authHeader = request.headers.get('Authorization');
-        if(!authHeader){
-            return new Response(JSON.stringify({ error: 'Unauthorized: Missing token' }), {
-                status: 401,
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
-        // console.log(authHeader);
-        
-        const isTokenValid = JWTVerify(authHeader);
-        if (!isTokenValid) {
-            return new Response(JSON.stringify({ error: 'Unauthorized: Invalid token' }), {
-                status: 401,
+        if (locals.user === null) {
+            return new Response(JSON.stringify({ error: 'Unautherized request' }), {
+                status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
         }
 
+        //Fetch all sandcastles
         await connectDB();
         const allSandcastles = await Jaedeesai.find().select('-_id id name ownername');
         if (!allSandcastles) {
             return new Response(JSON.stringify({ error: 'Sand castle not found' }), {
-                status: 204,
+                status: 404,
                 headers: { 'Content-Type': 'application/json' }
             });
         }
+
         return new Response(JSON.stringify(allSandcastles), {
             status: 200,
             headers: { 'Content-Type': 'application/json' }
@@ -43,27 +35,19 @@ export async function GET({request}) {
     }
 }
 
-
-export async function POST({ request }) {
+//Create new user with castle
+export async function POST({ request, locals }) {
     try {
-        const authHeader = request.headers.get('Authorization');
-        if(!authHeader){
-            return new Response(JSON.stringify({ error: 'Unauthorized: Missing token' }), {
-                status: 401,
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
-        // console.log(authHeader);
-        
-        const isTokenValid = JWTVerify(authHeader);
-        if (!isTokenValid) {
-            return new Response(JSON.stringify({ error: 'Unauthorized: Invalid token' }), {
+        if (locals.user === null) {
+            return new Response(JSON.stringify({
+                error: 'Unauthorized request'
+            }), {
                 status: 401,
                 headers: { 'Content-Type': 'application/json' }
             });
         }
         const { name, type, ownername, email } = await request.json();
-        
+
         // Validate input : If one of them is empty
         if (!name || !type || !ownername || !email) {
             return new Response(JSON.stringify({ error: 'Missing required fields' }), {
@@ -132,12 +116,18 @@ export async function POST({ request }) {
 
         return new Response(JSON.stringify({
             message: 'Sandcastle created successfully',
-            data : newSandcastle
+            data: newSandcastle
         }), {
             status: 201,
             headers: { 'Content-Type': 'application/json' }
         });
     } catch (err) {
+        if (err instanceof mongoose.Error.ValidationError) {
+            return new Response(JSON.stringify(
+                { error: err.message }),
+                { status: 400 }
+            );
+        }
         return new Response(JSON.stringify({ error: 'Internal server error' }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
