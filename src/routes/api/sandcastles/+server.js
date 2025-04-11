@@ -76,6 +76,7 @@ export async function POST({ request, locals }) {
         }
 
         // Validate input : Check if email already exists
+        //Maybe we can delete this and only check on verify
         const existingSandcastle = await Jaedeesai.findOne({ email });
         if (existingSandcastle) {
             return new Response(JSON.stringify({ error: 'Email already used for another sandcastle' }), {
