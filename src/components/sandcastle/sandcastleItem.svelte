@@ -45,12 +45,10 @@
 {#if error}
 	<p class="text-red-800">{error}</p>
 {:else if sandcastle}
-	<div class="sandcastle">
-		<h2>{sandcastle.name}</h2>
-		<p>Owner: {sandcastle.ownername}</p>
-		<p>Type: {sandcastle.type}</p>
+	<div class="flex flex-col items-center justify-center">
+		<h1 class="text-4xl font-bold text-yellow-700">{sandcastle.name}</h1>
+		<p>ของ {sandcastle.ownername}</p>
 
-		<h3>Decorations:</h3>
 		{#if sandcastle.decorations.length > 0}
 			<ul>
 				{#each sandcastle.decorations as decoration}

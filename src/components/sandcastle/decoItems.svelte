@@ -21,4 +21,8 @@
 	const imageSrc = imageMap[type] || ratchapruek;
 </script>
 
-<img class="h-[80px]" src={imageSrc} alt={type || 'placeholder'} />
+<img
+	class="h-[80px] rounded-4xl outline-white hover:outline-2"
+	src={imageSrc}
+	alt={type || 'placeholder'}
+/>
