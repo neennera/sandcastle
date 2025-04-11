@@ -28,7 +28,7 @@
 	</div>
 
 	<button
-		class="absolute right-5 bottom-30 mt-6 flex h-10 w-10 items-center justify-center rounded-full bg-gray-300 shadow-md hover:bg-gray-400"
+		class="bottom-30 absolute right-5 mt-6 flex h-10 w-10 items-center justify-center rounded-full bg-gray-300 shadow-md hover:bg-gray-400"
 	>
 		❓
 	</button>
