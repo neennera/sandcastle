@@ -1,31 +1,20 @@
 import Jaedeesai from '$lib/models/jaedeesai.js';
 import { connectDB } from '$lib/db';
-import JWTVerify from '../../jwtVerify';
-/**
- * 
- * @param {*} param0 
- * @returns 
- */
 
-export async function GET({ params, request }) {
+/**
+ * Fetch a sandcastle by ID.
+ */
+export async function GET({ params, locals }) {
     try {
-        const authHeader = request.headers.get('Authorization');
-        if(!authHeader){
-            return new Response(JSON.stringify({ error: 'Unauthorized: Missing token' }), {
+        if (locals.user === null) {
+            return new Response(JSON.stringify({ error: 'Unauthorized request' }), {
                 status: 401,
                 headers: { 'Content-Type': 'application/json' }
             });
         }
-        const isTokenValid = JWTVerify(authHeader);
-        if (!isTokenValid) {
-            return new Response(JSON.stringify({ error: 'Unauthorized: Invalid token' }), {
-                status: 401,
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
+
         await connectDB();
-        const id = params.id;
-        const sandcastle = await Jaedeesai.findOne({ id: id }).select("-_id -decorations._id"); // Fetch data from the database
+        const sandcastle = await Jaedeesai.findOne({ id: params.id }).select('-_id -decorations._id');
 
         if (!sandcastle) {
             return new Response(JSON.stringify({ error: 'Sandcastle not found' }), {
@@ -39,29 +28,22 @@ export async function GET({ params, request }) {
             headers: { 'Content-Type': 'application/json' }
         });
     } catch (error) {
-        return new Response(JSON.stringify({ error: 'Internal Server Error' }), {
+        return new Response(JSON.stringify({ error: 'Internal server error' }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' }
         });
     }
 }
 
-export async function POST({ params, request }) {
+export async function POST({ params, request, locals }) {
     try {
-        const authHeader = request.headers.get('Authorization');
-        if(!authHeader){
-            return new Response(JSON.stringify({ error: 'Unauthorized: Missing token' }), {
+        if (locals.user === null) {
+            return new Response(JSON.stringify({ error: 'Unauthorized request' }), {
                 status: 401,
                 headers: { 'Content-Type': 'application/json' }
             });
         }
-        const isTokenValid = JWTVerify(authHeader);
-        if (!isTokenValid) {
-            return new Response(JSON.stringify({ error: 'Unauthorized: Invalid token' }), {
-                status: 401,
-                headers: { 'Content-Type': 'application/json' }
-            });
-        }
+
         const id = params.id;
         const { type, wishing_text, sender_name } = await request.json();
 
