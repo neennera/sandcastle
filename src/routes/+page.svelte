@@ -39,7 +39,7 @@
 		</div>
 		
 		<div class="flex w-full h-[45%] items-center justify-center">
-			<img src={imageUrl} alt="เจดีย์ทราย" class="h-full rounded-lg" />
+			<img src={imageUrl} alt="เจดีย์ทราย" class="h-full" />
 		</div>
 
 		<div class="flex flex-col space-y-4 w-full items-center justify-start h-[35%]">
