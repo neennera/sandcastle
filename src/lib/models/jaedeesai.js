@@ -1,8 +1,8 @@
-import mongoose, { Model, mongo } from "mongoose";
+import mongoose, { Model } from "mongoose";
 import isEmail from "validator/lib/isEmail";
 
 /**
- * 
+ * Validate Jaedee ID (should be a 6-digit number)
  * @param {Number} id 
  */
 const checkJeadeeID = function (id) {
@@ -27,8 +27,7 @@ const decorationSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-}, {versionKey:false});
-
+}, { versionKey: false });
 
 const jaedeesaiSchema = new mongoose.Schema({
     id: {
@@ -53,7 +52,7 @@ const jaedeesaiSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        require: true,
+        required: true,
         validator: [isEmail],
     },
     decorations: {
@@ -63,6 +62,9 @@ const jaedeesaiSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-}, { collection: 'jaedeesai' , versionKey:false})
+}, { collection: 'jaedeesai', versionKey: false });
 
-export default mongoose.model("Jaedeesai", jaedeesaiSchema);
+// Check if the model already exists
+const Jaedeesai = mongoose.models.Jaedeesai || mongoose.model('Jaedeesai', jaedeesaiSchema);
+
+export default Jaedeesai;

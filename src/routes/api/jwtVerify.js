@@ -7,6 +7,7 @@ const SECRET_KEY = process.env.SECRET_KEY;
  * @param {string} authHeader - The Authorization header containing the token.
  * @returns {boolean} - Returns true if the token is valid, false otherwise.
  */
+
 export default function JWTVerify(authHeader) {
 
     // console.log(SECRET_KEY);
@@ -20,7 +21,7 @@ export default function JWTVerify(authHeader) {
     }
 
     const token = authHeader.split(' ')[1];
-    // console.log(SECRET_KEY, token);
+    console.log(SECRET_KEY, token);
     
     // Verify the token
     try {
@@ -30,3 +31,4 @@ export default function JWTVerify(authHeader) {
         return false; // Token is invalid
     }
 }
+
