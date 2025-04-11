@@ -1,18 +1,24 @@
 <script>
+	import ratchapruek from '$lib/images/deco/ratchapruek_OL.webp';
+	import mali from '$lib/images/deco/mali_OL.webp';
+	import banmairooroi from '$lib/images/deco/banmairooroi_OL.webp';
+	import flag from '$lib/images/deco/flag_OL.webp';
+	import stone from '$lib/images/deco/stone_OL.webp';
+	import leaf from '$lib/images/deco/leaf_OL.webp';
+
+	/** @type {keyof typeof imageMap} */
 	export let type;
 
-	// Define the allowed types
-	const validTypes = ['ratchapruek', 'mali', 'banmairooroi', 'flag', 'stone', 'leaf'];
+	const imageMap = {
+		ratchapruek,
+		mali,
+		banmairooroi,
+		flag,
+		stone,
+		leaf
+	};
 
-	// Check if the provided type is valid
-	if (!validTypes.includes(type)) {
-		type = null; // Set to null if invalid
-	}
+	const imageSrc = imageMap[type] || ratchapruek;
 </script>
 
-{#if type}
-	<img src={`/static/deco/${type}_OL.webp`} alt={type} />
-{:else}
-	<!-- return ratchapruek_OL as placeholder  -->
-	<img src={`/static/deco/ratchapruek_OL.webp`} alt={type} />
-{/if}
+<img class="h-[80px]" src={imageSrc} alt={type || 'placeholder'} />

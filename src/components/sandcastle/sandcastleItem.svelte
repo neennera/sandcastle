@@ -13,12 +13,14 @@
 	 */
 	let error = null; // To store any error messages
 
-	// TODO : replace token
-	const token =
-		'yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ0ZW1wIiwiaWF0IjoxNzQ0MzU3NzA5LCJleHAiOjE3NDQzNjEzMDl9.sVRrm6thlkrgVib8hrmgrGvAzi0eEHz-7y3aWPKXmiI';
 	// Fetch sandcastle data from the API
 	onMount(async () => {
 		try {
+			// TODO : replace token
+			const token =
+				'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ0ZW1wIiwiaWF0IjoxNzQ0MzU3NzA5LCJleHAiOjE3NDQzNjEzMDl9.sVRrm6thlkrgVib8hrmgrGvAzi0eEHz-7y3aWPKXmiI';
+			console.log(token);
+
 			const response = await fetch(`/api/sandcastles/${id}`, {
 				method: 'GET',
 				headers: {
@@ -41,7 +43,7 @@
 </script>
 
 {#if error}
-	<p class="error">{error}</p>
+	<p class="text-red-800">{error}</p>
 {:else if sandcastle}
 	<div class="sandcastle">
 		<h2>{sandcastle.name}</h2>
@@ -53,14 +55,7 @@
 			<ul>
 				{#each sandcastle.decorations as decoration}
 					<li>
-						<!-- Validate type before passing it to DecoItems -->
-						<DecoItems
-							type={['ratchapruek', 'mali', 'banmairooroi', 'flag', 'stone', 'leaf'].includes(
-								decoration.type
-							)
-								? decoration.type
-								: null}
-						/>
+						<DecoItems type={decoration.type} />
 						<p>Wishing Text: {decoration.wishing_text}</p>
 						<p>Sender: {decoration.sender_name}</p>
 					</li>
