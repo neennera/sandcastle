@@ -51,8 +51,8 @@
 			{#each sandcastles as sandcastle, index}
 				<div
 					class="absolute w-[30%]"
-					style="left: {sandcastlePositionLeft[index % 6]}%; top: {sandcastlePositionTop[
-						index % 6
+					style="left: {sandcastlePositionLeft[index % 5]}%; top: {sandcastlePositionTop[
+						index % 5
 					]}%"
 					role="button"
 					tabindex="0"

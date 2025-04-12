@@ -95,14 +95,15 @@
 </script>
 
 <div
+	id="screenshot-area"
 	class="flex h-full w-full flex-col items-center justify-center self-center bg-[url('/sample/templebg.webp')] bg-cover"
 >
 	<div
-		id="screenshot-area"
 		class="relative flex h-[90%] w-[90%] flex-col items-center justify-start overflow-hidden rounded-[20px] bg-[url('/sample/bg.webp')] bg-cover"
 	>
 		{#if isSharing}
 			<div class="mt-20 flex h-[10%] w-full flex-col items-center justify-center">
+				<h1 class="text-xs text-[#8D7878] italic">https://sandcastle-delta.vercel.app/</h1>
 				<h1 class="text-3xl font-bold text-[#8D7878]">ร่วมตกแต่งเจดีย์ทราย</h1>
 				<h1 class="text-3xl font-bold text-[#8D7878]">{sandcastle?.name}</h1>
 				<h3 class="mt-2 text-xl font-semibold text-[#8D7878]">ของ {sandcastle?.ownername}</h3>
@@ -126,34 +127,39 @@
 
 		<!-- Show QR code and ID icon in share mode -->
 		{#if isSharing}
-			<div class="absolute bottom-5 flex w-[80%] flex-col items-center rounded-2xl bg-white">
-				<p class="mt-2 text-lg font-bold text-black">ID: {id}</p>
-				<img src={qrCodeUrl} alt="QR Code" class="h-[200px] w-[200px]" />
+			<div
+				class="absolute bottom-5 flex h-[230px] w-[80%] flex-col items-center rounded-2xl bg-white"
+			>
+				<img style="z-index: 10;" src={qrCodeUrl} alt="QR Code" class="-mb-7 h-[200px] w-[200px]" />
+				<p style="z-index: 20;" class="font-thai text-2xl font-bold text-[#8D7878]">
+					หมายเลข : {id}
+				</p>
 			</div>
 		{/if}
 	</div>
-
-	<!-- Share Button -->
-	<button
-		class="absolute top-100 right-10 flex h-12 w-12 items-center justify-center rounded-full bg-yellow-500 text-white shadow-lg"
-		on:click={takeScreenshot}
-		aria-label="share"
-	>
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			x="0px"
-			y="0px"
-			width="20"
-			height="20"
-			viewBox="0 0 24 24"
+	{#if !isSharing}
+		<!-- Share Button -->
+		<button
+			class="absolute top-100 right-10 flex h-12 w-12 items-center justify-center rounded-full bg-yellow-500 text-white shadow-lg"
+			on:click={takeScreenshot}
+			aria-label="share"
 		>
-			<path
-				d="M 18 2 A 3 3 0 0 0 15 5 A 3 3 0 0 0 15.054688 5.5605469 L 7.9394531 9.7109375 A 3 3 0 0 0 6 9 A 3 3 0 0 0 3 12 A 3 3 0 0 0 6 15 A 3 3 0 0 0 7.9355469 14.287109 L 15.054688 18.439453 A 3 3 0 0 0 15 19 A 3 3 0 0 0 18 22 A 3 3 0 0 0 21 19 A 3 3 0 0 0 18 16 A 3 3 0 0 0 16.0625 16.712891 L 8.9453125 12.560547 A 3 3 0 0 0 9 12 A 3 3 0 0 0 8.9453125 11.439453 L 16.060547 7.2890625 A 3 3 0 0 0 18 8 A 3 3 0 0 0 21 5 A 3 3 0 0 0 18 2 z"
-			></path>
-		</svg>
-	</button>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				x="0px"
+				y="0px"
+				width="20"
+				height="20"
+				viewBox="0 0 24 24"
+			>
+				<path
+					d="M 18 2 A 3 3 0 0 0 15 5 A 3 3 0 0 0 15.054688 5.5605469 L 7.9394531 9.7109375 A 3 3 0 0 0 6 9 A 3 3 0 0 0 3 12 A 3 3 0 0 0 6 15 A 3 3 0 0 0 7.9355469 14.287109 L 15.054688 18.439453 A 3 3 0 0 0 15 19 A 3 3 0 0 0 18 22 A 3 3 0 0 0 21 19 A 3 3 0 0 0 18 16 A 3 3 0 0 0 16.0625 16.712891 L 8.9453125 12.560547 A 3 3 0 0 0 9 12 A 3 3 0 0 0 8.9453125 11.439453 L 16.060547 7.2890625 A 3 3 0 0 0 18 8 A 3 3 0 0 0 21 5 A 3 3 0 0 0 18 2 z"
+				></path>
+			</svg>
+		</button>
 
-	<Decopanel {openD} {closeD} {handleClickOutside} sandcastleId={id.toString()} />
+		<Decopanel {openD} {closeD} {handleClickOutside} sandcastleId={id.toString()} />
+	{/if}
 </div>
 
 <style>
