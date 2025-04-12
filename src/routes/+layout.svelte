@@ -6,7 +6,7 @@
 
 	onMount(() => {
 		const checkOrientation = () => {
-			isPortrait = (window.innerHeight >= window.innerWidth) || (window.innerHeight > 700 );
+			isPortrait = (window.innerHeight >= window.innerWidth) || (window.innerHeight > 600 );
 		};
 		checkOrientation();
 		window.addEventListener('resize', checkOrientation);
@@ -56,7 +56,7 @@
 		<slot />
 	</div>
 {:else}
-	<div class="font-thai flex items-center justify-center h-screen w-screen bg-[url('sample/bg.webp')] text-[#8d7878] text-center p-8">
+	<div class="font-thai flex items-center justify-center h-screen w-screen bg-[#f8f6e8] text-[#8d7878] text-center p-8">
 		<p class="text-xl font-bold">กรุณาหมุนอุปกรณ์ของคุณเป็นแนวตั้งเพื่อใช้งานเว็บไซต์ 📱🔄</p>
 	</div>
 {/if}
