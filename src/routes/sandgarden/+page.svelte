@@ -85,7 +85,7 @@
 		</div>
 	{/if}
 	<button
-		class="btn-secondary absolute top-[90%] bg-sky-100 bg-[url('sample/btnbg.png')]"
+		class="btn-secondary absolute top-[90%] bg-sky-100 bg-[url('/sample/btnbg.png')]"
 		on:click={async () => {
 			try {
 				// Fetch new random sandcastles

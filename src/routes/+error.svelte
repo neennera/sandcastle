@@ -15,7 +15,7 @@
 		<h1 class="text-6xl font-bold text-[#8D7878]">404</h1>
 		<p class="mt-4 text-2xl font-semibold text-[#8D7878]">ไม่พบหน้าที่คุณต้องการ</p>
 
-		<button class="btn-primary bg-[url('sample/btnbg.png')]mt-8 h-20" on:click={goToLandingPage}>
+		<button class="btn-primary bg-[url('/sample/btnbg.png')]mt-8 h-20" on:click={goToLandingPage}>
 			กลับไปหน้าหลัก
 		</button>
 	</div>

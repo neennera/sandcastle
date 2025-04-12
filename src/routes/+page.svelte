@@ -84,7 +84,7 @@
 
 		<div class="flex h-[35%] w-full flex-col items-center justify-start space-y-4">
 			<button
-				class="btn-primary bg-[url('sample/btnbg.png')] text-xl"
+				class="btn-primary bg-[url('/sample/btnbg.png')] text-xl"
 				on:click={() => {
 					navigateToPage('/sandgarden');
 				}}
@@ -92,13 +92,13 @@
 				สำรวจเจดีย์ในลานวัด
 			</button>
 			<button
-				class="btn-primary bg-[url('sample/btnbg.png')] text-xl"
+				class="btn-primary bg-[url('/sample/btnbg.png')] text-xl"
 				on:click={() => {
 					createPopUp('#friend-popup');
 				}}>ตกแต่งเจดีย์เพื่อน</button
 			>
 			<button
-				class="btn-primary bg-[url('sample/btnbg.png')] text-xl"
+				class="btn-primary bg-[url('/sample/btnbg.png')] text-xl"
 				on:click={() => {
 					navigateToPage('/buildcastle');
 				}}>ก่อเจดีย์ทรายของคุณ</button

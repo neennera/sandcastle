@@ -122,7 +122,7 @@
 							</h1>
 
 							<button
-								class="btn-secondary mt-4 mb-4 self-center bg-[url('sample/btnbg.png')] text-sm"
+								class="btn-secondary mt-4 mb-4 self-center bg-[url('/sample/btnbg.png')] text-sm"
 								on:click={() => (isFormPage = true)}
 							>
 								ถัดไป
@@ -148,14 +148,14 @@
 					></textarea>
 					<div class="mt-4 flex w-full justify-between gap-8">
 						<button
-							class="btn-secondary h-[45px] bg-[url('sample/btnbg.png')] text-sm"
+							class="btn-secondary h-[45px] bg-[url('/sample/btnbg.png')] text-sm"
 							on:click={() => (isFormPage = false)}
 							aria-label="ย้อนกลับ"
 						>
 							ย้อนกลับ
 						</button>
 						<button
-							class="btn-primary bg-[url('sample/btnbg.png')]h-[45px] text-sm"
+							class="btn-primary bg-[url('/sample/btnbg.png')]h-[45px] text-sm"
 							on:click={submitDecoration}
 							aria-label="ส่ง"
 						>
