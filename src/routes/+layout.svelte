@@ -3,14 +3,14 @@
 </script>
 
 <div
-	class=" font-thai relative mx-auto flex aspect-[9/16] min-h-screen w-full flex-col items-center bg-blue-100 md:max-w-[800px]"
+	class=" font-thai relative mx-auto flex aspect-[9/16] min-h-screen w-full flex-col items-center bg-blue-100 md:h-screen md:w-auto md:max-w-[800px]"
 >
 	<a
 		id="home-button"
 		href="/"
-		class="absolute top-4 left-4 rounded-lg bg-blue-500 px-4 py-2 text-white shadow-md hover:bg-blue-600"
+		class=" absolute top-[6%] left-[6%] z-5 aspect-square w-[13%] rounded-[100%] border-[2px] border-[#8d7878] bg-[#f6f3e6] text-white hover:border-[#e3d1a0]"
 	>
-		Home
+		<img src="/sample/jaedee1.webp" class="h-full w-full object-cover" alt="home" />
 	</a>
 
 	<slot />

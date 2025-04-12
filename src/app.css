@@ -1,5 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import 'tailwindcss';
+@tailwind utilities;
+
 @theme {
     --font-thai: "Kanit", "serif"; 
+}
+
+@layer base {
+    .btn-primary {
+        @apply flex w-[80%] h-[20%] rounded-[20px] justify-center items-center text-[#658890] text-[24px] md:text-3xl font-semibold opacity-80 hover:opacity-100 border-[#7ababe] border-[1px] bg-cover;
+        background-image: url('sample/btnbg.webp')
+    }
+    .btn-secondary {
+        @apply flex w-[50%] h-[20%] rounded-[20px] justify-center items-center text-[#658890] text-[18px] md:text-2xl font-semibold opacity-80 hover:opacity-100 border-[#7ababe] border-[1px] bg-cover;
+        background-image: url('sample/btnbg.webp')
+    }
 }
