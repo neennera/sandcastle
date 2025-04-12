@@ -123,10 +123,14 @@
 		{#if sandcastle}
 			{#if isSharing}
 				<div class="mt-20 flex h-[10%] w-[400px] flex-col items-center justify-center">
-					<p class="text-xs text-[#8D7878]">"https://sandcastle-delta.vercel.app/"</p>
-					<h1 class="text-xl font-bold text-[#8D7878]">ร่วมตกแต่งเจดีย์ทราย</h1>
-					<h1 class="text-2xl font-bold text-[#8D7878]">{sandcastle?.name}</h1>
-					<h3 class="mt-2 text-lg font-semibold text-[#8D7878]">ของ {sandcastle?.ownername}</h3>
+					<p class="w-full text-center text-xs text-[#8D7878]">
+						"https://sandcastle-delta.vercel.app/"
+					</p>
+					<h1 class="w-full text-center text-xl font-bold text-[#8D7878]">ร่วมตกแต่งเจดีย์ทราย</h1>
+					<h1 class="w-full text-center text-2xl font-bold text-[#8D7878]">{sandcastle?.name}</h1>
+					<h3 class="mt-2 w-full text-center text-lg font-semibold text-[#8D7878]">
+						ของ {sandcastle?.ownername}
+					</h3>
 				</div>
 			{:else}
 				<div class="mt-10 flex h-[10%] w-full flex-col items-center justify-center">
