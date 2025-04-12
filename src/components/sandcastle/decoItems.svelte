@@ -21,4 +21,4 @@
 	const imageSrc = imageMap[type] || ratchapruek;
 </script>
 
-<img class="h-[80px]" src={imageSrc} alt={type || 'placeholder'} />
+<img class="h-[8vh]" src={imageSrc} alt={type || 'placeholder'} />

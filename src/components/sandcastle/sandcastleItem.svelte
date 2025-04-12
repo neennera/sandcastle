@@ -22,8 +22,8 @@
 	const itemsPerPage = 5;
 
 	// Configurable top and right values
-	const top_values = ['60px', '95px', '115px', '40px', '50px'];
-	const right_values = ['130px', '90px', '150px', '40px', '50px'];
+	const top_values = ['42', '35', '25', '60', '60'];
+	const right_values = ['20', '45', '30', '25', '50'];
 
 	// Function to handle decoration selection
 	/**
@@ -60,14 +60,14 @@
 	};
 </script>
 
-<div class="relative flex h-full w-full flex-col items-center justify-center">
+<div class="relative flex h-full w-full flex-col items-center justify-start">
 	<!-- Decoration -->
-	<div class="decorations-grid">
+	<div class="absolute top-0 ">
 		{#each paginatedDecorations as decoration, index}
 			<button
 				type="button"
 				class={`decoration-button ${selectedDecoration === decoration ? 'selected' : ''}`}
-				style="top: {top_values[index % 6]}; right: {right_values[index % 6]};"
+				style="top: {top_values[index % 6]}%; right: {right_values[index % 6]}%;"
 				on:click={() => {
 					if (
 						selectedDecoration &&
@@ -84,13 +84,11 @@
 				<DecoItems type={decoration.type} />
 			</button>
 		{/each}
+		<img class="max-h-[35vh]" src={imageMap[sandcastle_type]} alt={'sandcastle'} />
 	</div>
 
-	<!-- Sandcastle -->
-	<img class=" absolute top-0 w-[70%]" src={imageMap[sandcastle_type]} alt={'sandcastle'} />
-
 	<!-- Pagination controls -->
-	<div class="absolute top-[45%] pagination-controls">
+	<div class="absolute pagination-controls top-[50%] md:text-2xl">
 		<button on:click={goToPreviousPage} disabled={currentPage === 1}> {'<'} </button>
 		<span>กองที่ {currentPage} จาก {totalPages}</span>
 		<button on:click={goToNextPage} disabled={currentPage === totalPages}> {'>'} </button>
@@ -98,7 +96,7 @@
 
 	<!-- Selected decoration details -->
 	{#if selectedDecoration}
-		<div class="absolute bottom-[30%] selected-decoration max-w-[60%]">
+		<div class="absolute bottom-[25%] selected-decoration max-w-[60%] md:text-2xl md-w-[30%]">
 			<p>Wishing Text: {selectedDecoration.wishing_text}</p>
 			<p>Sender: {selectedDecoration.sender_name}</p>
 		</div>
@@ -107,12 +105,13 @@
 
 <style>
 	.decoration-button {
+		z-index: 3;
 		position: absolute;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 100px;
-		height: 80px;
+		height: auto;
+		max-height: 10vh;
 		border-radius: 20px;
 		background-color: transparent;
 		border: none;
@@ -129,13 +128,6 @@
 	.decoration-button.selected {
 		outline: 2px solid white;
 		background-color: rgba(255, 255, 255, 0.1);
-	}
-	.decorations-grid {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 10px;
-		margin-bottom: 20px;
-		z-index: 5;
 	}
 
 	.pagination-controls {
@@ -165,5 +157,9 @@
 		border: 1px solid #ccc;
 		border-radius: 15px;
 		background-color: #f9f9f9;
+		width: 50%;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
 	}
 </style>

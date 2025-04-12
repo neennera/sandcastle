@@ -69,14 +69,14 @@
 	<div
 		class="relative flex h-[90%] w-[90%] flex-col items-center justify-start overflow-hidden rounded-[20px] bg-[url('/sample/bg.webp')] bg-cover"
 	>
-		<div class="mt-10 flex w-full flex-col items-center justify-center">
+		<div class="mt-15 flex w-full flex-col items-center justify-center">
 			<h1 class="text-3xl md:text-4xl font-bold text-[#8D7878]">{sandcastle?.name}</h1>
 			<h3 class="mt-2 text-xl md:text-2xl font-semibold text-[#8D7878]">ของ {sandcastle?.ownername}</h3>
 		</div>
 		{#if error}
 			<p class="text-red-800">{error}</p>
 		{:else if sandcastle}
-			<div class="flex h-full w-full items-start justify-center">
+			<div class="flex h-full w-full items-start justify-start">
 				<SandcastleItem {sandcastle} />
 			</div>
 		{:else}
