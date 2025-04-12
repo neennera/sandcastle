@@ -122,7 +122,7 @@
 	>
 		{#if sandcastle}
 			{#if isSharing}
-				<div class="mt-20 flex h-[10%] w-full flex-col items-center justify-center">
+				<div class="mt-20 flex h-[10%] w-80 flex-col items-center justify-center">
 					<p class="text-xs text-[#8D7878]">"https://sandcastle-delta.vercel.app/"</p>
 					<h1 class="text-xl font-bold text-[#8D7878]">ร่วมตกแต่งเจดีย์ทราย</h1>
 					<h1 class="text-2xl font-bold text-[#8D7878]">{sandcastle?.name}</h1>
@@ -153,7 +153,7 @@
 			>
 				<img style="z-index: 10;" src={qrCodeUrl} alt="QR Code" class="-mb-7 h-[200px] w-[200px]" />
 				<p style="z-index: 20;" class="font-thai mt-2 text-2xl font-bold text-[#8D7878]">
-					หมายเลข : {id}
+					id : {id}
 				</p>
 			</div>
 		{/if}
