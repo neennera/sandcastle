@@ -10,6 +10,7 @@ export async function GET({ locals }) {
     }
     await connectDB();
     try {
+        /** @type {{ id: string, name: string, ownername: string }[]} */
         const randomSandcastles = await Jaedeesai.aggregate([
             { $sample: { size: 6 } },
             {
@@ -17,7 +18,8 @@ export async function GET({ locals }) {
                     _id: 0,
                     id: 1,
                     name: 1,
-                    ownername: 1
+                    ownername: 1,
+                    type: 1
                 }
             }
         ]);
