@@ -165,48 +165,48 @@
 	<SvelteToast />
 
 	<div
-		class="relative flex h-[90%] w-[90%] flex-col items-center justify-center rounded-[20px] bg-[url('/sample/bg.webp')] bg-cover"
+		class="relative flex h-[90%] w-[90%] flex-col items-center justify-start pt-4 rounded-[20px] bg-[url('/sample/bg.webp')] bg-cover"
 	>
-		<form class="w-full max-w-lg rounded-lg bg-[url(/sample/bg.webp)] p-6">
+		<form class="w-full h-full max-w-lg rounded-lg p-6">
 			<div class="text-center">
-				<h1 class="mb-6 text-3xl font-bold text-[#8D7878]">สร้างเจดีย์ใหม่</h1>
+				<h1 class="mb-6 text-3xl md:text-5xl font-bold text-[#8D7878]">สร้างเจดีย์ใหม่</h1>
 			</div>
 			<!-- Input Fields -->
-			<div class="mb-4">
+			<div class="mb-4 md:text-2xl">
 				<label for="sandcastlename" class="block text-[#8D7878]">ชื่อเจดีย์ทราย</label>
 				<input
 					id="sandcastlename"
 					type="text"
 					bind:value={sandcastlename}
-					class="w-full rounded-lg border px-4 py-2 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
+					class="w-full h-[5vh] max-h-[50px] bg-[#fdfde6] border-[#8d7878] rounded-[20px] border px-4 py-2 focus:border-[#e3d1a0] focus:outline-none"
 				/>
 			</div>
 
-			<div class="mb-4">
+			<div class="mb-4 md:text-2xl">
 				<label for="ownername" class="block text-[#8D7878]">ชื่อของคุณ</label>
 				<input
 					id="ownername"
 					type="text"
 					bind:value={name}
-					class="w-full rounded-lg border px-4 py-2 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
+					class="w-full h-[5vh] max-h-[50px] border-[#8d7878] rounded-[20px] bg-[#fdfde6] border px-4 py-2 focus:border-[#e3d1a0] focus:outline-none"
 				/>
 			</div>
 
-			<div class="mb-4">
+			<div class="mb-4 md:text-2xl">
 				<label for="owneremail" class="block text-[#8D7878]">อีเมลของคุณ</label>
 				<input
 					id="owneremail"
 					type="email"
 					bind:value={email}
-					class="w-full rounded-lg border px-4 py-2 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
+					class="w-full h-[5vh] max-h-[50px] bg-[#fdfde6] border-[#8d7878] rounded-[20px] border px-4 py-2 focus:border-[#e3d1a0] focus:outline-none"
 				/>
 			</div>
 
 			<!-- Castle Type Selection -->
-			<div class="mb-4">
-				<label for="sandcastletype" class="block text-[#8D7878]">เลือกแบบเจดีย์</label>
+			<div class="mb-4 md:text-2xl flex flex-col items-center justify-center">
+				<label for="sandcastletype" class="block self-start text-[#8D7878]">เลือกแบบเจดีย์</label>
 				<div class="flex w-full space-x-4 py-4">
-					<div class="flex space-x-1">
+					<div class="flex space-x-1 w-full justify-center">
 						{#each castleOptions as option}
 							<div class="flex w-[25%] flex-col items-center space-y-1 text-[#8D7878]">
 								<button
@@ -224,12 +224,14 @@
 											toastMessage = details.flora;
 										}
 									}}
-									class="flex h-20 w-full cursor-pointer flex-col items-center justify-center rounded-lg border px-4 py-2 text-sm {castleType ==
+									class="flex w-[75px] sm:w-[100px] cursor-pointer flex-col items-center justify-center rounded-lg border px-4 py-2 text-xs {castleType ==
 										option &&
-										'bg-yellow-500 font-bold text-white'} hover:bg-yellow-400 hover:text-white"
+										'bg-[#f6cd75] font-bold text-white'} hover:bg-[#f6cd75] hover:text-white"
 								>
 									<img src="/sample/{option}.webp" alt="option" />
-									{option}
+									<div>
+										{option}
+									</div>
 								</button>
 							</div>
 						{/each}
@@ -247,7 +249,7 @@
 						role="button"
 					>
 						<button
-							class="flex flex-col items-center rounded-lg border-4 border-yellow-500 bg-white p-4 shadow-lg"
+							class="flex flex-col items-center bg-[#fdfde6] rounded-xl border-[2px] border-[#e6d1a3] p-4"
 							on:click|stopPropagation
 						>
 							<!-- Image at the center -->
@@ -255,11 +257,11 @@
 
 							<!-- Toast message -->
 							<div class="flex w-full flex-col items-center justify-center space-y-2">
-								<span class="text-4xl font-bold text-yellow-500">{castleType}</span>
+								<span class="text-4xl font-bold text-[#8d7878]">{castleType}</span>
 								<span>{toastMessage}</span>
 								<!-- Close button -->
 								<span
-									class="ml-4 cursor-pointer rounded-full bg-yellow-500 px-2 px-3 py-1 text-white hover:bg-yellow-600"
+									class="ml-4 cursor-pointer rounded-full bg-[#f6cd75] px-2 px-3 py-1 text-white hover:bg-[#e3d1a0]"
 									on:click={closeToast}
 								>
 									ปิดคำอธิบาย
@@ -278,12 +280,12 @@
 								id="otp"
 								type="text"
 								bind:value={otp}
-								class="w-full rounded-lg border px-4 py-2 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
+								class="w-full h-[5vh] max-h-[50px] border-[#8d7878] rounded-[20px] bg-[#fdfde6] border px-4 py-2 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
 							/>
 						</div>
 						<!-- OTP Button -->
 						<button
-							class="flex h-10 w-[40%] items-center rounded-lg bg-yellow-500 px-6 py-3 text-white shadow-md hover:bg-yellow-600 disabled:opacity-50"
+							class="flex h-10 w-[40%] items-center justify-center rounded-lg bg-[#f6cd75] px-6 py-3 text-white text-sm font-bold hover:bg-yellow-500"
 							on:click|preventDefault={requestOtp}
 							disabled={isOtpSent}
 						>
@@ -305,7 +307,7 @@
 				<button
 					type="submit"
 					on:click|preventDefault={handleSubmit}
-					class="w-full rounded-lg bg-yellow-500 px-6 py-3 text-white shadow-md hover:bg-yellow-600"
+					class="btn-primary self-center mt-4 md:h-[5vh]"
 				>
 					ก่อเจดีย์ทราย
 				</button>
