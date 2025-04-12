@@ -21,7 +21,7 @@ export async function handle({ event, resolve }) {
             event.locals.user = userData;
         }
         catch (err) {
-            console.error('Invalid token');
+            // console.error('Invalid token');
             event.locals.user = null;
         }
     } else {
