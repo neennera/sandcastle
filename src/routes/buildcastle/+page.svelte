@@ -4,6 +4,7 @@
 	let email = '';
 	let castleType = '';
 
+	let toastVisible = false; // State to control the visibility of the toast
 	let toastMessage = '';
 
 	const details = {
@@ -18,9 +19,15 @@
 	function handleSubmit() {
 		alert(`กำลังสร้างเจดีย์ทราย: ${castleType}`);
 	}
+	function closeToast() {
+		toastVisible = false; // Hide the toast
+		toastMessage = ''; // Clear the message
+	}
 </script>
 
-<div class="flex min-h-screen flex-col items-center justify-center p-6">
+<svelte:window on:scroll={closeToast} />
+
+<div class="flex min-h-screen max-w-lg flex-col items-center justify-center p-6">
 	<form class="w-full max-w-lg rounded-lg bg-[url(/sample/bg.webp)] p-6 shadow-lg">
 		<div class="text-center">
 			<h1 class="mb-6 text-3xl font-bold text-[#8D7878]">สร้างเจดีย์ใหม่</h1>
@@ -67,6 +74,7 @@
 								type="button"
 								on:click={() => {
 									castleType = option;
+									toastVisible = true; // Show the toast
 									if (option == 'lotus') {
 										toastMessage = details.lotus;
 									} else if (option == 'layer') {
@@ -77,10 +85,11 @@
 										toastMessage = details.flora;
 									}
 								}}
-								class="rounded-lg border px-4 py-2 {castleType == option &&
+								class="flex w-23 flex-col items-center justify-center rounded-lg border px-4 py-2 {castleType ==
+									option &&
 									'bg-yellow-500 font-bold text-white'} hover:bg-yellow-400 hover:text-white"
 							>
-								<img src="/sample/{option}.webp" alt="option" width="85px" height="100px" />
+								<img src="/sample/{option}.webp" alt="option" />
 								{option}
 							</button>
 						</div>
@@ -88,10 +97,20 @@
 				</div>
 			</div>
 
-			{#if toastMessage}
-				<div class="fixed inset-0 z-50 flex items-center justify-center">
-					<div class="rounded-lg bg-yellow-500 p-4 text-white shadow-lg">
-						{toastMessage}
+			{#if toastVisible}
+				<div
+					class="bg-opacity-50 fixed inset-0 z-50 flex items-center justify-center"
+					on:click={closeToast}
+					on:keydown={(event) => {
+						if (event.key === 'Enter' || event.key === ' ') closeToast();
+					}}
+					tabindex="0"
+					role="button"
+				>
+					<div class="rounded-lg bg-yellow-500 p-4 text-white shadow-lg" on:click|stopPropagation>
+						<div class="flex items-center justify-between">
+							<span>{toastMessage}</span>
+						</div>
 					</div>
 				</div>
 			{/if}
