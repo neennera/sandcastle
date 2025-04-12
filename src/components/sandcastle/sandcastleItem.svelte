@@ -69,7 +69,7 @@
 				<button
 					type="button"
 					class={`decoration-button ${selectedDecoration === decoration ? 'selected' : ''}`}
-					style="top: {top_values[index % 6]}; right: {right_values[index % 6]};"
+					style="top: {top_values[index % 5]}; right: {right_values[index % 5]};"
 					on:click={() => {
 						if (
 							selectedDecoration &&

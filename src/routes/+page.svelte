@@ -5,6 +5,12 @@
 	import { navigateToPage } from '$lib/utils/functionUtils';
 	import { PUBLIC_WEB_SECRET } from '$env/static/public';
 
+	import { initGA } from '../analytics';
+	onMount(() => {
+		initGA();
+	});
+	let credithidden = true;
+
 	onMount(async () => {
 		const data = {
 			web_secret: PUBLIC_WEB_SECRET
@@ -28,7 +34,7 @@
 		}
 	});
 
-	let imageUrl = '/sample/jaedee1.webp';
+	let imageUrl = '/sample/flora.webp';
 	onMount(() => {
 		const homebtn = document.getElementById('home-button');
 		if (homebtn) {
@@ -37,20 +43,27 @@
 	});
 
 	function createPopUp(selector: string) {
+		if (selector === '#credit-popup') {
+			credithidden = false; // Update the hidden prop for CreditPopup
+		}
 		const popup: HTMLElement = document.querySelector(selector) as HTMLElement;
 		if (popup) {
-			popup.style.height = '40%';
+			popup.style.minHeight = '40%';
 			popup.style.opacity = '100%';
 			popup.style.zIndex = '50';
+			popup.hidden = false;
 		}
 	}
 
 	function closePopUp(selector: string) {
+		if (selector === '#credit-popup') {
+			credithidden = true; // Update the hidden prop for CreditPopup
+		}
 		const popup: HTMLElement = document.querySelector(selector) as HTMLElement;
 		if (popup) {
-			popup.style.height = '0';
 			popup.style.opacity = '0';
 			popup.style.zIndex = '0';
+			popup.hidden = true;
 		}
 	}
 </script>
@@ -74,8 +87,10 @@
 				class="btn-primary"
 				on:click={() => {
 					navigateToPage('/sandgarden');
-				}}>สำรวจเจดีย์ในลานวัด</button
+				}}
 			>
+				สำรวจเจดีย์ในลานวัด
+			</button>
 			<button
 				class="btn-primary"
 				on:click={() => {
@@ -91,15 +106,19 @@
 		</div>
 
 		<button
-			class="absolute right-3 bottom-3 flex h-8 w-8 items-center justify-center rounded-full border-[3px] border-[#6a799a] bg-[#fff8ee] text-[24px] font-bold text-[#6a799a] opacity-80 hover:opacity-100 sm:h-10 sm:w-10 sm:text-[36px]"
+			class="absolute right-3 bottom-3 flex h-8 w-8 items-center justify-center rounded-full border-[3px] border-[#6a799a] bg-[#fff8ee] text-xs text-[#6a799a] opacity-80 hover:opacity-100 sm:h-10 sm:w-10 sm:text-[36px]"
 			on:click={() => {
 				createPopUp('#credit-popup');
 			}}
 		>
-			?
+			<p>?</p>
 		</button>
 
 		<FriendPopup close={() => closePopUp('#friend-popup')} />
-		<CreditPopup close={() => closePopUp('#credit-popup')} />
+		<CreditPopup hidden={credithidden} close={() => closePopUp('#credit-popup')} />
 	</div>
 </div>
+<div
+	class="absolute z-2 h-full w-full bg-[url('/sample/foreground.png')] bg-cover"
+	style="pointer-events: none;"
+></div>
