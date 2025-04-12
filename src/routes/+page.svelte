@@ -73,7 +73,7 @@
 			<button
 				class="btn-primary"
 				on:click={() => {
-					navigateToPage('/sandcastle');
+					navigateToPage('/sandgarden');
 				}}>สำรวจเจดีย์ในลานวัด</button
 			>
 			<button
