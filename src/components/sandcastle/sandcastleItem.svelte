@@ -5,6 +5,7 @@
 	import lotus from '$lib/images/sandcastle/lotus.webp';
 	import octagonal from '$lib/images/sandcastle/octagonal.webp';
 	export let sandcastle;
+	export let isSharing;
 
 	/** @type {keyof typeof imageMap} */
 	const sandcastle_type = ['flora', 'layer', 'lotus', 'octagonal'].includes(sandcastle.type)
@@ -93,12 +94,19 @@
 	</div>
 
 	<!-- Pagination controls -->
-	<div class="pagination-controls mt-8">
-		<button on:click={goToPreviousPage} disabled={currentPage === 1}> {'<'} </button>
-		<span>กองที่ {currentPage} จาก {totalPages}</span>
-		<button on:click={goToNextPage} disabled={currentPage === totalPages}> {'>'} </button>
-	</div>
-
+	{#if !isSharing}
+		<div class="pagination-controls mt-8">
+			<button on:click={goToPreviousPage} disabled={currentPage === 1}> {'<'} </button>
+			<span>กองที่ {currentPage} จาก {totalPages}</span>
+			<button on:click={goToNextPage} disabled={currentPage === totalPages}> {'>'} </button>
+		</div>
+	{:else}
+		<div class="pagination-controls mt-8 opacity-0">
+			<button on:click={goToPreviousPage} disabled={currentPage === 1}> {'<'} </button>
+			<span>กองที่ {currentPage} จาก {totalPages}</span>
+			<button on:click={goToNextPage} disabled={currentPage === totalPages}> {'>'} </button>
+		</div>
+	{/if}
 	<!-- Selected decoration details -->
 	{#if selectedDecoration}
 		<div class="selected-decoration h-[100px] w-full overflow-y-scroll">

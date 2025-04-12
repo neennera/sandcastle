@@ -1,5 +1,3 @@
-<!-- src/components/sandcastle/Decoration.svelte -->
-
 <script lang="ts">
 	import { toast } from '@zerodevx/svelte-toast'; // Import the toast library
 	import { SvelteToast } from '@zerodevx/svelte-toast';
@@ -73,7 +71,7 @@
 >
 	<SvelteToast />
 	<button
-		class="absolute top-[-25px] left-[20%] h-12 w-[60%] rounded-[20px] border-[#efc368] bg-[#f9d790] text-2xl font-semibold text-[#c28d1e] hover:border-[2px]"
+		class="absolute top-[-25px] left-[20%] h-[5vh] w-[60%] rounded-[20px] border-[#efc368] bg-[#f9d790] text-xl font-semibold text-[#c28d1e] hover:border-[2px] sm:text-3xl"
 		on:click={() => {
 			openD('#deco');
 			isOpen = true;
@@ -82,7 +80,7 @@
 		ตกแต่งเพิ่ม
 	</button>
 
-	<div class="flex h-full w-full flex-col">
+	<div class="mt-4 flex h-full w-full flex-col">
 		{#if isOpen}
 			{#if !isFormPage}
 				<!-- Selection Page -->
@@ -90,7 +88,7 @@
 					<div class="grid h-full w-[80%] grid-cols-2 grid-rows-3">
 						{#each decoprops as deco, index (index)}
 							<div
-								class="flex h-24 w-24 items-center justify-center rounded-lg transition-transform duration-200 ease-in-out hover:scale-120"
+								class="flex h-20 w-20 items-center justify-center rounded-lg transition-transform duration-200 ease-in-out hover:scale-120 sm:h-32 sm:w-32"
 								on:click={() => (clickedIndex = index)}
 								on:keydown={(event) => {
 									if (event.key === 'Enter' || event.key === ' ') {
@@ -111,18 +109,18 @@
 						{/each}
 					</div>
 					<div
-						class="mt-4 ml-4 flex h-full w-full flex-col items-center justify-center pl-4 text-xl font-semibold text-[#bd7878]"
+						class="mt-4 ml-4 flex h-full w-full flex-col items-center justify-center pl-4 text-xl font-semibold text-[#bd7878] sm:text-2xl"
 					>
 						{#if clickedIndex !== null}
-							<h1 class="text-xl font-bold">{decoprops[clickedIndex].name}</h1>
-							<h2 class="text-sm">{decoprops[clickedIndex].detail}</h2>
+							<h1 class="text-lg font-bold sm:text-3xl">{decoprops[clickedIndex].name}</h1>
+							<h2 class="text-sm sm:text-xl">{decoprops[clickedIndex].detail}</h2>
 
-							<h1 class="mt-2 ml-1 self-start text-base font-medium">
+							<h1 class="mt-2 text-sm font-medium sm:text-xl">
 								{decoprops[clickedIndex].description}
 							</h1>
 
 							<button
-								class="btn-secondary mt-4 mb-4 self-center text-sm"
+								class="btn-secondary mt-4 mb-4 self-center bg-[url('/sample/btnbg.png')] text-sm"
 								on:click={() => (isFormPage = true)}
 							>
 								ถัดไป
@@ -134,28 +132,28 @@
 				</div>
 			{:else}
 				<!-- Form Page -->
-				<div class="flex flex-col items-center justify-center p-4">
+				<div class="mt-0 flex h-full flex-col items-center justify-start px-4 py-2 sm:mt-4">
 					<input
 						type="text"
 						placeholder="ชื่อผู้ส่ง"
 						bind:value={sender_name}
-						class="mt-4 w-full rounded-md border-2 border-yellow-500 bg-white p-2"
+						class="mt-4 w-full rounded-[20px] border-[2px] border-[#8d7878] bg-[#fdfde6] p-2 text-sm focus:border-[#e3d1a0] focus:outline-none"
 					/>
 					<textarea
 						placeholder="ข้อความอวยพร"
 						bind:value={wishing_text}
-						class="mt-4 w-full rounded-md border-2 border-yellow-500 bg-white p-2"
+						class="mt-4 h-[30%] w-full rounded-[20px] border-[2px] border-[#8d7878] bg-[#fdfde6] p-2 text-sm focus:border-[#e3d1a0] focus:outline-none"
 					></textarea>
-					<div class="mt-4 flex w-full justify-between gap-8">
+					<div class="mt-4 flex w-full justify-between gap-4">
 						<button
-							class="btn-secondary h-[45px] text-sm"
+							class="btn-primary h-[45px] bg-[url('/sample/btnbg.png')] text-sm"
 							on:click={() => (isFormPage = false)}
 							aria-label="ย้อนกลับ"
 						>
 							ย้อนกลับ
 						</button>
 						<button
-							class="btn-primary h-[45px] text-sm"
+							class="btn-primary h-[45px] bg-[url('/sample/btnbg.png')] text-sm"
 							on:click={submitDecoration}
 							aria-label="ส่ง"
 						>
