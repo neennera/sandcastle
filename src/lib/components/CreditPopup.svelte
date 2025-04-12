@@ -10,19 +10,19 @@
 		<h3 class="text-4xl">credit</h3>
 	</div>
 	<div class="items-left flex h-full w-full flex-col justify-start pt-4">
-		<div class="flex flex-col">
+		<div class="flex flex-col ml-3">
 			<h3 class="mb-3 flex items-center text-xl">
-				source code
+				source code:
 				<a
 					href="https://github.com/neennera/sandcastle.git"
-					class="ml-2 text-xl text-blue-500 underline">Sandcastle</a
+					class="ml-2 text-xl text-[#79a1ac] underline">Sandcastle</a
 				>
 			</h3>
+			<h3 class="mb-3 text-lg">ทีมพัฒนา: neennera, Flook0147,</h3>
+			<h3 class="mb-3 text-lg">Cchinchillaz, senella02</h3>
+			<h3 class="mb-3 text-lg">ทีมกราฟฟิก: Pakpim</h3>
+			<h3 class="mb-3 text-lg">feedback: xxxxxxxxxx</h3>
 		</div>
-		<h3 class="mb-3 text-xl">ทีมพัฒนา: neenneraม, Flook0147,</h3>
-		<h3 class="mb-3 text-xl">Cchinchillaz, senella02</h3>
-		<h3 class="mb-3 text-xl">ทีมกราฟฟิก: Pakpim</h3>
-		<h3 class="mb-3 text-xl">feedback: xxxxxxxxxx</h3>
 	</div>
 	<button
 		class="absolute top-4 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#d9d9d9] text-[24px] font-bold text-[#8d7878] opacity-80 hover:opacity-100 sm:h-10 sm:w-10 sm:text-[32px]"
