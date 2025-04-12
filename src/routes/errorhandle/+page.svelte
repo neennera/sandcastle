@@ -15,7 +15,9 @@
 		<h1 class="text-3xl font-bold text-[#8D7878]">ไม่มีเจดีย์ทรายนี้</h1>
 		<p class="mt-4 text-xl font-semibold text-[#8D7878]">ไม่พบหน้าที่คุณต้องการ</p>
 
-		<button class="btn-primary mt-8 h-20" on:click={goToLandingPage}> กลับไปหน้าหลัก </button>
+		<button class="btn-primary bg-[url('sample/btnbg.png')]mt-8 h-20" on:click={goToLandingPage}>
+			กลับไปหน้าหลัก
+		</button>
 	</div>
 </div>
 

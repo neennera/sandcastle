@@ -105,7 +105,6 @@
 </script>
 
 <div
-	id="screenshot-area"
 	class="flex h-full w-full flex-col items-center justify-center self-center bg-[url('/sample/templebg.webp')] bg-cover"
 >
 	<div

@@ -9,7 +9,7 @@
 @layer base {
     .btn-primary {
         @apply flex w-[80%] h-[20%] rounded-[20px] justify-center items-center text-[#315259] text-[24px] md:text-3xl font-semibold cursor-pointer opacity-80 hover:opacity-100 border-[#7ababe] border-[1px] bg-cover overflow-hidden;
-        background-image: url('sample/btnbg.png');
+        /* background-image: url('sample/btnbg.png'); */
         background-position: bottom right;
     }
     .btn-secondary {

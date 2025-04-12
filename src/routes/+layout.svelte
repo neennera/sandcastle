@@ -30,6 +30,7 @@
 </svelte:head>
 
 <div
+	id="screenshot-area"
 	class=" font-thai relative mx-auto flex aspect-[9/16] min-h-screen w-full flex-col items-center bg-[url('/sample/lanwad.PNG')] bg-cover md:h-screen md:w-auto md:max-w-[800px]"
 >
 	<a
