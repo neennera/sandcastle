@@ -29,7 +29,7 @@
 			sender_name
 		};
 
-		console.log(data);
+		// console.log(data);
 
 		try {
 			const response = await fetch(`/api/sandcastles/${sandcastleId}`, {
@@ -43,7 +43,7 @@
 			if (!response.ok) {
 				const errorData = await response.json();
 				// alert(`Failed : ${errorData.error}`);
-				console.log(errorData.error);
+				// console.log(errorData.error);
 
 				toast.push(`${errorData.error}`, {
 					theme: {
@@ -66,6 +66,7 @@
 		}
 	}
 </script>
+
 
 <div
 	class="absolute bottom-0 z-15 h-[10%] w-full rounded-[20px] border-[2px] border-[#e6d1a3] bg-[#f3e7ce]"
