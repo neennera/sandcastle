@@ -2,14 +2,17 @@ import { connectDB } from '$lib/db.js';
 import OTP from '$lib/models/otp';
 import { json } from '@sveltejs/kit';
 
-export async function POST({ request, locals }) {
+export async function POST({ request, locals }) {    
+    console.log("Request received at /api/auth/verify-otp");
+   
     if (!locals.user) {
         return json({ message: "Unauthorized request" }, { status: 401 });
     }
 
     try {
         const { email, otp } = await request.json();
-
+        console.log("Request body:", { email, otp });
+        
         // Validate input
         if (!email || !otp) {
             return json({ message: "Missing required field" }, { status: 400 });

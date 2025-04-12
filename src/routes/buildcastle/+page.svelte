@@ -114,7 +114,8 @@
 					name: sandcastlename,
 					type: castleType,
 					ownername: name,
-					email
+					email,
+					otp
 				})
 			});
 

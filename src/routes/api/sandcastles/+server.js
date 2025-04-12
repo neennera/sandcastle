@@ -1,5 +1,6 @@
 import Jaedeesai from "$lib/models/jaedeesai";
 import { connectDB } from "$lib/db";
+import { BASE_URL } from '$env/static/private';
 import crypto from 'crypto';
 import mongoose from "mongoose";
 
@@ -38,6 +39,9 @@ export async function GET({ locals }) {
 //Create new user with castle
 export async function POST({ request, locals }) {
     try {
+        const { name, type, ownername, email, otp } = await request.json();
+        
+
         if (locals.user === null) {
             return new Response(JSON.stringify({
                 error: 'Unauthorized request'
@@ -46,10 +50,10 @@ export async function POST({ request, locals }) {
                 headers: { 'Content-Type': 'application/json' }
             });
         }
-        const { name, type, ownername, email } = await request.json();
+        
 
         // Validate input : If one of them is empty
-        if (!name || !type || !ownername || !email) {
+        if (!name || !type || !ownername || !email || !otp) {
             return new Response(JSON.stringify({ error: 'Missing required fields' }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
@@ -59,6 +63,28 @@ export async function POST({ request, locals }) {
         // Validate input : type validation
         if (!['lotus', 'octagonal', 'flora', 'layer'].includes(type)) {
             return new Response(JSON.stringify({ error: 'Type Invalid' }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
+
+        const verifyResponse = await fetch(`${BASE_URL}/api/auth/verify-otp`, {
+            method: 'POST',
+			credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email,
+                otp
+            })
+        });
+        console.log(verifyResponse);
+        
+
+        if (!verifyResponse.ok) {
+            const errorData = await verifyResponse.json();
+            return new Response(JSON.stringify({ error: 'OTP Invalid' }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
@@ -74,6 +100,8 @@ export async function POST({ request, locals }) {
                 headers: { 'Content-Type': 'application/json' }
             });
         }
+
+        
 
         // Validate input : Check if email already exists
         //Maybe we can delete this and only check on verify
