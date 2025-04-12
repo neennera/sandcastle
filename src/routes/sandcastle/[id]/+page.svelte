@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores'; // Import the page store
 	import { goto } from '$app/navigation'; // Import SvelteKit's navigation helper
+	import Loading from '../../../components/loading.svelte';
 
 	import SandcastleItem from '../../../components/sandcastle/sandcastleItem.svelte';
 	import Decopanel from '$lib/components/Decopanel.svelte';
@@ -120,7 +121,7 @@
 				<SandcastleItem {sandcastle} />
 			</div>
 		{:else}
-			<p>Loading sandcastle data...</p>
+			<Loading />
 		{/if}
 
 		<!-- Show QR code and ID icon in share mode -->

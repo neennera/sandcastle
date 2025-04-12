@@ -73,7 +73,11 @@
 				<div class="flex w-full space-x-4 py-4">
 					<div class="flex space-x-1">
 						{#each castleOptions as option}
-							<div class="flex flex-col items-center space-y-1 text-[#8D7878]">
+							<div
+								class={`flex flex-col items-center space-y-1 text-[#8D7878] ${
+									castleType === option ? 'rounded-lg border-4 border-yellow-500 p-2' : ''
+								}`}
+							>
 								<button
 									type="button"
 									on:click={() => {
@@ -89,12 +93,10 @@
 											toastMessage = details.flora;
 										}
 									}}
-									class="flex w-20 cursor-pointer flex-col items-center justify-center rounded-lg border px-4 py-2 text-sm {castleType ==
-										option &&
-										'bg-yellow-500 font-bold text-white'} hover:bg-yellow-400 hover:text-white"
+									class="flex w-20 cursor-pointer flex-col items-center justify-center rounded-lg border px-4 py-2 text-sm hover:bg-yellow-400 hover:text-white"
 								>
 									<img src="/sample/{option}.webp" alt="option" />
-									{option}
+									<div>{option}</div>
 								</button>
 							</div>
 						{/each}
