@@ -20,7 +20,7 @@
 			});
 			if (!response.ok) {
 				const errorData = await response.json();
-				console.error('Login failed:', errorData);
+				// console.error('Login failed:', errorData);
 				return;
 			}
 		} catch (err) {

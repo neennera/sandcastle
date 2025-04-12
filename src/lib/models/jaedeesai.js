@@ -54,7 +54,7 @@ const jaedeesaiSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        validator: [isEmail],
+        validate: [isEmail],
     },
     decorations: {
         type: [decorationSchema]
