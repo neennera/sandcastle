@@ -160,12 +160,12 @@
 
 <svelte:window on:scroll={closeToast} />
 <div
-	class="flex h-full w-full flex-col items-center justify-center self-center bg-[url('/sample/templebg.webp')] bg-cover"
+	class="flex h-full w-full flex-col items-center justify-center self-center"
 >
 	<SvelteToast />
 
 	<div
-		class="relative flex h-[90%] w-[90%] flex-col items-center justify-start pt-4 rounded-[20px] bg-[url('/sample/bg.webp')] bg-cover"
+		class="relative z-2 flex h-[90%] w-[90%] flex-col items-center justify-start pt-4 rounded-[20px] bg-[url('/sample/bg.webp')] bg-cover"
 	>
 		<form class="w-full h-full max-w-lg rounded-lg p-6">
 			<div class="text-center">
@@ -280,7 +280,7 @@
 								id="otp"
 								type="text"
 								bind:value={otp}
-								class="w-full h-[5vh] max-h-[50px] border-[#8d7878] rounded-[20px] bg-[#fdfde6] border px-4 py-2 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
+								class="w-full h-[5vh] max-h-[50px] border-[#8d7878] rounded-[20px] bg-[#fdfde6] border px-4 py-2 focus:border-[#e3d1a0] focus:outline-none"
 							/>
 						</div>
 						<!-- OTP Button -->
@@ -315,3 +315,7 @@
 		</form>
 	</div>
 </div>
+<div
+	class="absolute z-1 h-full w-full bg-[url('/sample/foreground_textured.webp')] bg-cover"
+	style="pointer-events: none;"
+></div>

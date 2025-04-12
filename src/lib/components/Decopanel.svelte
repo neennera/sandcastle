@@ -80,8 +80,8 @@
 		ตกแต่งเพิ่ม
 	</button>
 
+    {#if isOpen}
 	<div class="mt-4 flex h-full w-full flex-col">
-		{#if isOpen}
 			{#if !isFormPage}
 				<!-- Selection Page -->
 				<div class="mt-[4%] ml-[5%] flex h-[70%] w-[90%] items-center justify-center">
@@ -120,7 +120,7 @@
 							</h1>
 
 							<button
-								class="btn-secondary mt-4 mb-4 self-center bg-[url('/sample/btnbg.png')] text-sm"
+								class="btn-secondary mt-4 mb-4 self-center text-md"
 								on:click={() => (isFormPage = true)}
 							>
 								ถัดไป
@@ -146,14 +146,14 @@
 					></textarea>
 					<div class="mt-4 flex w-full justify-between gap-4">
 						<button
-							class="btn-primary h-[45px] bg-[url('/sample/btnbg.png')] text-sm"
+							class="btn-primary h-[5vh] h-max-[45px] text-base sm:text-lg"
 							on:click={() => (isFormPage = false)}
 							aria-label="ย้อนกลับ"
 						>
 							ย้อนกลับ
 						</button>
 						<button
-							class="btn-primary h-[45px] bg-[url('/sample/btnbg.png')] text-sm"
+							class="btn-primary h-[5vh] h-max-[45px] text-base sm:text-lg"
 							on:click={submitDecoration}
 							aria-label="ส่ง"
 						>
@@ -162,8 +162,8 @@
 					</div>
 				</div>
 			{/if}
-		{/if}
 	</div>
+    {/if}
 </div>
 
 <div

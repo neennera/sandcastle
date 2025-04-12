@@ -7,7 +7,6 @@
 	import SandcastleItem from '../../../components/sandcastle/sandcastleItem.svelte';
 	import Decopanel from '$lib/components/Decopanel.svelte';
 	import { onMount, tick } from 'svelte';
-	import html2canvas from 'html2canvas';
 	import QRCode from 'qrcode';
 
 	import { initGA } from '../../../analytics';
@@ -115,7 +114,7 @@
 
 <div
 	id="screenshot-area"
-	class="flex h-full w-full flex-col items-center justify-center self-center bg-[url('/sample/templebg.webp')] bg-cover"
+	class="flex h-full w-full flex-col items-center justify-center self-center"
 >
 	<div
 		class="relative flex h-[90%] w-[90%] flex-col items-center justify-start overflow-hidden rounded-[20px] bg-[url('/sample/bg.webp')] bg-cover"
@@ -165,7 +164,7 @@
 	{#if !isSharing && sandcastle}
 		<!-- Share Button -->
 		<button
-			class="absolute top-100 right-10 flex h-12 w-12 items-center justify-center rounded-full bg-yellow-500 text-white shadow-lg"
+			class="absolute top-100 right-10 flex h-12 w-12 items-center justify-center rounded-full bg-[#f9d790] text-white shadow-lg"
 			on:click={takeScreenshot}
 			aria-label="share"
 		>
@@ -186,6 +185,10 @@
 		<Decopanel {openD} {closeD} {handleClickOutside} sandcastleId={id.toString()} />
 	{/if}
 </div>
+<div
+	class="absolute z-2 h-full w-full bg-[url('/sample/foreground_textured.webp')] bg-cover"
+	style="pointer-events: none;"
+></div>
 
 <style>
 	/* Add styles for the share button and QR code */

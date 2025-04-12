@@ -22,7 +22,7 @@
 					<td class="py-2">
 						<a
 							href="https://github.com/neennera/sandcastle.git"
-							class=" font-normal text-blue-500 underline"
+							class=" font-normal text-[#0289a8] underline"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
@@ -39,7 +39,7 @@
 							<li>
 								<a
 									href="https://github.com/neennera"
-									class=" font-normal text-blue-500 underline"
+									class=" font-normal text-[#0289a8] underline"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
@@ -49,7 +49,7 @@
 							<li>
 								<a
 									href="https://github.com/senella02"
-									class=" font-normal text-blue-500 underline"
+									class=" font-normal text-[#0289a8] underline"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
@@ -59,7 +59,7 @@
 							<li>
 								<a
 									href="https://github.com/Cchinchillaz"
-									class=" font-normal text-blue-500 underline"
+									class=" font-normal text-[#0289a8] underline"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
@@ -70,7 +70,7 @@
 							<li>
 								<a
 									href="https://github.com/Flook0147"
-									class=" font-normal text-blue-500 underline"
+									class=" font-normal text-[#0289a8] underline"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
@@ -90,18 +90,18 @@
 								<a
 									href="https://github.com/Pakpim"
 									target="_blank"
-									class=" font-normal text-blue-500 underline">Pakpim</a
+									class=" font-normal text-[#0289a8] underline">Pakpim</a
 								>
 							</li>
 							<li>
 								<a
 									href="https://www.instagram.com/ppimpamela/"
 									target="_blank"
-									class=" font-normal text-blue-500 underline">Pamela Pim</a
+									class=" font-normal text-[#0289a8] underline">Pamela Pim</a
 								>
 							</li>
 							<li>
-								<div class=" font-normal text-blue-500 underline">SSR</div>
+								<div class=" font-normal text-[#0289a8] underline">SSR</div>
 							</li>
 						</ul>
 					</td>
@@ -114,7 +114,7 @@
 								<a
 									href="https://github.com/ItsGuitar"
 									target="_blank"
-									class=" font-normal text-blue-500 underline">ItsGuitar</a
+									class=" font-normal text-[#0289a8] underline">ItsGuitar</a
 								>
 							</li>
 						</ul>
@@ -127,7 +127,7 @@
 					<td class="py-2">
 						<a
 							href="https://forms.gle/7cG768pUSdEGyr5n8"
-							class="text-lg font-normal text-blue-500 underline"
+							class="text-lg font-normal text-[#0289a8] underline"
 							target="_blank"
 							rel="noopener noreferrer"
 						>

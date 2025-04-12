@@ -69,7 +69,7 @@
 </script>
 
 <div
-	class="flex h-full w-full flex-col items-center justify-center self-center bg-[url('/sample/templebg.webp')] bg-cover"
+	class="flex h-full w-full flex-col items-center justify-center self-center"
 >
 	<div
 		class="relative flex h-[90%] w-[90%] flex-col items-center justify-center rounded-[20px] bg-[url('/sample/bg.webp')] bg-cover"
@@ -84,29 +84,35 @@
 
 		<div class="flex h-[35%] w-full flex-col items-center justify-start space-y-4">
 			<button
-				class="btn-primary bg-[url('/sample/btnbg.png')] text-xl"
+				class="btn-primary text-xl"
 				on:click={() => {
 					navigateToPage('/sandgarden');
 				}}
 			>
-				สำรวจเจดีย์ในลานวัด
+				<p class="ml-2">สำรวจเจดีย์ในลานวัด</p>
+				<img src="/sample/larnwat.png" alt="" class="h-[70%] ml-2" />
 			</button>
 			<button
-				class="btn-primary bg-[url('/sample/btnbg.png')] text-xl"
+				class="btn-primary text-xl"
 				on:click={() => {
 					createPopUp('#friend-popup');
-				}}>ตกแต่งเจดีย์เพื่อน</button
-			>
+				}}>
+				<p class="ml-2">ตกแต่งเจดีย์เพื่อน</p>
+				<img src="/sample/search_jd.png" alt="" class="h-[70%] ml-2" />
+				</button>
 			<button
-				class="btn-primary bg-[url('/sample/btnbg.png')] text-xl"
+				class="btn-primary text-xl"
 				on:click={() => {
 					navigateToPage('/buildcastle');
-				}}>ก่อเจดีย์ทรายของคุณ</button
+				}}>
+				<p class="ml-2">ก่อเจดีย์ทรายของคุณ</p>
+				<img src="/sample/my_jd.png" alt="" class="h-[70%] ml-2" />
+				</button
 			>
 		</div>
 
 		<button
-			class="absolute right-3 bottom-3 flex h-8 w-8 items-center justify-center rounded-full border-[3px] border-[#6a799a] bg-[#fff8ee] text-xs text-[#6a799a] opacity-80 hover:opacity-100 sm:h-10 sm:w-10 sm:text-[36px]"
+			class="absolute right-3 top-5 flex z-50 h-8 w-8 items-center justify-center rounded-full border-[3px] border-[#6a799a] bg-[#fff8ee] text-base text-[#6a799a] sm:h-10 sm:w-10 sm:text-[36px]"
 			on:click={() => {
 				createPopUp('#credit-popup');
 			}}
@@ -119,6 +125,6 @@
 	</div>
 </div>
 <div
-	class="absolute z-2 h-full w-full bg-[url('/sample/foreground.png')] bg-cover"
+	class="absolute z-2 h-full w-full bg-[url('/sample/foreground_textured.webp')] bg-cover"
 	style="pointer-events: none;"
 ></div>
