@@ -2,6 +2,7 @@
 	import { page } from '$app/stores'; // Import the page store
 	import { goto } from '$app/navigation'; // Import SvelteKit's navigation helper
 	import Loading from '../../../components/loading.svelte';
+	import domtoimage from 'dom-to-image'; // Import dom-to-image
 
 	import SandcastleItem from '../../../components/sandcastle/sandcastleItem.svelte';
 	import Decopanel from '$lib/components/Decopanel.svelte';
@@ -85,19 +86,24 @@
 		// Take a screenshot of the page
 		const element = document.querySelector('#screenshot-area') as HTMLElement;
 		if (element) {
-			const canvas = await html2canvas(element, {
-				useCORS: true, // Enable cross-origin resource sharing for external assets
-				logging: true, // Enable logging for debugging
-				scale: 2, // Increase resolution for better quality
-				backgroundColor: null // Preserve transparency
-			});
-			const image = canvas.toDataURL('image/png');
+			try {
+				const dataUrl = await domtoimage.toPng(element, {
+					width: element.offsetWidth,
+					height: element.offsetHeight,
+					style: {
+						transform: 'scale(1)', // Ensure no scaling issues
+						transformOrigin: 'top left' // Fix origin for scaling
+					}
+				});
 
-			// Download the screenshot
-			const link = document.createElement('a');
-			link.href = image;
-			link.download = `sandcastle_${id}.png`;
-			link.click();
+				// Download the screenshot
+				const link = document.createElement('a');
+				link.href = dataUrl;
+				link.download = `sandcastle_${id}.png`;
+				link.click();
+			} catch (error) {
+				console.error('Error generating image:', error);
+			}
 		}
 
 		isSharing = false; // Disable share mode
@@ -142,7 +148,7 @@
 				class="absolute bottom-5 flex h-[230px] w-[80%] flex-col items-center rounded-2xl bg-white"
 			>
 				<img style="z-index: 10;" src={qrCodeUrl} alt="QR Code" class="-mb-7 h-[200px] w-[200px]" />
-				<p style="z-index: 20;" class="font-thai text-2xl font-bold text-[#8D7878]">
+				<p style="z-index: 20;" class="font-thai mt-2 text-2xl font-bold text-[#8D7878]">
 					หมายเลข : {id}
 				</p>
 			</div>

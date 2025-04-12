@@ -11,6 +11,9 @@ importers:
       '@zerodevx/svelte-toast':
         specifier: ^0.9.6
         version: 0.9.6(svelte@5.25.9)
+      dom-to-image:
+        specifier: ^2.6.0
+        version: 2.6.0
       dotenv:
         specifier: ^16.4.7
         version: 16.4.7
@@ -816,6 +819,9 @@ packages:
 
   dijkstrajs@1.0.3:
     resolution: {integrity: sha512-qiSlmBq9+BCdCA/L46dw8Uy93mloxsPSbwnm5yrKn2vMPiy8KyAskTF6zuV/j5BMsmOGZDPs7KjU+mjb670kfA==}
+
+  dom-to-image@2.6.0:
+    resolution: {integrity: sha512-Dt0QdaHmLpjURjU7Tnu3AgYSF2LuOmksSGsUcE6ItvJoCWTBEmiMXcqBdNSAm9+QbbwD7JMoVsuuKX6ZVQv1qA==}
 
   dotenv@16.4.7:
     resolution: {integrity: sha512-47qPchRCykZC03FhkYAhrvwU4xDBFIj1QPqaarj6mdM/hgUzfPHcpkHJOn3mJAufFeeAxAzeGsr5X0M4k6fLZQ==}
@@ -2097,6 +2103,8 @@ snapshots:
   devalue@5.1.1: {}
 
   dijkstrajs@1.0.3: {}
+
+  dom-to-image@2.6.0: {}
 
   dotenv@16.4.7: {}
 
