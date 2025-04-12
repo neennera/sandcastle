@@ -111,6 +111,7 @@
 </script>
 
 <div
+	id="screenshot-area"
 	class="flex h-full w-full flex-col items-center justify-center self-center bg-[url('/sample/templebg.webp')] bg-cover"
 >
 	<div
@@ -119,7 +120,7 @@
 		{#if sandcastle}
 			{#if isSharing}
 				<div class="mt-20 flex h-[10%] w-full flex-col items-center justify-center">
-					<h1 class="text-xs text-[#8D7878] italic">https://sandcastle-delta.vercel.app/</h1>
+					<p class="text-xs text-[#8D7878]">"https://sandcastle-delta.vercel.app/"</p>
 					<h1 class="text-3xl font-bold text-[#8D7878]">ร่วมตกแต่งเจดีย์ทราย</h1>
 					<h1 class="text-3xl font-bold text-[#8D7878]">{sandcastle?.name}</h1>
 					<h3 class="mt-2 text-xl font-semibold text-[#8D7878]">ของ {sandcastle?.ownername}</h3>
