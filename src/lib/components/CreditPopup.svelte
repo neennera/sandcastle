@@ -1,20 +1,33 @@
 <script lang="ts">
-    export let close: () => void;
-  </script>
-  
-  <div class="absolute z-0 top-[25%] mt-6 flex flex-col h-0 opacity-0 w-[85%] items-center justify-center rounded-[20px] bg-[#f3f5e7] border-[#e3d1a0] border-[2px] font-bold text-[#8D7878] text-[24px] sm:text-[36px]"
-		id = "credit-popup">
-			<div class="flex w-full h-[30%] items-center justify-center">
-				<h3 class="text-4xl">credit</h3>
-			</div>
-			<div class="flex flex-col w-full h-full items-center justify-start pt-4">
-				<h3 class="text-2xl mb-3">source code: xxxxx</h3>
-				<h3 class="text-2xl mb-3">สร้างโดย: xxxxxxxxxx</h3>
-				<h3 class="text-2xl mb-3">feedback: xxxxxxxxxx</h3>
-			</div>
-			<button
-      class="absolute right-3 top-4 flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-[#d9d9d9] opacity-80 hover:opacity-100 font-bold text-[#8d7878] text-[24px] sm:text-[32px]"
-      on:click={close}
-      > x </button>
+	export let close: () => void;
+</script>
+
+<div
+	class="absolute top-[25%] z-0 mt-6 flex h-0 w-[85%] flex-col items-center justify-center rounded-[20px] border-[2px] border-[#e3d1a0] bg-[#f3f5e7] text-[24px] font-bold text-[#8D7878] opacity-0 sm:text-[36px]"
+	id="credit-popup"
+>
+	<div class="flex h-[30%] w-full items-center justify-center">
+		<h3 class="text-4xl">credit</h3>
+	</div>
+	<div class="items-left flex h-full w-full flex-col justify-start pt-4">
+		<div class="flex flex-col">
+			<h3 class="mb-3 flex items-center text-xl">
+				source code
+				<a
+					href="https://github.com/neennera/sandcastle.git"
+					class="ml-2 text-xl text-blue-500 underline">Sandcastle</a
+				>
+			</h3>
 		</div>
-  
+		<h3 class="mb-3 text-xl">ทีมพัฒนา: neenneraม, Flook0147,</h3>
+		<h3 class="mb-3 text-xl">Cchinchillaz, senella02</h3>
+		<h3 class="mb-3 text-xl">ทีมกราฟฟิก: Pakpim</h3>
+		<h3 class="mb-3 text-xl">feedback: xxxxxxxxxx</h3>
+	</div>
+	<button
+		class="absolute top-4 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#d9d9d9] text-[24px] font-bold text-[#8d7878] opacity-80 hover:opacity-100 sm:h-10 sm:w-10 sm:text-[32px]"
+		on:click={close}
+	>
+		x
+	</button>
+</div>

@@ -16,6 +16,7 @@ const decoprops = [
     {
         name: 'ดอกบานไม่รู้โรย',
         imgsrc: banmairooroi,
+        engname: 'banmairooroi',
         focusedimg: banmairooroiFocused,
         detail: 'รักมั่น ไม่โรยง่าย',
         description: 'ดอกไม้แห่งความรุ่งเรือง ขอพรแล้วโชคดีตลอดปี',
@@ -23,6 +24,7 @@ const decoprops = [
     {
         name: 'ธงสี',
         imgsrc: flag,
+        engname: "flag",
         focusedimg: flagFocused,
         detail: 'เพิ่มสีสัน เติมพลัง',
         description: 'ธงสดใสสายมูต้องจัด เสริม vibe สดชื่นต้อนรับสิ่งดีๆ ',
@@ -30,6 +32,7 @@ const decoprops = [
     {
         name: 'ใบเตยพับ',
         imgsrc: leaf,
+        engname: "leaf",
         focusedimg: leafFocused,
         detail: 'กลิ่นธรรมชาติ เย็นใจ',
         description: 'พับแล้วหอม เสริมฟีลสงบๆ ให้ชีวิตไม่ว้าวุ่น',
@@ -37,6 +40,7 @@ const decoprops = [
     {
         name: 'กลีบมะลิ',
         imgsrc: mali,
+        engname: 'mali',
         focusedimg: maliFocused,
         detail: 'หอมฟุ้ง ละมุนใจ',
         description: 'กลิ่นหอมๆ ความรักดีๆ ฟูลใจสุดๆ',
@@ -44,6 +48,7 @@ const decoprops = [
     {
         name: 'ดอกราชพฤกษ์',
         imgsrc: ratchapruek,
+        engname: 'ratchapruek',
         focusedimg: ratchapruekFocused,
         detail: 'สีทอง = เฮงๆปังๆ',
         description: 'ดอกไม้แห่งความรุ่งเรือง ขอพรแล้วโชคดีตลอดปี ',
@@ -51,6 +56,7 @@ const decoprops = [
     {
         name: 'กรวดแม่น้ำ',
         imgsrc: stone,
+        engname: 'stone',
         focusedimg: stoneFocused,
         detail: 'ก้อนเล็ก แต่ใจใหญ่',
         description: 'เป็นสายแน่วแน่ ไม่หวั่นไหว แม้อุปสรรคจะมา',

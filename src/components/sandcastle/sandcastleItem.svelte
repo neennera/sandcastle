@@ -10,6 +10,7 @@
 	const sandcastle_type = ['flora', 'layer', 'lotus', 'octagonal'].includes(sandcastle.type)
 		? sandcastle.type
 		: 'layer';
+	// const sandcastle_type = 'octagonal';
 
 	// State to track the selected decoration
 	/**
@@ -100,6 +101,8 @@
 			<p>Wishing Text: {selectedDecoration.wishing_text}</p>
 			<p>Sender: {selectedDecoration.sender_name}</p>
 		</div>
+	{:else}
+		<div class="h-[100px] w-full"></div>
 	{/if}
 </div>
 
@@ -152,7 +155,6 @@
 
 	.selected-decoration {
 		font-size: medium;
-		margin-top: 20px;
 		padding: 10px;
 		border: 1px solid #ccc;
 		border-radius: 15px;
