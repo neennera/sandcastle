@@ -2,7 +2,7 @@
 	// No additional logic is needed for this simple loading component
 </script>
 
-<div class="flex h-screen flex-col items-center justify-center bg-[#f9f6e8]">
+<div class="flex h-screen flex-col items-center justify-center">
 	<!-- Loading Icon -->
 	<div class="loading-icon mb-4"></div>
 
@@ -10,7 +10,7 @@
 	<h1 class="text-2xl font-bold text-[#8D7878]">กำลังรวมรวบข้อมูลเจดีย์ทราย</h1>
 
 	<!-- Decorative Text -->
-	<p class="mt-2 text-lg text-[#6a799a]">โปรดรอสักครู่...</p>
+	<p class="mt-2 text-lg">โปรดรอสักครู่...</p>
 </div>
 
 <style>

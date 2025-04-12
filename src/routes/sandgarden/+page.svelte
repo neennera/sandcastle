@@ -56,11 +56,11 @@
 					]}%"
 					role="button"
 					tabindex="0"
-					on:click={() => goto(`/sandcastle/`)}
+					on:click={() => goto(`/sandcastle/${sandcastle.id}`)}
 					on:keydown={(e) => {
 						if (e.key === 'Enter' || e.key === ' ') {
 							e.preventDefault();
-							goto(`/sandcastle/`);
+							goto(`/sandcastle/${sandcastle.id}`);
 						}
 					}}
 				>
@@ -80,7 +80,7 @@
 		</div>
 	{/if}
 	<button
-		class="btn-secondary absolute top-[90%]"
+		class="btn-secondary absolute top-[90%] bg-sky-100"
 		on:click={async () => {
 			try {
 				// Fetch new random sandcastles
