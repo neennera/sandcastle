@@ -144,7 +144,7 @@ export async function POST({ request, locals }) {
             <p>ขอบคุณมาร่วมสร้างเจดีย์ทราย บนเว็บไซต์ Jaedeesai ของพวกเรา✨</p>
             <p>รหัสเจดีย์ของคุณคือ</p>
             <div style="font-size: 24px; font-weight: bold; padding: 10px; background-color: #ffecb3; text-align: center;">
-            <strong>${otp}</strong>
+            <strong>${id}</strong>
         </body>
         </html>
         `;
