@@ -3,6 +3,11 @@
 	import { goto } from '$app/navigation'; // Import SvelteKit's navigation helper
 
 	import { SvelteToast } from '@zerodevx/svelte-toast';
+	import { initGA } from '../../analytics';
+	import { onMount } from 'svelte';
+	onMount(() => {
+		initGA();
+	});
 	let sandcastlename = '';
 	let name = '';
 	let email = '';

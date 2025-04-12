@@ -5,6 +5,10 @@
 	import { navigateToPage } from '$lib/utils/functionUtils';
 	import { PUBLIC_WEB_SECRET } from '$env/static/public';
 
+	import { initGA } from '../analytics';
+	onMount(() => {
+		initGA();
+	});
 	let credithidden = true;
 
 	onMount(async () => {

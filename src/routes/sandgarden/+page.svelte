@@ -7,6 +7,11 @@
 	import Loading from '../../components/loading.svelte';
 	import { goto } from '$app/navigation';
 
+	import { initGA } from '../../analytics';
+	onMount(() => {
+		initGA();
+	});
+
 	let sandcastles: { id: string; name: string; ownername: string; type: string }[] = [];
 	let error: string | null = null;
 

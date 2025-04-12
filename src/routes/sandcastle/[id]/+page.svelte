@@ -9,6 +9,11 @@
 	import html2canvas from 'html2canvas';
 	import QRCode from 'qrcode';
 
+	import { initGA } from '../../../analytics';
+	onMount(() => {
+		initGA();
+	});
+
 	let id: string = $page.params.id; // ID from the URL
 	let sandcastle: { name: string; ownername: string; type: string; decorations: string[] } | null =
 		null; // To store the fetched sandcastle data
