@@ -135,8 +135,6 @@ export async function POST({ request, locals }) {
         });
         await newSandcastle.save();
 
-        // Delete the OTP after successful verification
-        await OTP.deleteOne({ _id: emailExists._id });
 
         const emailContent = `
         <html>
@@ -172,6 +170,8 @@ export async function POST({ request, locals }) {
                 console.error('Brevo failed to send email:', await response.text());
                 throw new Error('Brevo email sending failed');
             }
+            // Delete the OTP after successful verification
+            await OTP.deleteOne({ _id: emailExists._id });
 
             return new Response(JSON.stringify({
                 message: 'Sandcastle created successfully',
