@@ -39,7 +39,6 @@
 	function createPopUp(selector: string) {
 		const popup: HTMLElement = document.querySelector(selector) as HTMLElement;
 		if (popup) {
-			popup.style.height = '40%';
 			popup.style.opacity = '100%';
 			popup.style.zIndex = '50';
 		}
@@ -48,7 +47,6 @@
 	function closePopUp(selector: string) {
 		const popup: HTMLElement = document.querySelector(selector) as HTMLElement;
 		if (popup) {
-			popup.style.height = '0';
 			popup.style.opacity = '0';
 			popup.style.zIndex = '0';
 		}
@@ -93,12 +91,12 @@
 		</div>
 
 		<button
-			class="absolute right-3 bottom-3 flex h-8 w-8 items-center justify-center rounded-full border-[3px] border-[#6a799a] bg-[#fff8ee] text-[24px] font-bold text-[#6a799a] opacity-80 hover:opacity-100 sm:h-10 sm:w-10 sm:text-[36px]"
+			class="absolute right-3 bottom-3 flex h-8 w-8 items-center justify-center rounded-full border-[3px] border-[#6a799a] bg-[#fff8ee] text-xs text-[#6a799a] opacity-80 hover:opacity-100 sm:h-10 sm:w-10 sm:text-[36px]"
 			on:click={() => {
 				createPopUp('#credit-popup');
 			}}
 		>
-			?
+			<p>?</p>
 		</button>
 
 		<FriendPopup close={() => closePopUp('#friend-popup')} />
