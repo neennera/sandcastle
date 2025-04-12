@@ -5,6 +5,8 @@
 	import { navigateToPage } from '$lib/utils/functionUtils';
 	import { PUBLIC_WEB_SECRET } from '$env/static/public';
 
+	let credithidden = true;
+
 	onMount(async () => {
 		const data = {
 			web_secret: PUBLIC_WEB_SECRET
@@ -37,6 +39,9 @@
 	});
 
 	function createPopUp(selector: string) {
+		if (selector === '#credit-popup') {
+			credithidden = false; // Update the hidden prop for CreditPopup
+		}
 		const popup: HTMLElement = document.querySelector(selector) as HTMLElement;
 		if (popup) {
 			popup.style.minHeight = '40%';
@@ -47,6 +52,9 @@
 	}
 
 	function closePopUp(selector: string) {
+		if (selector === '#credit-popup') {
+			credithidden = true; // Update the hidden prop for CreditPopup
+		}
 		const popup: HTMLElement = document.querySelector(selector) as HTMLElement;
 		if (popup) {
 			popup.style.opacity = '0';
@@ -103,7 +111,7 @@
 		</button>
 
 		<FriendPopup close={() => closePopUp('#friend-popup')} />
-		<CreditPopup close={() => closePopUp('#credit-popup')} />
+		<CreditPopup hidden={credithidden} close={() => closePopUp('#credit-popup')} />
 	</div>
 </div>
 <div

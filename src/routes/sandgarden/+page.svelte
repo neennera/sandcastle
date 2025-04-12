@@ -65,7 +65,7 @@
 					}}
 				>
 					<div
-						class="flex w-full flex-col items-center justify-center rounded-2xl bg-[#fdfde6]/50 px-2 py-3"
+						class="flex w-full flex-col items-center justify-center rounded-2xl bg-[#fdfde6]/70 px-2 py-3"
 					>
 						<p class="text-sm font-semibold text-[#473d3d]">{sandcastle.name}</p>
 						<p class="text-xs text-[#8d7878]">โดย {sandcastle.ownername}</p>
