@@ -10,6 +10,7 @@
 	const sandcastle_type = ['flora', 'layer', 'lotus', 'octagonal'].includes(sandcastle.type)
 		? sandcastle.type
 		: 'layer';
+	// const sandcastle_type = 'octagonal';
 
 	// State to track the selected decoration
 	/**
@@ -22,8 +23,8 @@
 	const itemsPerPage = 5;
 
 	// Configurable top and right values
-	const top_values = ['42', '35', '25', '60', '60'];
-	const right_values = ['20', '45', '30', '25', '50'];
+	const top_values = ['60px', '95px', '115px', '60px', '115px'];
+	const right_values = ['130px', '90px', '150px', '40px', '30px'];
 
 	// Function to handle decoration selection
 	/**
@@ -62,7 +63,7 @@
 
 <div class="relative flex h-full w-full flex-col items-center justify-start">
 	<!-- Decoration -->
-	<div class="absolute top-0 ">
+	<div class="absolute top-0">
 		{#each paginatedDecorations as decoration, index}
 			<button
 				type="button"
@@ -88,7 +89,7 @@
 	</div>
 
 	<!-- Pagination controls -->
-	<div class="absolute pagination-controls top-[50%] md:text-2xl">
+	<div class="pagination-controls absolute top-[50%] md:text-2xl">
 		<button on:click={goToPreviousPage} disabled={currentPage === 1}> {'<'} </button>
 		<span>กองที่ {currentPage} จาก {totalPages}</span>
 		<button on:click={goToNextPage} disabled={currentPage === totalPages}> {'>'} </button>
@@ -96,10 +97,12 @@
 
 	<!-- Selected decoration details -->
 	{#if selectedDecoration}
-		<div class="absolute bottom-[25%] selected-decoration max-w-[60%] md:text-2xl md-w-[30%]">
-			<p>Wishing Text: {selectedDecoration.wishing_text}</p>
-			<p>Sender: {selectedDecoration.sender_name}</p>
+		<div class="selected-decoration h-[100px] w-full overflow-y-scroll">
+			<p>คำอวยพร : {selectedDecoration.wishing_text}</p>
+			<p>จาก: {selectedDecoration.sender_name}</p>
 		</div>
+	{:else}
+		<div class="h-[100px] w-full"></div>
 	{/if}
 </div>
 
@@ -152,7 +155,6 @@
 
 	.selected-decoration {
 		font-size: medium;
-		margin-top: 20px;
 		padding: 10px;
 		border: 1px solid #ccc;
 		border-radius: 15px;
