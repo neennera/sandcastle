@@ -169,10 +169,10 @@
 	>
 		<form class="w-full h-full max-w-lg rounded-lg p-6">
 			<div class="text-center">
-				<h1 class="mb-6 text-3xl md:text-5xl font-bold text-[#8D7878]">สร้างเจดีย์ใหม่</h1>
+				<h1 class="mb-6 text-3xl font-bold text-[#8D7878]">สร้างเจดีย์ใหม่</h1>
 			</div>
 			<!-- Input Fields -->
-			<div class="mb-4 md:text-2xl">
+			<div class="mb-4">
 				<label for="sandcastlename" class="block text-[#8D7878]">ชื่อเจดีย์ทราย</label>
 				<input
 					id="sandcastlename"
@@ -182,7 +182,7 @@
 				/>
 			</div>
 
-			<div class="mb-4 md:text-2xl">
+			<div class="mb-4">
 				<label for="ownername" class="block text-[#8D7878]">ชื่อของคุณ</label>
 				<input
 					id="ownername"
@@ -192,7 +192,7 @@
 				/>
 			</div>
 
-			<div class="mb-4 md:text-2xl">
+			<div class="mb-4">
 				<label for="owneremail" class="block text-[#8D7878]">อีเมลของคุณ</label>
 				<input
 					id="owneremail"
@@ -203,7 +203,7 @@
 			</div>
 
 			<!-- Castle Type Selection -->
-			<div class="mb-4 md:text-2xl flex flex-col items-center justify-center">
+			<div class="mb-4 flex flex-col items-center justify-center">
 				<label for="sandcastletype" class="block self-start text-[#8D7878]">เลือกแบบเจดีย์</label>
 				<div class="flex w-full space-x-4 py-4">
 					<div class="flex space-x-1 w-full justify-center">
