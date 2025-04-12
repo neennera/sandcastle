@@ -106,19 +106,21 @@
 	<div
 		class="relative flex h-[90%] w-[90%] flex-col items-center justify-start overflow-hidden rounded-[20px] bg-[url('/sample/bg.webp')] bg-cover"
 	>
-		{#if isSharing}
-			<div class="mt-20 flex h-[10%] w-full flex-col items-center justify-center">
-				<h1 class="text-xs text-[#8D7878] italic">https://sandcastle-delta.vercel.app/</h1>
-				<h1 class="text-3xl font-bold text-[#8D7878]">ร่วมตกแต่งเจดีย์ทราย</h1>
-				<h1 class="text-3xl font-bold text-[#8D7878]">{sandcastle?.name}</h1>
-				<h3 class="mt-2 text-xl font-semibold text-[#8D7878]">ของ {sandcastle?.ownername}</h3>
-			</div>
-		{:else}
-			<div class="mt-10 flex h-[10%] w-full flex-col items-center justify-center">
-				<!-- <h1 class="mt-20 text-3xl font-bold text-[#8D7878]">ร่วมตกแต่งเจดีย์ทราย</h1> -->
-				<h1 class="text-3xl font-bold text-[#8D7878]">{sandcastle?.name}</h1>
-				<h3 class="mt-2 text-xl font-semibold text-[#8D7878]">ของ {sandcastle?.ownername}</h3>
-			</div>
+		{#if sandcastle}
+			{#if isSharing}
+				<div class="mt-20 flex h-[10%] w-full flex-col items-center justify-center">
+					<h1 class="text-xs text-[#8D7878] italic">https://sandcastle-delta.vercel.app/</h1>
+					<h1 class="text-3xl font-bold text-[#8D7878]">ร่วมตกแต่งเจดีย์ทราย</h1>
+					<h1 class="text-3xl font-bold text-[#8D7878]">{sandcastle?.name}</h1>
+					<h3 class="mt-2 text-xl font-semibold text-[#8D7878]">ของ {sandcastle?.ownername}</h3>
+				</div>
+			{:else}
+				<div class="mt-10 flex h-[10%] w-full flex-col items-center justify-center">
+					<!-- <h1 class="mt-20 text-3xl font-bold text-[#8D7878]">ร่วมตกแต่งเจดีย์ทราย</h1> -->
+					<h1 class="text-3xl font-bold text-[#8D7878]">{sandcastle?.name}</h1>
+					<h3 class="mt-2 text-xl font-semibold text-[#8D7878]">ของ {sandcastle?.ownername}</h3>
+				</div>
+			{/if}
 		{/if}
 		{#if error}
 			<p class="text-red-800">{error}</p>
@@ -142,7 +144,7 @@
 			</div>
 		{/if}
 	</div>
-	{#if !isSharing}
+	{#if !isSharing && sandcastle}
 		<!-- Share Button -->
 		<button
 			class="absolute top-100 right-10 flex h-12 w-12 items-center justify-center rounded-full bg-yellow-500 text-white shadow-lg"
