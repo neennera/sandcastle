@@ -4,7 +4,7 @@
 	import layer from '$lib/images/sandcastle/layer.webp';
 	import lotus from '$lib/images/sandcastle/lotus.webp';
 	import octagonal from '$lib/images/sandcastle/octagonal.webp';
-	import Loading from '../../components/loading.svelte';
+	import Loading from '$lib/components/loading.svelte';
 	import { goto } from '$app/navigation';
 
 	import { initGA } from '../../analytics';
