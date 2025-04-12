@@ -37,7 +37,7 @@
 		href="/"
 		class=" absolute top-[6%] left-[6%] z-5 aspect-square w-[13%] rounded-[100%] border-[2px] border-[#8d7878] bg-[#f6f3e6] text-white hover:border-[#e3d1a0]"
 	>
-		<img src="/image/icon.webp" class="h-full w-full object-cover" alt="home" />
+		<img src="/sample/jd.png" class="w-[60%] mx-auto my-2 object-cover" alt="home" />
 	</a>
 
 	<slot />
