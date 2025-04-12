@@ -122,7 +122,7 @@
 	>
 		{#if sandcastle}
 			{#if isSharing}
-				<div class="mt-20 flex h-[10%] w-80 flex-col items-center justify-center">
+				<div class="mt-20 flex h-[10%] w-[400px] flex-col items-center justify-center">
 					<p class="text-xs text-[#8D7878]">"https://sandcastle-delta.vercel.app/"</p>
 					<h1 class="text-xl font-bold text-[#8D7878]">ร่วมตกแต่งเจดีย์ทราย</h1>
 					<h1 class="text-2xl font-bold text-[#8D7878]">{sandcastle?.name}</h1>
@@ -140,7 +140,7 @@
 			<p class="text-red-800">{error}</p>
 		{:else if sandcastle}
 			<div class="flex h-[70%] w-full items-center justify-center">
-				<SandcastleItem {sandcastle} />
+				<SandcastleItem {sandcastle} {isSharing} />
 			</div>
 		{:else}
 			<Loading />
@@ -149,11 +149,11 @@
 		<!-- Show QR code and ID icon in share mode -->
 		{#if isSharing}
 			<div
-				class="absolute bottom-5 flex h-[230px] w-[80%] flex-col items-center rounded-2xl bg-white"
+				class="absolute bottom-5 flex h-[230px] w-[200px] flex-col items-center rounded-2xl bg-white"
 			>
 				<img style="z-index: 10;" src={qrCodeUrl} alt="QR Code" class="-mb-7 h-[200px] w-[200px]" />
 				<p style="z-index: 20;" class="font-thai mt-2 text-2xl font-bold text-[#8D7878]">
-					id : {id}
+					{id}
 				</p>
 			</div>
 		{/if}
