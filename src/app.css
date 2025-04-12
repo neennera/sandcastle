@@ -13,7 +13,7 @@
         background-position: bottom right;
     }
     .btn-secondary {
-        @apply flex w-[50%] h-[20%] max-h-[70px] rounded-[20px] justify-center items-center text-[#658890] text-[18px] md:text-2xl font-semibold opacity-80 hover:opacity-100 border-[#7ababe] border-[1px] bg-cover;
+        @apply flex w-[50%] h-[20%] max-h-[5vh] rounded-[20px] justify-center items-center text-[#658890] text-[18px] md:text-2xl font-semibold opacity-80 hover:opacity-100 border-[#7ababe] border-[1px] bg-cover;
         background-image: url('sample/btnbg.png');
         background-position: bottom right;
     }

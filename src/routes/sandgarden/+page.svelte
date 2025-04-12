@@ -75,4 +75,23 @@
 
 		</div>
 	{/if}
+	<button class="absolute top-[90%] btn-secondary"
+		on:click={async () => {
+			try {
+				// Fetch new random sandcastles
+				const res = await fetch('/api/sandcastles/random');
+				if (!res.ok) {
+					const data = await res.json();
+					error = data.error || 'Failed to fetch new sandcastles.';
+					return;
+				}
+				// Update the sandcastles array with new data
+				sandcastles = await res.json();
+			} catch (err) {
+				error = 'Error loading new sandcastles.';
+				console.error(err);
+			}
+		}}>
+		สำรวจต่อ... 🔍
+	</button>
 </div>

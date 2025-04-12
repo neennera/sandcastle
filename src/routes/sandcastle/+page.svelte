@@ -71,7 +71,7 @@
 	>
 		<div class="mt-15 flex w-full flex-col items-center justify-center">
 			<h1 class="text-3xl md:text-4xl font-bold text-[#8D7878]">{sandcastle?.name}</h1>
-			<h3 class="mt-2 text-xl md:text-2xl font-semibold text-[#8D7878]">ของ {sandcastle?.ownername}</h3>
+			<h3 class="mt-2 text-xl md:text-2xl font-semibold text-[#8D7878] mb-0">ของ {sandcastle?.ownername}</h3>
 		</div>
 		{#if error}
 			<p class="text-red-800">{error}</p>

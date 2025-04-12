@@ -12,7 +12,7 @@
   
 <div class="absolute bottom-0 z-15 bg-[#f3e7ce] border-[2px] border-[#e6d1a3] h-[10%] w-full rounded-[20px]" id="deco">
     <button
-      class="absolute top-[-25px] left-[20%] h-12 w-[60%] text-[#c28d1e] text-2xl sm:text-3xl font-semibold rounded-[20px] bg-[#f9d790] border-[#efc368] hover:border-[2px]"
+      class="absolute top-[-20px] left-[20%] h-[5vh] w-[60%] text-[#c28d1e] text-xl sm:text-3xl font-semibold rounded-[20px] bg-[#f9d790] border-[#efc368] hover:border-[2px]"
       on:click={() => {openD('#deco'); isOpen=true;}}
     >
       ตกแต่งเพิ่ม
@@ -20,7 +20,7 @@
 
     <div class="flex flex-col w-full h-full">
     {#if isOpen}
-     <div class="w-[90%] h-[70%] flex items-center justify-center mt-[4%] ml-[5%]">
+     <div class="w-[90%] h-[70%] flex items-center justify-center mt-[6%] ml-[5%]">
         <div class="grid grid-cols-2 grid-rows-3 w-[80%] h-full ">
             {#each decoprops as deco, index (index)}
             <div
@@ -40,12 +40,12 @@
             </div>
             {/each}
         </div>
-        <div class="w-full h-full text-[#bd7878] justify-center items-center text-xl sm:text-2xl font-semibold flex flex-col ml-4 pl-4">
+        <div class="w-full h-full text-[#bd7878] justify-center items-start text-base sm:text-lg md:text-xl font-semibold flex flex-col ml-4 pl-4">
             {#if clickedIndex !== null}
-            <h1 class="font-bold text-2xl">{decoprops[clickedIndex].name}</h1>
-            <h2 class="text-xl">{decoprops[clickedIndex].detail}</h2>
-            <h2 class="mt-4 ml-1 self-start text-lg">คำอธิบาย:</h2>
-            <h1 class="text-base font-medium self-start mt-1 ml-1">{decoprops[clickedIndex].description}</h1>
+            <h1 class="font-bold text-lg sm:text-2xl md:text-3xl">{decoprops[clickedIndex].name}</h1>
+            <h2 class="text-sm sm:text-lg md:text-2xl">{decoprops[clickedIndex].detail}</h2>
+            <h2 class="mt-2 text-sm sm:text-base font-bold md:text-xl">คำอธิบาย:</h2>
+            <h1 class="text-sm font-medium sm:text-base mt-1 md:text-xl">{decoprops[clickedIndex].description}</h1>
             {:else}
             จิ้มของที่ชอบเลย!
             {/if}
