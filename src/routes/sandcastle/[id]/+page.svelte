@@ -85,7 +85,12 @@
 		// Take a screenshot of the page
 		const element = document.querySelector('#screenshot-area') as HTMLElement;
 		if (element) {
-			const canvas = await html2canvas(element);
+			const canvas = await html2canvas(element, {
+				useCORS: true, // Enable cross-origin resource sharing for external assets
+				logging: true, // Enable logging for debugging
+				scale: 2, // Increase resolution for better quality
+				backgroundColor: null // Preserve transparency
+			});
 			const image = canvas.toDataURL('image/png');
 
 			// Download the screenshot
