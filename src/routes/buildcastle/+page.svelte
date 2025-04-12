@@ -284,6 +284,10 @@
 					{#if errorMessage}
 						<p class="text-red-500">{errorMessage}</p>
 					{/if}
+
+					{#if isOtpSent}
+						<p class="text-green-500">รหัสได้ถูกส่งไปทางอีเมล ลองเช็คสแปมหากไม่พบในกล่องจดหมาย</p>
+					{/if}
 				</div>
 
 				<!-- Submit Button -->
