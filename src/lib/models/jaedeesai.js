@@ -13,7 +13,7 @@ const decorationSchema = new mongoose.Schema({
     type: {
         type: String,
         required: true,
-        enum: ['ratchapruek', 'mali', 'banmairooroi', 'flag', 'stone', 'leaf']
+        enum: ['ratchapruek', 'mali', 'banmairooroi', 'flag', 'stone', 'leaf'] 
     },
     wishing_text: {
         type: String,
@@ -34,12 +34,13 @@ const jaedeesaiSchema = new mongoose.Schema({
     id: {
         type: Number,
         required: true,
-        validate: [checkJeadeeID, "ID must be 6 digits"]
+        validate: [checkJeadeeID, "ID must be 6 digits"],
+        length : 6
     },
     name: {
         type: String,
         required: [true, 'Please add your Jaedee name!'],
-        maxlength: 20,
+        maxlength: 15,
     },
     type: {
         type: String,
@@ -49,7 +50,7 @@ const jaedeesaiSchema = new mongoose.Schema({
     ownername: {
         type: String,
         required: [true, 'Please add your Jaedee name!'],
-        maxlength: 20,
+        maxlength: 15,
     },
     email: {
         type: String,

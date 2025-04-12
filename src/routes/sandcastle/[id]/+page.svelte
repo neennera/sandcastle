@@ -93,7 +93,10 @@
 					style: {
 						transform: 'scale(1)', // Ensure no scaling issues
 						transformOrigin: 'top left' // Fix origin for scaling
-					}
+					},
+					// Embed fonts and images
+					quality: 1, // Set high quality for the image
+					useCORS: true // Enable cross-origin resource sharing for external assets
 				});
 
 				// Download the screenshot
@@ -121,9 +124,9 @@
 			{#if isSharing}
 				<div class="mt-20 flex h-[10%] w-full flex-col items-center justify-center">
 					<p class="text-xs text-[#8D7878]">"https://sandcastle-delta.vercel.app/"</p>
-					<h1 class="text-3xl font-bold text-[#8D7878]">ร่วมตกแต่งเจดีย์ทราย</h1>
-					<h1 class="text-3xl font-bold text-[#8D7878]">{sandcastle?.name}</h1>
-					<h3 class="mt-2 text-xl font-semibold text-[#8D7878]">ของ {sandcastle?.ownername}</h3>
+					<h1 class="text-xl font-bold text-[#8D7878]">ร่วมตกแต่งเจดีย์ทราย</h1>
+					<h1 class="text-2xl font-bold text-[#8D7878]">{sandcastle?.name}</h1>
+					<h3 class="mt-2 text-lg font-semibold text-[#8D7878]">ของ {sandcastle?.ownername}</h3>
 				</div>
 			{:else}
 				<div class="mt-10 flex h-[10%] w-full flex-col items-center justify-center">
