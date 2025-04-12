@@ -1,13 +1,17 @@
-<script>
+<script lang="ts" context="module">
+	import { toast } from '@zerodevx/svelte-toast'; // Import the toast library
+	import { goto } from '$app/navigation'; // Import SvelteKit's navigation helper
+
+	import { SvelteToast } from '@zerodevx/svelte-toast';
 	let sandcastlename = '';
 	let name = '';
 	let email = '';
-	let castleType = '';
+	let castleType: 'lotus' | 'layer' | 'octagonal' | 'flora' | '' = ''; // Default value
 
 	let toastVisible = false; // State to control the visibility of the toast
 	let toastMessage = '';
 
-	const details = {
+	const details: Record<'lotus' | 'layer' | 'octagonal' | 'flora', string> = {
 		lotus: 'เจดีย์แบบดอกบัว เป็นสัญลักษณ์ของความบริสุทธิ์',
 		layer: 'เจดีย์แบบชั้น หมายถึงความมั่นคงและการเติบโต',
 		octagonal: 'เจดีย์แปดเหลี่ยม เป็นรูปแบบที่นิยมในหลายภูมิภาค',
@@ -16,23 +20,149 @@
 
 	const castleOptions = ['lotus', 'layer', 'octagonal', 'flora'];
 
-	function handleSubmit() {
-		alert(`กำลังสร้างเจดีย์ทราย: ${castleType}`);
-	}
 	function closeToast() {
 		toastVisible = false; // Hide the toast
 		toastMessage = ''; // Clear the message
 	}
+
+	// OTP function
+	let otp = ''; // To store the OTP input
+	let otpButtonText = 'ขอรหัส OTP'; // Button text
+	let errorMessage = ''; // To store error messages
+	let isOtpSent = false; // To track if the OTP has been sent
+
+	async function requestOtp() {
+		// Check if required fields are empty
+		if (!sandcastlename || !name || !email || !castleType) {
+			toast.push('กรุณากรอกค่าให้ครบ', {
+				theme: {
+					'--toastBackground': '#f56565',
+					'--toastColor': '#fff'
+				}
+			});
+			return;
+		}
+
+		try {
+			// Reset error message
+			errorMessage = '';
+
+			// Send API request to /get-otp
+			const response = await fetch('/api/auth/get-otp', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					email, // Assuming `email` is already bound to an input field
+					ownername: name // Assuming `name` is already bound to an input field
+				})
+			});
+
+			if (!response.ok) {
+				const errorData = await response.json();
+				errorMessage = errorData.message || 'An error occurred';
+				toast.push(errorData.message || 'An error occurred', {
+					theme: {
+						'--toastBackground': '#f56565',
+						'--toastColor': '#fff'
+					}
+				});
+			} else {
+				isOtpSent = true; // Mark OTP as sent
+				toast.push('รหัส OTP ถูกส่งแล้ว', {
+					theme: {
+						'--toastBackground': '#48bb78',
+						'--toastColor': '#fff'
+					}
+				});
+			}
+		} catch (err) {
+			errorMessage = 'Failed to request OTP. Please try again.';
+			toast.push('Failed to request OTP. Please try again.', {
+				theme: {
+					'--toastBackground': '#f56565',
+					'--toastColor': '#fff'
+				}
+			});
+			console.error(err);
+		} finally {
+			// Update button text regardless of success or failure
+			otpButtonText = 'ส่งแล้ว';
+		}
+	}
+
+	// Function to handle form submission
+	async function handleSubmit() {
+		// Check if required fields are empty
+		if (!sandcastlename || !name || !email || !castleType || !otp) {
+			toast.push('กรุณากรอกค่า otp', {
+				theme: {
+					'--toastBackground': '#f56565',
+					'--toastColor': '#fff'
+				}
+			});
+			return;
+		}
+
+		try {
+			// Send API request to create a sandcastle
+			const response = await fetch('/api/sandcastles', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					name: sandcastlename,
+					type: castleType,
+					ownername: name,
+					email,
+					otp
+				})
+			});
+
+			if (!response.ok) {
+				const errorData = await response.json();
+				toast.push(errorData.error || 'An error occurred', {
+					theme: {
+						'--toastBackground': '#f56565',
+						'--toastColor': '#fff'
+					}
+				});
+			} else {
+				toast.push('เจดีย์ทรายถูกสร้างสำเร็จ!', {
+					theme: {
+						'--toastBackground': '#48bb78',
+						'--toastColor': '#fff'
+					}
+				});
+				const data = await response.json();
+				// console.log(data);
+
+				goto(`/sandcastle/${data.data.id}`);
+			}
+		} catch (err) {
+			toast.push('Failed to create sandcastle. Please try again.', {
+				theme: {
+					'--toastBackground': '#f56565',
+					'--toastColor': '#fff'
+				}
+			});
+			console.error(err);
+		}
+	}
 </script>
 
-<svelte:window on:scroll={closeToast} />
+<svelte:window />
 <div
 	class="flex h-full w-full flex-col items-center justify-center self-center bg-[url('/sample/templebg.webp')] bg-cover"
 >
+	<SvelteToast />
+
 	<div
 		class="relative flex h-[90%] w-[90%] flex-col items-center justify-center rounded-[20px] bg-[url('/sample/bg.webp')] bg-cover"
 	>
-		<form class="w-full max-w-lg rounded-lg bg-[url(/sample/bg.webp)] p-6 shadow-lg">
+		<form class="w-full max-w-lg rounded-lg bg-[url(/sample/bg.webp)] p-6">
 			<div class="text-center">
 				<h1 class="mb-6 text-3xl font-bold text-[#8D7878]">สร้างเจดีย์ใหม่</h1>
 			</div>
@@ -73,23 +203,15 @@
 				<div class="flex w-full space-x-4 py-4">
 					<div class="flex space-x-1">
 						{#each castleOptions as option}
-							<div class="flex flex-col items-center space-y-1 text-[#8D7878]">
+							<div class="flex w-[25%] flex-col items-center space-y-1 text-[#8D7878]">
 								<button
 									type="button"
 									on:click={() => {
-										castleType = option;
+										castleType = option as 'lotus' | 'layer' | 'octagonal' | 'flora'; // Set the selected castle type
 										toastVisible = true;
-										if (option == 'lotus') {
-											toastMessage = details.lotus;
-										} else if (option == 'layer') {
-											toastMessage = details.layer;
-										} else if (option == 'octagonal') {
-											toastMessage = details.octagonal;
-										} else if (option == 'flora') {
-											toastMessage = details.flora;
-										}
+										toastMessage = details[castleType]; // Set the toast message based on the selected option
 									}}
-									class="flex w-20 cursor-pointer flex-col items-center justify-center rounded-lg border px-4 py-2 text-sm {castleType ==
+									class="flex h-20 w-full cursor-pointer flex-col items-center justify-center rounded-lg border px-4 py-2 text-sm {castleType ==
 										option &&
 										'bg-yellow-500 font-bold text-white'} hover:bg-yellow-400 hover:text-white"
 								>
@@ -123,16 +245,48 @@
 								<span class="text-4xl font-bold text-yellow-500">{castleType}</span>
 								<span>{toastMessage}</span>
 								<!-- Close button -->
-								<span
-									class="ml-4 cursor-pointer rounded-full bg-yellow-500 px-2 px-3 py-1 text-white hover:bg-yellow-600"
-									on:click={closeToast}
-								>
-									ปิดคำอธิบาย
-								</span>
 							</div>
+						</button>
+						<button
+							class="ml-4 cursor-pointer rounded-full bg-yellow-500 px-2 px-3 py-1 text-white hover:bg-yellow-600"
+							on:click={closeToast}
+						>
+							ปิดคำอธิบาย
 						</button>
 					</div>
 				{/if}
+
+				<!-- OTP button -->
+				<div class="mb-4 flex w-full flex-col items-start justify-center space-x-1">
+					<label for="otp" class="block text-[#8D7878]">รหัส OTP</label>
+					<div class="flex w-full items-center justify-between space-x-1">
+						<div class="flex w-[60%] flex-col">
+							<input
+								id="otp"
+								type="text"
+								bind:value={otp}
+								class="w-full rounded-lg border px-4 py-2 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
+							/>
+						</div>
+						<!-- OTP Button -->
+						<button
+							class="flex h-10 w-[40%] items-center rounded-lg bg-yellow-500 px-6 py-3 text-white shadow-md hover:bg-yellow-600 disabled:opacity-50"
+							on:click|preventDefault={requestOtp}
+							disabled={isOtpSent}
+						>
+							{otpButtonText}
+						</button>
+					</div>
+
+					<!-- Error Message -->
+					{#if errorMessage}
+						<p class="text-red-500">{errorMessage}</p>
+					{/if}
+
+					{#if isOtpSent}
+						<p class="text-green-500">รหัสได้ถูกส่งไปทางอีเมล ลองเช็คสแปมหากไม่พบในกล่องจดหมาย</p>
+					{/if}
+				</div>
 
 				<!-- Submit Button -->
 				<button
