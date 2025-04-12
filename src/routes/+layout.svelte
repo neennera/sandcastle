@@ -4,22 +4,22 @@
 
 <svelte:head>
 	<!-- Website Title -->
-	<title>ก่อเจดีย์ทราย</title>
+	<title>เจดีย์ทราย</title>
 
 	<!-- Meta Tags for SEO -->
 	<meta
 		name="description"
-		content="ก่อเจดีย์ทราย - สร้างและตกแต่งเจดีย์ทรายของคุณในแบบที่ไม่เหมือนใคร!"
+		content="เจดีย์ทราย - สร้างและตกแต่งเจดีย์ทรายของคุณในแบบที่ไม่เหมือนใคร!"
 	/>
 	<meta
 		name="keywords"
 		content="เจดีย์ทราย, ก่อเจดีย์ทราย, สร้างเจดีย์, ตกแต่งเจดีย์, Sandcastle"
 	/>
-	<meta name="author" content="ก่อเจดีย์ทราย" />
+	<meta name="author" content="เจดีย์ทราย" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<!-- Open Graph Metadata for Social Sharing -->
-	<meta property="og:title" content="ก่อเจดีย์ทราย" />
+	<meta property="og:title" content="เจดีย์ทราย" />
 	<meta property="og:description" content="สร้างและตกแต่งเจดีย์ทรายของคุณในแบบที่ไม่เหมือนใคร!" />
 	<meta property="og:image" content="/src/lib/images/sandcastle/lotus.webp" />
 	<meta property="og:url" content="https://yourwebsite.com" />

@@ -71,7 +71,7 @@
 		class="relative flex h-[90%] w-[90%] flex-col items-center justify-center rounded-[20px] bg-[url('/sample/bg.webp')] bg-cover"
 	>
 		<div class="flex h-[20%] w-full items-center justify-center">
-			<h1 class="text-5xl font-bold text-[#8D7878]">ก่อเจดีย์ทราย</h1>
+			<h1 class="text-5xl font-bold text-[#8D7878]">เจดีย์ทราย</h1>
 		</div>
 
 		<div class="flex h-[45%] w-full items-center justify-center">
