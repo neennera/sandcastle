@@ -18,7 +18,7 @@
 		leaf
 	};
 
-	const imageSrc = imageMap[type] || ratchapruek;
+	$: imageSrc = imageMap[type] || ratchapruek;
 </script>
 
 <img class="h-[8vh]" src={imageSrc} alt={type || 'placeholder'} />

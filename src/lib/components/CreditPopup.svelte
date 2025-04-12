@@ -4,7 +4,7 @@
 
 <div
 	id="credit-popup"
-	class="absolute z-10 mt-6 flex h-auto w-[80%] flex-col items-center justify-center rounded-[20px] border-2 border-[#e3d1a0] bg-[#f3f5e7] px-6 py-6 opacity-0 shadow-lg"
+	class="absolute z-10 mt-6 flex hidden h-auto w-[80%] flex-col items-center justify-center rounded-[20px] border-2 border-[#e3d1a0] bg-[#f3f5e7] px-6 py-6 shadow-lg"
 >
 	<!-- Title -->
 	<div class="mb-4 flex w-full items-center justify-center">

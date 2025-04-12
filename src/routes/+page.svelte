@@ -39,8 +39,10 @@
 	function createPopUp(selector: string) {
 		const popup: HTMLElement = document.querySelector(selector) as HTMLElement;
 		if (popup) {
+			popup.style.minHeight = '40%';
 			popup.style.opacity = '100%';
 			popup.style.zIndex = '50';
+			popup.hidden = false;
 		}
 	}
 
@@ -49,6 +51,7 @@
 		if (popup) {
 			popup.style.opacity = '0';
 			popup.style.zIndex = '0';
+			popup.hidden = true;
 		}
 	}
 </script>
