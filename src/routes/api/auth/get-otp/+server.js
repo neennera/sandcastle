@@ -2,7 +2,7 @@ import { connectDB } from '$lib/db.js';
 import OTP from '$lib/models/otp';
 import { json } from '@sveltejs/kit';
 import { randomInt } from 'crypto';
-import { MAILGUN_API_KEY, MAILGUN_DOMAIN, EMAIL_USER } from '$env/static/private';
+import { MAILGUN_API_KEY, MAILGUN_DOMAIN } from '$env/static/private';
 import FormData from 'form-data';
 import Mailgun from 'mailgun.js';
 import jaedeesai from '$lib/models/jaedeesai.js';
@@ -80,7 +80,7 @@ export async function POST({ request, locals }) {
             await mg.messages.create(MAILGUN_DOMAIN, msg);
             return json({ message: 'Successfully created OTP and sent email!' }, { status: 200 });
         } catch (emailError) {
-            console.error('Failed to send email:', emailError.message);
+            console.error('Failed to send email:', emailError instanceof Error ? emailError.message : 'Unknown error');
 
             await OTP.deleteOne({ email, otp });
             return json({ message: 'Failed to send email. OTP has been removed.' }, { status: 500 });
