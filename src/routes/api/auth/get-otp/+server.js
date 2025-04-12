@@ -64,7 +64,7 @@ export async function POST({ request, locals }) {
                 <strong>${otp}</strong>
                 </div>
                 <p>โปรดดำเนินการยืนยันอีเมล<strong>ภายใน 10 นาที</strong></p>
-                <p>หากมีข้อสงสัยเพิ่มเติมกรุณาติดต่อ...</p>
+                <p>หากมีข้อสงสัยเพิ่มเติมกรุณาติดต่อผ่าน google form feedback บนหน้าเว็บ</p>
             </body>
             </html>
         `;

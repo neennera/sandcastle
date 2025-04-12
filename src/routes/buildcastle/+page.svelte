@@ -1,5 +1,7 @@
 <script>
 	import { toast } from '@zerodevx/svelte-toast'; // Import the toast library
+	import { goto } from '$app/navigation'; // Import SvelteKit's navigation helper
+
 	import { SvelteToast } from '@zerodevx/svelte-toast';
 	let sandcastlename = '';
 	let name = '';
@@ -121,7 +123,7 @@
 
 			if (!response.ok) {
 				const errorData = await response.json();
-				toast.push(errorData.message || 'An error occurred', {
+				toast.push(errorData.error || 'An error occurred', {
 					theme: {
 						'--toastBackground': '#f56565',
 						'--toastColor': '#fff'
@@ -134,7 +136,10 @@
 						'--toastColor': '#fff'
 					}
 				});
-				// Optionally redirect or reset form
+				const data = await response.json();
+				// console.log(data);
+
+				goto(`/sandcastle/${data.data.id}`);
 			}
 		} catch (err) {
 			toast.push('Failed to create sandcastle. Please try again.', {

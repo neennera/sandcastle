@@ -1,8 +1,14 @@
 import Jaedeesai from "$lib/models/jaedeesai";
 import { connectDB } from "$lib/db";
-import { BASE_URL } from '$env/static/private';
+import { MAILGUN_API_KEY, MAILGUN_DOMAIN } from '$env/static/private';
+import Mailgun from 'mailgun.js';
+import OTP from '$lib/models/otp';
+
 import crypto from 'crypto';
 import mongoose from "mongoose";
+
+const mailgun = new Mailgun(FormData);
+const mg = mailgun.client({ username: 'api', key: MAILGUN_API_KEY });
 
 export async function GET({ locals }) {
     try {
@@ -67,30 +73,28 @@ export async function POST({ request, locals }) {
                 headers: { 'Content-Type': 'application/json' }
             });
         }
+        await connectDB();
 
-        const verifyResponse = await fetch(`${BASE_URL}/api/auth/verify-otp`, {
-            method: 'POST',
-			credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email,
-                otp
-            })
-        });
-        console.log(verifyResponse);
-        
+         // Check if the email exists in the OTP collection
+        const emailExists = await OTP.findOne({ email }).select("_id otp");
+        if (!emailExists) {
+            return new Response(JSON.stringify({ error: 'Invalid email or OTP not found' }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
+            });
+                    }
 
-        if (!verifyResponse.ok) {
-            const errorData = await verifyResponse.json();
-            return new Response(JSON.stringify({ error: 'OTP Invalid' }), {
+        // Check if the OTP matches
+        if (emailExists.otp !== Number(otp)) {
+            return new Response(JSON.stringify({ error: 'Wrong OTP' }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
         }
-
-        await connectDB();
+                
+        
+        // Delete the OTP after successful verification
+        await OTP.deleteOne({ _id: emailExists._id });
 
         // Validate input: Check if email is valid
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -106,6 +110,8 @@ export async function POST({ request, locals }) {
         // Validate input : Check if email already exists
         //Maybe we can delete this and only check on verify
         const existingSandcastle = await Jaedeesai.findOne({ email });
+        // console.log(email, existingSandcastle);
+        
         if (existingSandcastle) {
             return new Response(JSON.stringify({ error: 'Email already used for another sandcastle' }), {
                 status: 400,
@@ -142,6 +148,37 @@ export async function POST({ request, locals }) {
             decorations: []
         });
         await newSandcastle.save();
+
+        const emailContent = `
+        <html>
+        <body>
+            <h1>Confirm Your E-mail verification on Jaedeesai</h1>
+            <p>สวัสดี <strong>${ownername}!😊</strong>,</p>
+            <p>ขอบคุณมาร่วมสร้างเจดีย์ทราย บนเว็บไซต์ Jaedeesai ของพวกเรา✨</p>
+            <p>รหัสเจดีย์ของคุณคือ</p>
+            <div style="font-size: 24px; font-weight: bold; padding: 10px; background-color: #ffecb3; text-align: center;">
+            <strong>${otp}</strong>
+        </body>
+        </html>
+        `;
+        const msg = {
+            from: `Mailgun Sandbox <postmaster@${MAILGUN_DOMAIN}>`,
+            to: [`${ownername} <${email}>`],
+            subject: "OTP for E-mail Address verification on Jaedeesai",
+            html: emailContent
+        };
+
+        try {
+            await mg.messages.create(MAILGUN_DOMAIN, msg);
+        } catch (emailError) {
+            console.error('Failed to send email:', emailError instanceof Error ? emailError.message : 'Unknown error');
+            await OTP.deleteOne({ email, otp });
+            await newSandcastle.deleteOne({ id : newSandcastle.id });
+            return new Response(JSON.stringify({ error: 'Failed to send email' }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
+            });
+        }
 
         return new Response(JSON.stringify({
             message: 'Sandcastle created successfully',

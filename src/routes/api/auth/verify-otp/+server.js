@@ -2,10 +2,12 @@ import { connectDB } from '$lib/db.js';
 import OTP from '$lib/models/otp';
 import { json } from '@sveltejs/kit';
 
-export async function POST({ request, locals }) {    
-    console.log("Request received at /api/auth/verify-otp");
-   
+export async function POST({ request, locals }) {   
+    console.log("receive OTP");
+    
     if (!locals.user) {
+    console.log("auth");
+
         return json({ message: "Unauthorized request" }, { status: 401 });
     }
 
