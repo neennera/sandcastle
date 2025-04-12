@@ -3,7 +3,7 @@
 </script>
 
 <div
-	class=" font-thai relative mx-auto flex min-h-screen w-full md:h-screen md:w-auto flex-col items-center aspect-[9/16] md:max-w-[800px] bg-[url('/sample/lanwad.webp')] bg-cover"
+	class=" font-thai relative mx-auto flex min-h-screen w-full md:h-screen md:w-auto flex-col items-center aspect-[9/16] md:max-w-[800px] bg-[url('/sample/lanwad.PNG')] bg-cover"
 >	
 	<a
 	id="home-button"
