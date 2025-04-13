@@ -9,23 +9,6 @@ export async function GET({ request, params, cookies, locals }) {
     try {
         // Check if the user is already authenticated
         if (locals.user === null) {
-            // Parse the request body
-            const { web_secret } = await request.json();
-            if (!web_secret) {
-                return new Response(JSON.stringify({ error: 'Missing WEB SECRET' }), {
-                    status: 400,
-                    headers: { 'Content-Type': 'application/json' }
-                });
-            }
-
-            // Validate the WEB_SECRET
-            if (web_secret !== WEB_SECRET) {
-                return new Response(JSON.stringify({ error: 'Unauthorized: WEB SECRET mismatch' }), {
-                    status: 401,
-                    headers: { 'Content-Type': 'application/json' }
-                });
-            }
-
             // Ensure SECRET_KEY is defined
             if (!SECRET_KEY) {
                 console.error('SECRET_KEY is missing');
