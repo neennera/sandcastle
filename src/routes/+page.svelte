@@ -68,9 +68,7 @@
 	}
 </script>
 
-<div
-	class="flex h-full w-full flex-col items-center justify-center self-center"
->
+<div class="flex h-full w-full flex-col items-center justify-center self-center">
 	<div
 		class="relative flex h-[90%] w-[90%] flex-col items-center justify-center rounded-[20px] bg-[url('/sample/bg.webp')] bg-cover"
 	>
@@ -90,29 +88,30 @@
 				}}
 			>
 				<p class="ml-2">สำรวจเจดีย์ในลานวัด</p>
-				<img src="/sample/larnwat.png" alt="" class="h-[70%] ml-2" />
+				<img src="/sample/larnwat.png" alt="" class="ml-2 h-[70%]" />
 			</button>
 			<button
 				class="btn-primary text-xl"
 				on:click={() => {
 					createPopUp('#friend-popup');
-				}}>
+				}}
+			>
 				<p class="ml-2">ตกแต่งเจดีย์เพื่อน</p>
-				<img src="/sample/search_jd.png" alt="" class="h-[70%] ml-2" />
-				</button>
+				<img src="/sample/search_jd.png" alt="" class="ml-2 h-[70%]" />
+			</button>
 			<button
 				class="btn-primary text-xl"
 				on:click={() => {
 					navigateToPage('/buildcastle');
-				}}>
-				<p class="ml-2">ก่อเจดีย์ทรายของคุณ</p>
-				<img src="/sample/my_jd.png" alt="" class="h-[70%] ml-2" />
-				</button
+				}}
 			>
+				<p class="ml-2">ก่อเจดีย์ทรายของคุณ</p>
+				<img src="/sample/my_jd.png" alt="" class="ml-2 h-[70%]" />
+			</button>
 		</div>
 
 		<button
-			class="absolute right-3 top-5 flex z-50 h-8 w-8 items-center justify-center rounded-full border-[3px] border-[#6a799a] bg-[#fff8ee] text-base text-[#6a799a] sm:h-10 sm:w-10 sm:text-[36px]"
+			class="absolute top-5 right-3 z-50 flex h-8 w-8 items-center justify-center rounded-full border-[3px] border-[#6a799a] bg-[#fff8ee] text-base text-[#6a799a] sm:h-10 sm:w-10 sm:text-[36px]"
 			on:click={() => {
 				createPopUp('#credit-popup');
 			}}

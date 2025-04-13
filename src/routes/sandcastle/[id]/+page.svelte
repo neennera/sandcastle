@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation'; // Import SvelteKit's navigation helper
 	import Loading from '../../../components/loading.svelte';
 	import domtoimage from 'dom-to-image'; // Import dom-to-image
+	import { PUBLIC_WEB_SECRET } from '$env/static/public';
 
 	import SandcastleItem from '../../../components/sandcastle/sandcastleItem.svelte';
 	import Decopanel from '$lib/components/Decopanel.svelte';
@@ -23,7 +24,19 @@
 
 	// Fetch sandcastle data from the API
 	onMount(async () => {
+		const data = {
+			web_secret: PUBLIC_WEB_SECRET
+		};
 		try {
+			const response_auth = await fetch('/api/auth/login', {
+				method: 'POST',
+				credentials: 'include',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data)
+			});
+
 			const response = await fetch(`/api/sandcastles/${id}`, {
 				method: 'GET',
 				credentials: 'include'
@@ -216,11 +229,19 @@
 		</button>
 		<!-- Popup Menu -->
 		{#if showShareMenu}
-		<div class="absolute top-[30%] right-10 z-50 w-48 rounded-xl bg-white shadow-lg border border-gray-300 text-[#8D7878] font-thai">
-			<button class="w-full px-4 py-2 hover:bg-[#fef6e4]" on:click={handleShare}>📤 แชร์ลิงก์</button>
-			<button class="w-full px-4 py-2 hover:bg-[#fef6e4]" on:click={copyLink}>🔗 คัดลอกลิงก์</button>
-			<button class="w-full px-4 py-2 hover:bg-[#fef6e4]" on:click={takeScreenshot}>📷 ดาวน์โหลดรูป</button>
-		</div>
+			<div
+				class="font-thai absolute top-[30%] right-10 z-50 w-48 rounded-xl border border-gray-300 bg-white text-[#8D7878] shadow-lg"
+			>
+				<button class="w-full px-4 py-2 hover:bg-[#fef6e4]" on:click={handleShare}
+					>📤 แชร์ลิงก์</button
+				>
+				<button class="w-full px-4 py-2 hover:bg-[#fef6e4]" on:click={copyLink}
+					>🔗 คัดลอกลิงก์</button
+				>
+				<button class="w-full px-4 py-2 hover:bg-[#fef6e4]" on:click={takeScreenshot}
+					>📷 ดาวน์โหลดรูป</button
+				>
+			</div>
 		{/if}
 
 		<Decopanel {openD} {closeD} {handleClickOutside} sandcastleId={id.toString()} />
