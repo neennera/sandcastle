@@ -9,25 +9,9 @@ export async function GET({ request, params, cookies, locals }) {
     try {
         // Check if the user is already authenticated
         if (locals.user === null) {
-            // Ensure SECRET_KEY is defined
-            if (!SECRET_KEY) {
-                console.error('SECRET_KEY is missing');
-                return new Response(JSON.stringify({ error: 'Internal server error: SECRET_KEY missing' }), {
-                    status: 500,
-                    headers: { 'Content-Type': 'application/json' }
-                });
-            }
-
-            // Generate a new token
-            const token = jwt.sign({}, SECRET_KEY, { expiresIn: '1d' });
-
-            // Set the token as an HTTP-only cookie
-            cookies.set('token', token, {
-                httpOnly: true,
-                secure: true,
-                sameSite: 'lax',
-                path: '/',
-                maxAge: 60 * 60 * 24 // 1 day
+            return new Response(JSON.stringify({ error: 'Unautherized request' }), {
+                status: 400,
+                headers: { 'Content-Type': 'application/json' }
             });
         }
 
