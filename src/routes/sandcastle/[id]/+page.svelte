@@ -48,6 +48,39 @@
 		}
 	});
 
+	let showShareMenu = false;
+
+	const shareUrl = `${window.location.origin}/sandcastle/${id}`;
+
+	async function handleShare() {
+		if (navigator.share) {
+			try {
+				await navigator.share({
+					title: 'ร่วมตกแต่งเจดีย์ทราย',
+					text: sandcastle?.name,
+					url: shareUrl
+				});
+			} catch (err) {
+				console.error('Share failed:', err);
+			}
+		} else {
+			alert('Sharing not supported on this device.');
+		}
+	}
+
+	async function copyLink() {
+		try {
+			await navigator.clipboard.writeText(shareUrl);
+			alert('คัดลอกลิงก์เรียบร้อยแล้ว!');
+		} catch (err) {
+			console.error('Copy failed:', err);
+		}
+	}
+
+	function toggleShareMenu() {
+		showShareMenu = !showShareMenu;
+	}
+
 	function openD(selector: string) {
 		const deco: HTMLElement = document.querySelector(selector) as HTMLElement;
 		const blur: HTMLElement = document.querySelector('#blur') as HTMLElement;
@@ -165,7 +198,7 @@
 		<!-- Share Button -->
 		<button
 			class="absolute top-100 right-10 flex h-12 w-12 items-center justify-center rounded-full bg-[#f9d790] text-white shadow-lg"
-			on:click={takeScreenshot}
+			on:click={toggleShareMenu}
 			aria-label="share"
 		>
 			<svg
@@ -181,6 +214,14 @@
 				></path>
 			</svg>
 		</button>
+		<!-- Popup Menu -->
+		{#if showShareMenu}
+		<div class="absolute top-[30%] right-10 z-50 w-48 rounded-xl bg-white shadow-lg border border-gray-300 text-[#8D7878] font-thai">
+			<button class="w-full px-4 py-2 hover:bg-[#fef6e4]" on:click={handleShare}>📤 แชร์ลิงก์</button>
+			<button class="w-full px-4 py-2 hover:bg-[#fef6e4]" on:click={copyLink}>🔗 คัดลอกลิงก์</button>
+			<button class="w-full px-4 py-2 hover:bg-[#fef6e4]" on:click={takeScreenshot}>📷 ดาวน์โหลดรูป</button>
+		</div>
+		{/if}
 
 		<Decopanel {openD} {closeD} {handleClickOutside} sandcastleId={id.toString()} />
 	{/if}
