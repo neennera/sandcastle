@@ -1,14 +1,11 @@
 import Jaedeesai from "$lib/models/jaedeesai";
 import { connectDB } from "$lib/db";
-import { MAILGUN_API_KEY, MAILGUN_DOMAIN } from '$env/static/private';
-import Mailgun from 'mailgun.js';
+import { BREVO_API_KEY, SENDGRID_API_KEY } from '$env/static/private';
 import OTP from '$lib/models/otp';
 
 import crypto from 'crypto';
 import mongoose from "mongoose";
-
-const mailgun = new Mailgun(FormData);
-const mg = mailgun.client({ username: 'api', key: MAILGUN_API_KEY });
+import fetch from 'node-fetch';
 
 export async function GET({ locals }) {
     try {
@@ -46,7 +43,6 @@ export async function GET({ locals }) {
 export async function POST({ request, locals }) {
     try {
         const { name, type, ownername, email, otp } = await request.json();
-        
 
         if (locals.user === null) {
             return new Response(JSON.stringify({
@@ -56,7 +52,6 @@ export async function POST({ request, locals }) {
                 headers: { 'Content-Type': 'application/json' }
             });
         }
-        
 
         // Validate input : If one of them is empty
         if (!name || !type || !ownername || !email || !otp) {
@@ -75,14 +70,14 @@ export async function POST({ request, locals }) {
         }
         await connectDB();
 
-         // Check if the email exists in the OTP collection
+        // Check if the email exists in the OTP collection
         const emailExists = await OTP.findOne({ email }).select("_id otp");
         if (!emailExists) {
             return new Response(JSON.stringify({ error: 'Invalid email or OTP not found' }), {
                 status: 400,
                 headers: { 'Content-Type': 'application/json' }
             });
-                    }
+        }
 
         // Check if the OTP matches
         if (emailExists.otp !== Number(otp)) {
@@ -91,10 +86,7 @@ export async function POST({ request, locals }) {
                 headers: { 'Content-Type': 'application/json' }
             });
         }
-                
-        
-        // Delete the OTP after successful verification
-        await OTP.deleteOne({ _id: emailExists._id });
+
 
         // Validate input: Check if email is valid
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -105,13 +97,8 @@ export async function POST({ request, locals }) {
             });
         }
 
-        
-
         // Validate input : Check if email already exists
-        //Maybe we can delete this and only check on verify
         const existingSandcastle = await Jaedeesai.findOne({ email });
-        // console.log(email, existingSandcastle);
-        
         if (existingSandcastle) {
             return new Response(JSON.stringify({ error: 'Email already used for another sandcastle' }), {
                 status: 400,
@@ -124,14 +111,13 @@ export async function POST({ request, locals }) {
         let id;
         let isUnique = false;
         while (!isUnique) {
-            // Error : if sandcastle id is already max
             if (ct == 900000) {
                 return new Response(JSON.stringify({ error: 'Sandcastle is full' }), {
                     status: 400,
                     headers: { 'Content-Type': 'application/json' }
                 });
             }
-            id = crypto.randomInt(100000, 1000000); // Generate a random 6-digit number
+            id = crypto.randomInt(100000, 1000000);
             const existingId = await Jaedeesai.findOne({ id });
             if (!existingId) {
                 isUnique = true;
@@ -149,6 +135,7 @@ export async function POST({ request, locals }) {
         });
         await newSandcastle.save();
 
+
         const emailContent = `
         <html>
         <body>
@@ -157,36 +144,92 @@ export async function POST({ request, locals }) {
             <p>ขอบคุณมาร่วมสร้างเจดีย์ทราย บนเว็บไซต์ Jaedeesai ของพวกเรา✨</p>
             <p>รหัสเจดีย์ของคุณคือ</p>
             <div style="font-size: 24px; font-weight: bold; padding: 10px; background-color: #ffecb3; text-align: center;">
-            <strong>${otp}</strong>
+            <strong>${id}</strong>
         </body>
         </html>
         `;
+
         const msg = {
-            from: `Mailgun Sandbox <postmaster@${MAILGUN_DOMAIN}>`,
-            to: [`${ownername} <${email}>`],
-            subject: "OTP for E-mail Address verification on Jaedeesai",
-            html: emailContent
+            sender: { name: "Jaedeesai", email: "jaedeesaiapp@gmail.com" },
+            to: [{ email, name: ownername }],
+            subject: "ID for your jaedee created on Jaedeesai",
+            htmlContent: emailContent
         };
 
         try {
-            await mg.messages.create(MAILGUN_DOMAIN, msg);
-        } catch (emailError) {
-            console.error('Failed to send email:', emailError instanceof Error ? emailError.message : 'Unknown error');
-            await OTP.deleteOne({ email, otp });
-            await newSandcastle.deleteOne({ id : newSandcastle.id });
-            return new Response(JSON.stringify({ error: 'Failed to send email' }), {
-                status: 400,
+            const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'api-key': BREVO_API_KEY
+                },
+                body: JSON.stringify(msg)
+            });
+
+            if (!response.ok) {
+                console.error('Brevo failed to send email:', await response.text());
+                throw new Error('Brevo email sending failed');
+            }
+            // Delete the OTP after successful verification
+            await OTP.deleteOne({ _id: emailExists._id });
+
+            return new Response(JSON.stringify({
+                message: 'Sandcastle created successfully',
+                data: newSandcastle
+            }), {
+                status: 201,
                 headers: { 'Content-Type': 'application/json' }
             });
-        }
+        } catch (brevoError) {
+            console.error('Brevo error:', brevoError instanceof Error ? brevoError.message : 'Unknown error');
 
-        return new Response(JSON.stringify({
-            message: 'Sandcastle created successfully',
-            data: newSandcastle
-        }), {
-            status: 201,
-            headers: { 'Content-Type': 'application/json' }
-        });
+            // Fallback to SendGrid
+            try {
+                const sendGridResponse = await fetch('https://api.sendgrid.com/v3/mail/send', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${SENDGRID_API_KEY}`
+                    },
+                    body: JSON.stringify({
+                        personalizations: [
+                            {
+                                to: [{ email, name: ownername }],
+                                subject: "OTP for E-mail Address verification on Jaedeesai"
+                            }
+                        ],
+                        from: { email: "jaedeesaiapp@gmail.com", name: "Jaedeesai" },
+                        content: [{ type: "text/html", value: emailContent }]
+                    })
+                });
+
+                if (!sendGridResponse.ok) {
+                    console.error('SendGrid failed to send email:', await sendGridResponse.text());
+                    await OTP.deleteOne({ email, otp });
+                    await newSandcastle.deleteOne({ id: newSandcastle.id });
+                    return new Response(JSON.stringify({ error: 'Failed to send email, please try again or contact us via feedback form' }), {
+                        status: 500,
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                }
+
+                return new Response(JSON.stringify({
+                    message: 'Successfully created OTP and sent email',
+                    data: newSandcastle
+                }), {
+                    status: 201,
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            } catch (sendGridError) {
+                console.error('SendGrid error:', sendGridError instanceof Error ? sendGridError.message : 'Unknown error');
+                await OTP.deleteOne({ email, otp });
+                await newSandcastle.deleteOne({ id: newSandcastle.id });
+                return new Response(JSON.stringify({ error: 'Failed to send email, please try again or contact us via feedback form' }), {
+                    status: 500,
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            }
+        }
     } catch (err) {
         if (err instanceof mongoose.Error.ValidationError) {
             return new Response(JSON.stringify(

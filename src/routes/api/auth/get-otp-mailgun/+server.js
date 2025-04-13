@@ -2,9 +2,13 @@ import { connectDB } from '$lib/db.js';
 import OTP from '$lib/models/otp';
 import { json } from '@sveltejs/kit';
 import { randomInt } from 'crypto';
-import { BREVO_API_KEY, SENDGRID_API_KEY } from '$env/static/private';
+import { MAILGUN_API_KEY, MAILGUN_DOMAIN } from '$env/static/private';
+import FormData from 'form-data';
+import Mailgun from 'mailgun.js';
 import jaedeesai from '$lib/models/jaedeesai.js';
-import fetch from 'node-fetch';
+
+const mailgun = new Mailgun(FormData);
+const mg = mailgun.client({ username: 'api', key: MAILGUN_API_KEY });
 
 export async function POST({ request, locals }) {
     if (locals.user === null) {
@@ -60,69 +64,26 @@ export async function POST({ request, locals }) {
                 <strong>${otp}</strong>
                 </div>
                 <p>โปรดดำเนินการยืนยันอีเมล<strong>ภายใน 10 นาที</strong></p>
-                <p>หากมีข้อสงสัยเพิ่มเติมกรุณาติดต่อผ่าน google form feedback บนหน้าเว็บ (อยู่ในเครื่องหมาย ? บนหน้าโฮมเพจ)</p>
+                <p>หากมีข้อสงสัยเพิ่มเติมกรุณาติดต่อผ่าน google form feedback บนหน้าเว็บ</p>
             </body>
             </html>
         `;
 
         const msg = {
-            sender: { name: "Jaedeesai", email: "jaedeesaiapp@gmail.com" },
-            to: [{ email, name: ownername }],
+            from: `Mailgun Sandbox <postmaster@${MAILGUN_DOMAIN}>`,
+            to: [`${ownername} <${email}>`],
             subject: "OTP for E-mail Address verification on Jaedeesai",
-            htmlContent: emailContent
+            html: emailContent
         };
 
         try {
-            const response = await fetch('https://api.brevo.com/v3/smtp/email', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'api-key': BREVO_API_KEY
-                },
-                body: JSON.stringify(msg)
-            });
+            await mg.messages.create(MAILGUN_DOMAIN, msg);
+            return json({ message: 'Successfully created OTP and sent email!' }, { status: 200 });
+        } catch (emailError) {
+            console.error('Failed to send email:', emailError instanceof Error ? emailError.message : 'Unknown error');
 
-            if (!response.ok) {
-                console.error('Brevo failed to send email:', await response.text());
-                throw new Error('Brevo email sending failed');
-            }
-
-            return json({ message: 'Email sent!' }, { status: 200 });
-        } catch (brevoError) {
-            console.error('Brevo error:', brevoError instanceof Error ? brevoError.message : 'Unknown error');
-
-            // Fallback to SendGrid
-            try {
-                const sendGridResponse = await fetch('https://api.sendgrid.com/v3/mail/send', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${SENDGRID_API_KEY}`
-                    },
-                    body: JSON.stringify({
-                        personalizations: [
-                            {
-                                to: [{ email, name: ownername }],
-                                subject: "OTP for E-mail Address verification on Jaedeesai"
-                            }
-                        ],
-                        from: { email: "jaedeesaiapp@gmail.com", name: "Jaedeesai" },
-                        content: [{ type: "text/html", value: emailContent }]
-                    })
-                });
-
-                if (!sendGridResponse.ok) {
-                    console.error('SendGrid failed to send email:', await sendGridResponse.text());
-                    await OTP.deleteOne({ email, otp });
-                    return json({ message: 'Failed to send email, please try again or contact us via feedback form' }, { status: 500 });
-                }
-
-                return json({ message: 'Email sent!' }, { status: 200 });
-            } catch (sendGridError) {
-                console.error('SendGrid error:', sendGridError instanceof Error ? sendGridError.message : 'Unknown error');
-                await OTP.deleteOne({ email, otp });
-                return json({ message: 'Failed to send email, please try again or contact us via feedback form' }, { status: 500 });
-            }
+            await OTP.deleteOne({ email, otp });
+            return json({ message: 'Failed to send email. OTP has been removed.' }, { status: 500 });
         }
 
     } catch (err) {
