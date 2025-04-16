@@ -1,11 +1,29 @@
 # Sand Castle (เจดีย์ทราย)
+Production Link : [link](https://sandcastle-delta.vercel.app/)
+Medium Blog Link : [medium](https://sandcastle-delta.vercel.app/)
 
-Tech Stack
+SandCastle for Songkran Festival
+An interactive watercolor-style website where users can create and decorate their own digital sand pagodas during Thailand's Songkran Festival — all built in just 5 days!
 
-- package manager = pnpm
-- Framework = SvelteKit with JavaScript
-- Stying : TailwindCss, Prettier
-- Deploy on Vercel
+🎯 Concept
+Let users feel the spirit of Songkran by:
+- Choosing from 4 types of sand pagodas
+- Decorating with 6 traditional Thai items
+- Writing and sharing personal blessings
+
+🧑‍💻 Tech Stack
+- Framework: SvelteKit (JavaScript)
+- Styling: Tailwind CSS
+- Formatter: Prettier
+- Package Manager: pnpm
+- Deployment: Vercel
+
+📊 Outcome (as of Apr 16, 2025)
+- 222 active users (Google Analytics)
+- 33 sandcastle created
+- 1,477 TikTok views
+
+# Documents
 
 # Svelt Doc
 
