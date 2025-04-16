@@ -1,6 +1,7 @@
 # Sand Castle (เจดีย์ทราย)
 Production Link : [link](https://sandcastle-delta.vercel.app/)
-Medium Blog Link : [medium](https://sandcastle-delta.vercel.app/)
+
+Medium Blog Link : [medium](https://neennera.medium.com/sandcastle-website-for-songkran-festival-in-just-5-days-99e445a2aafd)
 
 SandCastle for Songkran Festival
 An interactive watercolor-style website where users can create and decorate their own digital sand pagodas during Thailand's Songkran Festival — all built in just 5 days!
